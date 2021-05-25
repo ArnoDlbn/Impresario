@@ -1,10 +1,13 @@
 
 import SwiftUI
+import KeychainSwift
 
 struct AuthenticationView: View {
     @State private var username = ""
     @State private var password = ""
     @State var signUp = false
+    let loginViewModel = LoginViewModel()
+    @ObservedObject var user: User
     
     var body: some View {
         VStack {
@@ -23,15 +26,10 @@ struct AuthenticationView: View {
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(
-//                    NavigationLink(
-//                        destination: MainView(),
-//                        label: {
-//                            Text(" Sign In ")
-//                                .foregroundColor(.white)
-//                                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-//                        })
                     Button(action: {
-                        MainView()
+                        loginViewModel.perfomLoginMutation(username: username, password: password) { token in
+                            user.token = token
+                        }
                     }, label: {
                         Text(" Sign In ")
                             .foregroundColor(.white)
@@ -49,8 +47,8 @@ struct AuthenticationView: View {
     }
 }
 
-struct AuthenticationView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthenticationView()
-    }
-}
+//struct AuthenticationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AuthenticationView()
+//    }
+//}

@@ -1,0 +1,22 @@
+mutation login($input: Credentials!) {
+    login(input: $input) {
+        token
+        user {
+            email
+        }
+    }
+}
+
+mutation signup($input: Registration!) {
+    signup(input: $input) {
+        email
+    }
+}
+
+query me {
+    me {
+        email
+        firstName
+        lastName
+    }
+}

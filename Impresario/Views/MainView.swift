@@ -1,9 +1,3 @@
-//
-//  MainView.swift
-//  Impresario
-//
-//  Created by Arnaud Dalbin on 16/05/2021.
-//
 
 import SwiftUI
 
