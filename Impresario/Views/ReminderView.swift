@@ -12,7 +12,7 @@ struct ReminderView: View {
         NavigationView {
             List(0 ..< 3) { item in
                 NavigationLink(destination: Text("Sevdaliza")) {
-                    EventRowView()
+                    EventRowView(viewModel: EventViewModel(startEvent: "23/05", endEvent: "24/05", description: "Promo radio", bandName: "Sevdaliza"))
                 }
             }
             .navigationBarTitle(Text("Juin")

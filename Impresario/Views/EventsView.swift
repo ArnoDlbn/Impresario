@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct EventsView: View {
+    @State var events: [EventViewModel] = []
+    
     var body: some View {
         NavigationView {
-            List(0 ..< 4) { item in
+            List(events) { event in
                 NavigationLink(destination: Text("Sevdaliza")) {
-                    
-                    EventRowView()
+                    EventRowView(viewModel: event)
+                }
+            }
+            .onAppear {
+                ImpresarioQueries.performEventsQuery() { eventViewModels in
+                    self.events = eventViewModels
                 }
             }
             .navigationTitle(Text("Juin")

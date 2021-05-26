@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct EventRowView: View {
+    let viewModel: EventViewModel
+    
     var body: some View {
         HStack {
             Spacer()
@@ -10,7 +12,7 @@ struct EventRowView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.init(.darkGray), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
-                    .overlay(Text(" 10 ")
+                    .overlay(Text(viewModel.startEvent)
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(Color.init(.darkGray))
                     )
@@ -21,10 +23,10 @@ struct EventRowView: View {
             Spacer()
                 .frame(width: 30)
             VStack(alignment: .leading) {
-                Text("Sevdaliza")
+                Text(viewModel.bandName)
                     .font(.system(size: 25, weight: .bold))
                     .foregroundColor(Color.init(.darkGray))
-                Text("Promo radio")
+                Text(viewModel.description!)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                 Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")
@@ -39,6 +41,6 @@ struct EventRowView: View {
 
 struct EventCellView_Previews: PreviewProvider {
     static var previews: some View {
-        EventRowView()
+        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza"))
     }
 }

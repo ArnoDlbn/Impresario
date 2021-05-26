@@ -20,3 +20,27 @@ query me {
         lastName
     }
 }
+
+query events {
+    events {
+        edges {
+            cursor
+            node {
+                id
+                startsAt
+                endsAt
+                band {
+                    name
+                    artists {
+                        name
+                    }
+                }
+                description
+                planner {
+                    firstName
+                    lastName
+                }
+            }
+        }
+    }
+}

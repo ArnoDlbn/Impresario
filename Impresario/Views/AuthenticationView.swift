@@ -3,8 +3,8 @@ import SwiftUI
 import KeychainSwift
 
 struct AuthenticationView: View {
-    @State private var username = ""
-    @State private var password = ""
+    @State private var username = "impresarioapp+sevdaalizadeh@gmail.com"
+    @State private var password = "Sevdaliza!"
     @State var signUp = false
     let loginViewModel = LoginViewModel()
     @ObservedObject var user: User

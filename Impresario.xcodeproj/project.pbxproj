@@ -26,6 +26,9 @@
 		516EA59B265BE07A007E3508 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA59A265BE07A007E3508 /* LoginViewModel.swift */; };
 		516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */; };
 		516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */; };
+		516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A3265CDA71007E3508 /* EventViewModel.swift */; };
+		51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */; };
+		51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE57D265D51FE0046A366 /* DetailEventView.swift */; };
 		51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */; };
 		51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51ECEDCD26233A2B00D4C67E /* Assets.xcassets */; };
 		51ECEDD126233A2B00D4C67E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51ECEDD026233A2B00D4C67E /* Preview Assets.xcassets */; };
@@ -82,6 +85,9 @@
 		516EA59A265BE07A007E3508 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingInterceptor.swift; sourceTree = "<group>"; };
 		516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
+		516EA5A3265CDA71007E3508 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioQueries.swift; sourceTree = "<group>"; };
+		51DBE57D265D51FE0046A366 /* DetailEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventView.swift; sourceTree = "<group>"; };
 		51ECEDC626233A2800D4C67E /* Impresario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Impresario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioApp.swift; sourceTree = "<group>"; };
 		51ECEDCD26233A2B00D4C67E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +172,8 @@
 				516EA59A265BE07A007E3508 /* LoginViewModel.swift */,
 				516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */,
 				516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */,
+				516EA5A3265CDA71007E3508 /* EventViewModel.swift */,
+				51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */,
 			);
 			path = Impresario;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				51ECEDFD2623428A00D4C67E /* AuthenticationView.swift */,
+				51DBE57D265D51FE0046A366 /* DetailEventView.swift */,
 				516EA571264EC32E007E3508 /* EventRowView.swift */,
 				516EA57726510610007E3508 /* EventsView.swift */,
 				51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */,
@@ -395,11 +404,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				51ECEE092623569D00D4C67E /* UIView.swift in Sources */,
+				516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */,
 				516EA574265105B5007E3508 /* MainView.swift in Sources */,
 				516EA57826510610007E3508 /* EventsView.swift in Sources */,
+				51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */,
 				516EA57A2651198A007E3508 /* test.swift in Sources */,
 				516EA57E26516F35007E3508 /* ProfileView.swift in Sources */,
 				516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */,
+				51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */,
 				516EA572264EC32E007E3508 /* EventRowView.swift in Sources */,
 				516EA57C26516D61007E3508 /* NewEventView.swift in Sources */,
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,
