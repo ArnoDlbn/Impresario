@@ -27,13 +27,16 @@ struct EventsView: View {
                                 .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle)))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Events")
+                    Text("Add event")
                         .foregroundColor(Color.init(.darkGray))
-                        .font(.custom("Marker Felt Wide", size: 30, relativeTo: .largeTitle))
+                        .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
+//                        .overlay()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
                         .foregroundColor(Color.init(.darkGray))
+                        .font(.system(size: 25))
+//                        .overlay()
                 }
             }
         }
