@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EventsView: View {
     @State var events: [EventViewModel] = []
+    @State private var isAddEvent = false
+    @State private var isViewProfile = false
     
     var body: some View {
         NavigationView {
@@ -22,24 +24,33 @@ struct EventsView: View {
                     self.events = eventViewModels
                 }
             }
-            .navigationTitle(Text("Juin")
-                                .foregroundColor(Color.init(.darkGray))
-                                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle)))
+            .navigationTitle(Text("Juin"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Add event")
+                        .onTapGesture {
+                            isAddEvent.toggle()
+                        }
                         .foregroundColor(Color.init(.darkGray))
                         .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
-//                        .overlay()
                 }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
+                        .onTapGesture {
+                            isViewProfile.toggle()
+                        }
                         .foregroundColor(Color.init(.darkGray))
                         .font(.system(size: 25))
-//                        .overlay()
                 }
             }
         }
+        .sheet(isPresented: $isAddEvent, content: {
+            AddEventView()
+        })
+        .sheet(isPresented: $isViewProfile, content: {
+            ProfileView()
+        })
     }
 }
 

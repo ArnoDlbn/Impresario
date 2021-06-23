@@ -9,18 +9,23 @@ import SwiftUI
 
 struct test: View {
     var body: some View {
-        TabView {
-                    Text("First")
-                    Text("Second")
-                    Text("Third")
-                    Text("Fourth")
+        NavigationView {
+            Text("Hello, World!").padding()
+                .navigationTitle("SwiftUI")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Text("Title")
+                            Text("")
+                        }
+                        .foregroundColor(.red)
+                        .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
+                    }
                 }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-
-
+                .accentColor(.black)
+        }
     }
 }
-
 struct test_Previews: PreviewProvider {
     static var previews: some View {
         test()

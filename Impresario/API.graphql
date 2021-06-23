@@ -44,3 +44,10 @@ query events {
         }
     }
 }
+
+mutation createEvent($input: EventInput!) {
+    createEvent(input: $input) {
+        id
+        description
+    }
+}

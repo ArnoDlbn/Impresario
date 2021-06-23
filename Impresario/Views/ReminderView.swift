@@ -15,9 +15,7 @@ struct ReminderView: View {
                     EventRowView(viewModel: EventViewModel(startEvent: "23/05", endEvent: "24/05", description: "Promo radio", bandName: "Sevdaliza"))
                 }
             }
-            .navigationBarTitle(Text("Juin")
-                                .foregroundColor(Color.init(.darkGray))
-                                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle)))
+            .navigationBarTitle(Text("Juin"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Reminder")

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51278BD4268240FE00D5D106 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 51278BD3268240FE00D5D106 /* schema.json */; };
+		51278BD6268241CB00D5D106 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD5268241CB00D5D106 /* API.swift */; };
 		516EA572264EC32E007E3508 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA571264EC32E007E3508 /* EventRowView.swift */; };
 		516EA574265105B5007E3508 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA573265105B5007E3508 /* MainView.swift */; };
 		516EA576265105FB007E3508 /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA575265105FB007E3508 /* ReminderView.swift */; };
@@ -20,13 +22,13 @@
 		516EA58726543763007E3508 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 516EA58626543763007E3508 /* Apollo */; };
 		516EA58D26543763007E3508 /* ApolloCodegenLib in Frameworks */ = {isa = PBXBuildFile; productRef = 516EA58C26543763007E3508 /* ApolloCodegenLib */; };
 		516EA592265443F7007E3508 /* API.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 516EA591265443F7007E3508 /* API.graphql */; };
-		516EA59426544556007E3508 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA59326544556007E3508 /* API.swift */; };
 		516EA5962654459B007E3508 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5952654459B007E3508 /* Network.swift */; };
 		516EA599265908B6007E3508 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 516EA598265908B6007E3508 /* KeychainSwift */; };
 		516EA59B265BE07A007E3508 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA59A265BE07A007E3508 /* LoginViewModel.swift */; };
 		516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */; };
 		516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */; };
 		516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A3265CDA71007E3508 /* EventViewModel.swift */; };
+		5194244B267DE852001EBCAD /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5194244A267DE852001EBCAD /* AddEventView.swift */; };
 		51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */; };
 		51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE57D265D51FE0046A366 /* DetailEventView.swift */; };
 		51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */; };
@@ -36,7 +38,6 @@
 		51ECEDE726233A2C00D4C67E /* ImpresarioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEDE626233A2C00D4C67E /* ImpresarioUITests.swift */; };
 		51ECEDFE2623428A00D4C67E /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEDFD2623428A00D4C67E /* AuthenticationView.swift */; };
 		51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEE022623429D00D4C67E /* RegisterView.swift */; };
-		51ECEE092623569D00D4C67E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEE082623569D00D4C67E /* UIView.swift */; };
 		51ECEE1126357E5500D4C67E /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEE1026357E5500D4C67E /* StartView.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		51278BD3268240FE00D5D106 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		51278BD5268241CB00D5D106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		516EA571264EC32E007E3508 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		516EA573265105B5007E3508 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		516EA575265105FB007E3508 /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
@@ -78,14 +81,13 @@
 		516EA5792651198A007E3508 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		516EA57B26516D61007E3508 /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		516EA57D26516F35007E3508 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		516EA5902654437D007E3508 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		516EA591265443F7007E3508 /* API.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = API.graphql; sourceTree = "<group>"; };
-		516EA59326544556007E3508 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		516EA5952654459B007E3508 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		516EA59A265BE07A007E3508 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingInterceptor.swift; sourceTree = "<group>"; };
 		516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
 		516EA5A3265CDA71007E3508 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		5194244A267DE852001EBCAD /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioQueries.swift; sourceTree = "<group>"; };
 		51DBE57D265D51FE0046A366 /* DetailEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventView.swift; sourceTree = "<group>"; };
 		51ECEDC626233A2800D4C67E /* Impresario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Impresario.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +103,6 @@
 		51ECEDE826233A2C00D4C67E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51ECEDFD2623428A00D4C67E /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		51ECEE022623429D00D4C67E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		51ECEE082623569D00D4C67E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		51ECEE1026357E5500D4C67E /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,15 +160,14 @@
 		51ECEDC826233A2800D4C67E /* Impresario */ = {
 			isa = PBXGroup;
 			children = (
+				51278BD5268241CB00D5D106 /* API.swift */,
+				51278BD3268240FE00D5D106 /* schema.json */,
 				51ECEE072623568700D4C67E /* Supporting files */,
 				51ECEDF826233A6F00D4C67E /* Views */,
 				51ECEDF726233A6500D4C67E /* Models */,
-				51ECEDCD26233A2B00D4C67E /* Assets.xcassets */,
 				51ECEDD226233A2B00D4C67E /* Info.plist */,
-				516EA5902654437D007E3508 /* schema.json */,
 				51ECEDCF26233A2B00D4C67E /* Preview Content */,
 				516EA591265443F7007E3508 /* API.graphql */,
-				516EA59326544556007E3508 /* API.swift */,
 				516EA5952654459B007E3508 /* Network.swift */,
 				516EA59A265BE07A007E3508 /* LoginViewModel.swift */,
 				516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */,
@@ -214,6 +214,7 @@
 		51ECEDF826233A6F00D4C67E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5194244A267DE852001EBCAD /* AddEventView.swift */,
 				51ECEDFD2623428A00D4C67E /* AuthenticationView.swift */,
 				51DBE57D265D51FE0046A366 /* DetailEventView.swift */,
 				516EA571264EC32E007E3508 /* EventRowView.swift */,
@@ -233,7 +234,7 @@
 		51ECEE072623568700D4C67E /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				51ECEE082623569D00D4C67E /* UIView.swift */,
+				51ECEDCD26233A2B00D4C67E /* Assets.xcassets */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -355,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51278BD4268240FE00D5D106 /* schema.json in Resources */,
 				51ECEDD126233A2B00D4C67E /* Preview Assets.xcassets in Resources */,
 				516EA592265443F7007E3508 /* API.graphql in Resources */,
 				51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */,
@@ -403,7 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51ECEE092623569D00D4C67E /* UIView.swift in Sources */,
+				5194244B267DE852001EBCAD /* AddEventView.swift in Sources */,
 				516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */,
 				516EA574265105B5007E3508 /* MainView.swift in Sources */,
 				516EA57826510610007E3508 /* EventsView.swift in Sources */,
@@ -416,8 +418,8 @@
 				516EA57C26516D61007E3508 /* NewEventView.swift in Sources */,
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,
 				516EA59B265BE07A007E3508 /* LoginViewModel.swift in Sources */,
-				516EA59426544556007E3508 /* API.swift in Sources */,
 				51ECEE1126357E5500D4C67E /* StartView.swift in Sources */,
+				51278BD6268241CB00D5D106 /* API.swift in Sources */,
 				516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */,
 				51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */,
 				516EA576265105FB007E3508 /* ReminderView.swift in Sources */,
