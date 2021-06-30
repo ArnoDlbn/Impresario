@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct ReminderView: View {
+    let coloredNavAppearance = UINavigationBarAppearance()
+
+    init(){
+        coloredNavAppearance.configureWithOpaqueBackground()
+        coloredNavAppearance.backgroundColor = .systemGray4
+        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Marker Felt Wide", size: 15)!]
+        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Marker Felt Wide", size: 25)!]
+        
+        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+    }
+    
     var body: some View {
         NavigationView {
             List(0 ..< 3) { item in

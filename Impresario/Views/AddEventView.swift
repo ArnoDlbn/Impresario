@@ -6,11 +6,9 @@ struct AddEventView: View {
     @State private var eventStart = Date()
     @State private var eventEnd = Date()
     @State private var interviewDuration = ""
-    
-    @State private var birthDate = Date()
-    @State private var minutes = Date()
+    @State private var durationsIndex = 0
+    var durations = [5, 10, 15, 20, 25, 30]
 
-    
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -23,50 +21,87 @@ struct AddEventView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .foregroundColor(Color.init(.darkGray))
                     .frame(width: 200, height: 40, alignment: .center)
-                //                TextField("Event Start", text: $eventStart)
-                //                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                //                    .foregroundColor(Color.init(.darkGray))
-                //                    .frame(width: 200, height: 40, alignment: .center)
-                DatePicker("Enter your birthday", selection: $birthDate)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .frame(maxHeight: 400)
-                DatePicker(selection: $birthDate, in: Date()..., displayedComponents: .date) { Text("yo") }
+                DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event Start")
+                    .foregroundColor(Color.init(.darkGray))
+                }
+                    .frame(width: 350)
+                DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event End")
+                    .foregroundColor(Color.init(.darkGray))
+                }
+                .foregroundColor(Color.init(.darkGray))
+                    .frame(width: 350)
                 Text("Event Start")
                     .foregroundColor(Color.init(.darkGray))
-                
-                HStack {
-                    DatePicker(selection: $birthDate, in: Date()..., displayedComponents: .date) {}
+                    DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
                         .labelsHidden()
-                    DatePicker(selection: $birthDate, in: Date()..., displayedComponents: .hourAndMinute) {}
-                        .labelsHidden()
-                }
-                //                TextField("Event End", text: $eventEnd)
-                //                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                //                    .foregroundColor(Color.init(.darkGray))
-                //                    .frame(width: 200, height: 40, alignment: .center)
-                TextField("Interview Duration", text: $interviewDuration)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Text("Event End")
                     .foregroundColor(Color.init(.darkGray))
-                    .frame(width: 200, height: 40, alignment: .center)
-                Picker("", selection: $minutes){
-                    ForEach(0..<60, id: \.self) { i in
-                        Text("\(i) min").tag(i)
+                    DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
+                        .labelsHidden()
+                
+                Text("Interview Duration")
+                    .foregroundColor(Color.init(.darkGray))
+                
+                Picker("", selection: $durationsIndex) {
+                    ForEach(0..<durations.count) {
+                        Text("\(self.durations[$0]) min")
+                            .tag($0)
                     }
                 }
                 .pickerStyle(WheelPickerStyle())
-                .frame(width: 180)
-                .clipped()
-                RoundedRectangle(cornerRadius: 10)
+                .frame(width: 200, height: 150)
+//                                        .clipped()
+                Text("Event Adress")
                     .foregroundColor(Color.init(.darkGray))
-                    .frame(width: 200, height: 40, alignment: .center)
-                    .overlay(Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text(" Create your event ")
-                            .foregroundColor(.white)
-                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-                    }))
+//                TextField("Event Description", text: $eventDescription)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .foregroundColor(Color.init(.darkGray))
+//                    .frame(width: 200, height: 40, alignment: .center)
+//                NavigationView {
+//                Form {
+//                    Section {
+//                        TextField("Event Description", text: $eventDescription)
+//                            .foregroundColor(Color.init(.darkGray))
+//                    }
+//                    Section {
+//                        DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event Start")
+//                            .foregroundColor(Color.init(.darkGray))
+//                        }
+//                    }
+//                    Section {
+//                        DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event End")
+//                            .foregroundColor(Color.init(.darkGray))
+//                        }
+//                    }
+//                    Section {
+//                        Picker("Duration", selection: $interviewDuration){
+//                            ForEach(0..<durations.count) {
+//                                Text("\(self.durations[$0]) min")
+//                                    .tag($0)
+//                            }
+//                        }
+////                        .pickerStyle(WheelPickerStyle())
+//        //                .frame(width: 180)
+//        //                .clipped()
+//                    }
+//
+//                }.navigationTitle("Add Event")
+//                .foregroundColor(.black)
+//                }.foregroundColor(.black)
+                
+                
             }
+            .frame(height: 700)
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(Color.init(.darkGray))
+                .frame(width: 200, height: 40, alignment: .center)
+                .overlay(Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text(" Create your event ")
+                        .foregroundColor(.white)
+                        .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                }))
         }
     }
 }

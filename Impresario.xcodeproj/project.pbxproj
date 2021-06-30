@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		51278BD4268240FE00D5D106 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 51278BD3268240FE00D5D106 /* schema.json */; };
 		51278BD6268241CB00D5D106 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD5268241CB00D5D106 /* API.swift */; };
+		51278BD82687A47800D5D106 /* EventDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD72687A47700D5D106 /* EventDatesView.swift */; };
+		51278BDA2687A48B00D5D106 /* EventAdressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD92687A48B00D5D106 /* EventAdressView.swift */; };
 		516EA572264EC32E007E3508 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA571264EC32E007E3508 /* EventRowView.swift */; };
 		516EA574265105B5007E3508 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA573265105B5007E3508 /* MainView.swift */; };
 		516EA576265105FB007E3508 /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA575265105FB007E3508 /* ReminderView.swift */; };
@@ -74,6 +76,8 @@
 /* Begin PBXFileReference section */
 		51278BD3268240FE00D5D106 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		51278BD5268241CB00D5D106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		51278BD72687A47700D5D106 /* EventDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDatesView.swift; sourceTree = "<group>"; };
+		51278BD92687A48B00D5D106 /* EventAdressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAdressView.swift; sourceTree = "<group>"; };
 		516EA571264EC32E007E3508 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		516EA573265105B5007E3508 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		516EA575265105FB007E3508 /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				516EA575265105FB007E3508 /* ReminderView.swift */,
 				51ECEE1026357E5500D4C67E /* StartView.swift */,
 				516EA5792651198A007E3508 /* test.swift */,
+				51278BD72687A47700D5D106 /* EventDatesView.swift */,
+				51278BD92687A48B00D5D106 /* EventAdressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -407,6 +413,7 @@
 			files = (
 				5194244B267DE852001EBCAD /* AddEventView.swift in Sources */,
 				516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */,
+				51278BD82687A47800D5D106 /* EventDatesView.swift in Sources */,
 				516EA574265105B5007E3508 /* MainView.swift in Sources */,
 				516EA57826510610007E3508 /* EventsView.swift in Sources */,
 				51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */,
@@ -419,6 +426,7 @@
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,
 				516EA59B265BE07A007E3508 /* LoginViewModel.swift in Sources */,
 				51ECEE1126357E5500D4C67E /* StartView.swift in Sources */,
+				51278BDA2687A48B00D5D106 /* EventAdressView.swift in Sources */,
 				51278BD6268241CB00D5D106 /* API.swift in Sources */,
 				516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */,
 				51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */,
