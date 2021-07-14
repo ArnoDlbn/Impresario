@@ -40,6 +40,13 @@ query events {
                     firstName
                     lastName
                 }
+                physicalAddress {
+                    street
+                    city
+                }
+                virtualAddress {
+                    url
+                }
             }
         }
     }

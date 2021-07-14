@@ -1,19 +1,12 @@
-//
-//  EventAdressView.swift
-//  Impresario
-//
-//  Created by Arnaud Dalbin on 26/06/2021.
-//
 
 import SwiftUI
 
 struct EventAddressView: View {
-    @State var label = ""
-    @State var street = ""
-    @State var zipCode = ""
-    @State var city = ""
-    @State var country = ""
-    @State private var isAddAddress = false
+    @Binding var label: String
+    @Binding var street: String
+    @Binding var zipCode: String
+    @Binding var city: String
+    @Binding var country: String
 
     var body: some View {
         VStack {
@@ -41,8 +34,8 @@ struct EventAddressView: View {
     }
 }
 
-struct EventAdressView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventAdressView()
-    }
-}
+//struct EventAdressView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventAddressView(label: "$label", street: "$street", zipCode: "$zipCode", city: "$city", country: "$country")
+//    }
+//}

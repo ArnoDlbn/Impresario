@@ -90,9 +90,12 @@ public struct EventInput: GraphQLMapConvertible {
   ///   - description
   ///   - endsAt
   ///   - interviewDuration
+  ///   - physicalAddress
   ///   - startsAt
-  public init(bandId: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, endsAt: Swift.Optional<String?> = nil, interviewDuration: Swift.Optional<Int?> = nil, startsAt: Swift.Optional<String?> = nil) {
-    graphQLMap = ["bandId": bandId, "description": description, "endsAt": endsAt, "interviewDuration": interviewDuration, "startsAt": startsAt]
+  ///   - title
+  ///   - virtualAddress
+  public init(bandId: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, endsAt: Swift.Optional<String?> = nil, interviewDuration: Swift.Optional<Int?> = nil, physicalAddress: Swift.Optional<PhysicalAddressInput?> = nil, startsAt: Swift.Optional<String?> = nil, title: Swift.Optional<String?> = nil, virtualAddress: Swift.Optional<VirtualAddressInput?> = nil) {
+    graphQLMap = ["bandId": bandId, "description": description, "endsAt": endsAt, "interviewDuration": interviewDuration, "physicalAddress": physicalAddress, "startsAt": startsAt, "title": title, "virtualAddress": virtualAddress]
   }
 
   public var bandId: Swift.Optional<String?> {
@@ -131,12 +134,127 @@ public struct EventInput: GraphQLMapConvertible {
     }
   }
 
+  public var physicalAddress: Swift.Optional<PhysicalAddressInput?> {
+    get {
+      return graphQLMap["physicalAddress"] as? Swift.Optional<PhysicalAddressInput?> ?? Swift.Optional<PhysicalAddressInput?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "physicalAddress")
+    }
+  }
+
   public var startsAt: Swift.Optional<String?> {
     get {
       return graphQLMap["startsAt"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "startsAt")
+    }
+  }
+
+  public var title: Swift.Optional<String?> {
+    get {
+      return graphQLMap["title"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "title")
+    }
+  }
+
+  public var virtualAddress: Swift.Optional<VirtualAddressInput?> {
+    get {
+      return graphQLMap["virtualAddress"] as? Swift.Optional<VirtualAddressInput?> ?? Swift.Optional<VirtualAddressInput?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "virtualAddress")
+    }
+  }
+}
+
+public struct PhysicalAddressInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - city
+  ///   - countryCode
+  ///   - label
+  ///   - street
+  ///   - zipCode
+  public init(city: String, countryCode: String, label: Swift.Optional<String?> = nil, street: String, zipCode: String) {
+    graphQLMap = ["city": city, "countryCode": countryCode, "label": label, "street": street, "zipCode": zipCode]
+  }
+
+  public var city: String {
+    get {
+      return graphQLMap["city"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "city")
+    }
+  }
+
+  public var countryCode: String {
+    get {
+      return graphQLMap["countryCode"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "countryCode")
+    }
+  }
+
+  public var label: Swift.Optional<String?> {
+    get {
+      return graphQLMap["label"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "label")
+    }
+  }
+
+  public var street: String {
+    get {
+      return graphQLMap["street"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "street")
+    }
+  }
+
+  public var zipCode: String {
+    get {
+      return graphQLMap["zipCode"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "zipCode")
+    }
+  }
+}
+
+public struct VirtualAddressInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - label
+  ///   - url
+  public init(label: Swift.Optional<String?> = nil, url: String) {
+    graphQLMap = ["label": label, "url": url]
+  }
+
+  public var label: Swift.Optional<String?> {
+    get {
+      return graphQLMap["label"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "label")
+    }
+  }
+
+  public var url: String {
+    get {
+      return graphQLMap["url"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "url")
     }
   }
 }
@@ -517,6 +635,15 @@ public final class EventsQuery: GraphQLQuery {
               firstName
               lastName
             }
+            physicalAddress {
+              __typename
+              street
+              city
+            }
+            virtualAddress {
+              __typename
+              url
+            }
           }
         }
       }
@@ -654,6 +781,8 @@ public final class EventsQuery: GraphQLQuery {
               GraphQLField("band", type: .nonNull(.object(Band.selections))),
               GraphQLField("description", type: .scalar(String.self)),
               GraphQLField("planner", type: .nonNull(.object(Planner.selections))),
+              GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
+              GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
             ]
           }
 
@@ -663,8 +792,8 @@ public final class EventsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, startsAt: String, endsAt: String, band: Band, description: String? = nil, planner: Planner) {
-            self.init(unsafeResultMap: ["__typename": "Event", "id": id, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "description": description, "planner": planner.resultMap])
+          public init(id: GraphQLID, startsAt: String, endsAt: String, band: Band, description: String? = nil, planner: Planner, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Event", "id": id, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "description": description, "planner": planner.resultMap, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }])
           }
 
           public var __typename: String {
@@ -727,6 +856,24 @@ public final class EventsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue.resultMap, forKey: "planner")
+            }
+          }
+
+          public var physicalAddress: PhysicalAddress? {
+            get {
+              return (resultMap["physicalAddress"] as? ResultMap).flatMap { PhysicalAddress(unsafeResultMap: $0) }
+            }
+            set {
+              resultMap.updateValue(newValue?.resultMap, forKey: "physicalAddress")
+            }
+          }
+
+          public var virtualAddress: VirtualAddress? {
+            get {
+              return (resultMap["virtualAddress"] as? ResultMap).flatMap { VirtualAddress(unsafeResultMap: $0) }
+            }
+            set {
+              resultMap.updateValue(newValue?.resultMap, forKey: "virtualAddress")
             }
           }
 
@@ -863,6 +1010,94 @@ public final class EventsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "lastName")
+              }
+            }
+          }
+
+          public struct PhysicalAddress: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["PhysicalAddress"]
+
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("street", type: .nonNull(.scalar(String.self))),
+                GraphQLField("city", type: .nonNull(.scalar(String.self))),
+              ]
+            }
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(street: String, city: String) {
+              self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "street": street, "city": city])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var street: String {
+              get {
+                return resultMap["street"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "street")
+              }
+            }
+
+            public var city: String {
+              get {
+                return resultMap["city"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "city")
+              }
+            }
+          }
+
+          public struct VirtualAddress: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["VirtualAddress"]
+
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("url", type: .nonNull(.scalar(String.self))),
+              ]
+            }
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(url: String) {
+              self.init(unsafeResultMap: ["__typename": "VirtualAddress", "url": url])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var url: String {
+              get {
+                return resultMap["url"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "url")
               }
             }
           }

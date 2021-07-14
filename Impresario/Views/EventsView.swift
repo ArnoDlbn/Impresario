@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct EventsView: View {
-    @State var events: [EventViewModel] = []
+    @ObservedObject var eventsViewModel = EventsViewModel()
     @State private var isAddEvent = false
     @State private var isViewProfile = false
     
     var body: some View {
         NavigationView {
-            List(events) { event in
+            List(eventsViewModel.events) { event in
                 NavigationLink(destination: Text("Sevdaliza")) {
                     EventRowView(viewModel: event)
                 }
             }
             .onAppear {
-                ImpresarioQueries.performEventsQuery() { eventViewModels in
-                    self.events = eventViewModels
-                }
+                loadEvents()
             }
             .navigationTitle(Text("Juin"))
             .toolbar {
@@ -45,12 +43,17 @@ struct EventsView: View {
                 }
             }
         }
-        .sheet(isPresented: $isAddEvent, content: {
+        .sheet(isPresented: $isAddEvent, onDismiss: loadEvents, content: {
             AddEventView()
         })
         .sheet(isPresented: $isViewProfile, content: {
             ProfileView()
         })
+    }
+    
+    func loadEvents() {
+        debugPrint("dismiss")
+        self.eventsViewModel.performEventsQuery()
     }
 }
 
