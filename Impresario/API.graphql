@@ -47,11 +47,15 @@ query events {
                 virtualAddress {
                     url
                 }
+                interviewDuration
+                timeSlots {
+                    startsAt
+                    isAvailable
+                }
             }
         }
     }
 }
-
 mutation createEvent($input: EventInput!) {
     createEvent(input: $input) {
         id

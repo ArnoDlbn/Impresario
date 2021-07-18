@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ReminderView: View {
+    @ObservedObject var eventsViewModel = EventsViewModel()
+    
     var body: some View {
         NavigationView {
-            List(0 ..< 3) { item in
+            List(eventsViewModel.events) { event in
                 NavigationLink(destination: Text("Sevdaliza")) {
-                    EventRowView(viewModel: EventViewModel(startEvent: "23/05", endEvent: "24/05", description: "Promo radio", bandName: "Sevdaliza"))
+                    EventRowView(viewModel: event)
                 }
+            }
+            .onAppear {
+                loadEvents()
             }
             .navigationBarTitle(Text("Juin"))
             .toolbar {
@@ -32,6 +37,11 @@ struct ReminderView: View {
                 }
             }
         }
+    }
+    
+    func loadEvents() {
+        debugPrint("dismiss")
+        self.eventsViewModel.performEventsQuery()
     }
 }
 

@@ -10,6 +10,8 @@
 		51278BD6268241CB00D5D106 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD5268241CB00D5D106 /* API.swift */; };
 		51278BD82687A47800D5D106 /* EventDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD72687A47700D5D106 /* EventDatesView.swift */; };
 		51278BDA2687A48B00D5D106 /* EventAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD92687A48B00D5D106 /* EventAddressView.swift */; };
+		5132875B26A30A6B00D2D6D9 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 5132875A26A30A6B00D2D6D9 /* schema.json */; };
+		5132875D26A42F1100D2D6D9 /* TimeSlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */; };
 		516EA572264EC32E007E3508 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA571264EC32E007E3508 /* EventRowView.swift */; };
 		516EA574265105B5007E3508 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA573265105B5007E3508 /* MainView.swift */; };
 		516EA576265105FB007E3508 /* ReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA575265105FB007E3508 /* ReminderView.swift */; };
@@ -30,7 +32,6 @@
 		516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */; };
 		516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA5A3265CDA71007E3508 /* EventViewModel.swift */; };
 		518478C0269F208F00C9AE34 /* AddEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518478BF269F208F00C9AE34 /* AddEventViewModel.swift */; };
-		518478C2269F370C00C9AE34 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 518478C1269F370C00C9AE34 /* schema.json */; };
 		518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518478C3269F469C00C9AE34 /* EventsViewModel.swift */; };
 		5194244B267DE852001EBCAD /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5194244A267DE852001EBCAD /* AddEventView.swift */; };
 		51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */; };
@@ -79,6 +80,8 @@
 		51278BD5268241CB00D5D106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		51278BD72687A47700D5D106 /* EventDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDatesView.swift; sourceTree = "<group>"; };
 		51278BD92687A48B00D5D106 /* EventAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddressView.swift; sourceTree = "<group>"; };
+		5132875A26A30A6B00D2D6D9 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotView.swift; sourceTree = "<group>"; };
 		516EA571264EC32E007E3508 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		516EA573265105B5007E3508 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		516EA575265105FB007E3508 /* ReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderView.swift; sourceTree = "<group>"; };
@@ -93,7 +96,6 @@
 		516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
 		516EA5A3265CDA71007E3508 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		518478BF269F208F00C9AE34 /* AddEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewModel.swift; sourceTree = "<group>"; };
-		518478C1269F370C00C9AE34 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		518478C3269F469C00C9AE34 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		5194244A267DE852001EBCAD /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioQueries.swift; sourceTree = "<group>"; };
@@ -168,7 +170,7 @@
 		51ECEDC826233A2800D4C67E /* Impresario */ = {
 			isa = PBXGroup;
 			children = (
-				518478C1269F370C00C9AE34 /* schema.json */,
+				5132875A26A30A6B00D2D6D9 /* schema.json */,
 				51278BD5268241CB00D5D106 /* API.swift */,
 				51ECEE072623568700D4C67E /* Supporting files */,
 				51ECEDF826233A6F00D4C67E /* Views */,
@@ -239,6 +241,7 @@
 				516EA5792651198A007E3508 /* test.swift */,
 				51278BD72687A47700D5D106 /* EventDatesView.swift */,
 				51278BD92687A48B00D5D106 /* EventAddressView.swift */,
+				5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,7 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518478C2269F370C00C9AE34 /* schema.json in Resources */,
+				5132875B26A30A6B00D2D6D9 /* schema.json in Resources */,
 				51ECEDD126233A2B00D4C67E /* Preview Assets.xcassets in Resources */,
 				516EA592265443F7007E3508 /* API.graphql in Resources */,
 				51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */,
@@ -429,6 +432,7 @@
 				518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */,
 				516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */,
 				51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */,
+				5132875D26A42F1100D2D6D9 /* TimeSlotView.swift in Sources */,
 				516EA572264EC32E007E3508 /* EventRowView.swift in Sources */,
 				516EA57C26516D61007E3508 /* NewEventView.swift in Sources */,
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,

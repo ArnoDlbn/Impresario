@@ -41,6 +41,6 @@ struct EventRowView: View {
 
 struct EventCellView_Previews: PreviewProvider {
     static var previews: some View {
-        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza"))
+        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza", duration: 30, timeSlot: nil))
     }
 }

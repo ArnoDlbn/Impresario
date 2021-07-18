@@ -15,7 +15,7 @@ struct EventsView: View {
     var body: some View {
         NavigationView {
             List(eventsViewModel.events) { event in
-                NavigationLink(destination: Text("Sevdaliza")) {
+                NavigationLink(destination: DetailEventView(viewModel: event)) {
                     EventRowView(viewModel: event)
                 }
             }
