@@ -12,11 +12,11 @@ struct EventRowView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.init(.darkGray), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
-                    .overlay(Text(viewModel.startEvent)
+                    .overlay(Text(viewModel.getEventDay(date: viewModel.startEvent))
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(Color.init(.darkGray))
                     )
-                Text(" 08 : 30 ")
+                Text(viewModel.getEventHoursAndMinutes(date: viewModel.startEvent))
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
             }
