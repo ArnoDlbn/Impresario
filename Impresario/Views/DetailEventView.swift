@@ -7,7 +7,7 @@ struct DetailEventView: View {
     var body: some View {
         ScrollView {
             Spacer()
-            Text(viewModel.bandName)
+            Text(viewModel.bandName ?? "")
                 .font(.system(size: 25, weight: .bold))
                 .foregroundColor(Color.init(.darkGray))
             Text(viewModel.description ?? "")
@@ -15,7 +15,7 @@ struct DetailEventView: View {
                 .foregroundColor(Color.init(.darkGray))
             Spacer()
             HStack(alignment: .center) {
-                Text(viewModel.getEventEntireDate(date: viewModel.startEvent))
+                Text(viewModel.getEventEntireDate(date: viewModel.startEvent ?? ""))
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                     .frame(width: 150)
@@ -23,7 +23,7 @@ struct DetailEventView: View {
                 Image(systemName: "arrow.right.square")
                     .foregroundColor(Color.init(.darkGray))
                     .font(.system(size: 40))
-                Text(viewModel.getEventEntireDate(date: viewModel.endEvent))
+                Text(viewModel.getEventEntireDate(date: viewModel.endEvent ?? ""))
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                     .frame(width: 150)
@@ -33,7 +33,7 @@ struct DetailEventView: View {
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
                 .padding(.top, 10)
-            Text("\(viewModel.duration) min")
+            Text("\(viewModel.duration!) min")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
             //        Spacer()
@@ -41,13 +41,23 @@ struct DetailEventView: View {
                 ForEach(0..<getRowCount()) { row in // create number of rows
                     HStack {
                         ForEach(0..<getColumnCount(row: row)) { column in // create 3 columns
-                            TimeSlotView(timeSlot: viewModel.timeSlot![row * 3 + column])
+                            TimeSlotView(timeSlot: viewModel.timeSlot![row * 3 + column], eventID: viewModel.eventId ?? "")
                         }
                     }
                 }
             }
             .padding(.top, 20)
             Spacer()
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(Color.init(.darkGray))
+                .frame(width: 200, height: 40, alignment: .center)
+                .overlay(Button(action: {
+                    CancelEventViewModel.cancelEvent(eventId: viewModel.eventId ?? "")
+                }, label: {
+                    Text(" Cancel your event ")
+                        .foregroundColor(.white)
+                        .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                }))
         }
     }
     func getRowCount() -> Int {

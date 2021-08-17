@@ -116,9 +116,7 @@ struct AddEventView: View {
                     dateForm.timeZone = TimeZone.current
                     let newEnd = dateForm.string(from: eventEnd)
                     let newStart = dateForm.string(from: eventStart)
-                    debugPrint("\(newEnd)")
-                    debugPrint("\(newStart)")
-                    addEventViewModel.performEventInput(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
+                    addEventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {

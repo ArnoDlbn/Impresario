@@ -3,7 +3,6 @@ import Foundation
 import KeychainSwift
 
 class LoginViewModel: ObservableObject {
-    @Published var token: String? = nil
     
     func perfomLoginMutation(username: String, password: String, completion: @escaping (String?) -> Void) {
         Network.shared.apollo.perform(mutation: LoginMutation(input: Credentials(email: username, password: password))) { result in
@@ -11,7 +10,7 @@ class LoginViewModel: ObservableObject {
             switch result {
             case .success(let graphQLResult):
                 
-                if let result = graphQLResult.data?.login?.token {
+                if let result = graphQLResult.data?.login.token {
                     keyChain.set(result, forKey: "token")
                     completion(result)
                     print(keyChain.get("token")!)
@@ -29,20 +28,8 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
-    
-    func performMeQuery() {
-        Network.shared.apollo.fetch(query: MeQuery()) { result in
-            switch result {
-            case .success:
-                return
-            case .failure:
-                self.token = nil
-            }
-        }
-        
-    }
 }
 
-class User: ObservableObject {
-    @Published var token: String? = nil
-}
+//class User: ObservableObject {
+//    @Published var token: String? = nil
+//}

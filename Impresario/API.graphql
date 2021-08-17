@@ -1,9 +1,6 @@
 mutation login($input: Credentials!) {
     login(input: $input) {
         token
-        user {
-            email
-        }
     }
 }
 
@@ -18,6 +15,8 @@ query me {
         email
         firstName
         lastName
+        isJournalist
+        isArtist
     }
 }
 
@@ -27,6 +26,10 @@ query events {
             cursor
             node {
                 id
+                author {
+                    firstName
+                    lastName
+                }
                 startsAt
                 endsAt
                 band {
@@ -36,13 +39,11 @@ query events {
                     }
                 }
                 description
-                planner {
-                    firstName
-                    lastName
-                }
                 physicalAddress {
+                    label
                     street
                     city
+                    zipCode
                 }
                 virtualAddress {
                     url
@@ -56,8 +57,67 @@ query events {
         }
     }
 }
+
 mutation createEvent($input: EventInput!) {
     createEvent(input: $input) {
+        id
+        description
+    }
+}
+
+query interviews {
+    interviews {
+        edges {
+            cursor
+            node {
+                id
+                startsAt
+                endsAt
+                event {
+                    id
+                    description
+                    band {
+                        name
+                    }
+                    physicalAddress {
+                        label
+                        street
+                        city
+                        zipCode
+                    }
+                    virtualAddress {
+                        url
+                    }
+                }
+                journalist {
+                    medium {
+                        name
+                    }
+                    user {
+                        firstName
+                        lastName
+                    }
+                }
+            }
+        }
+    }
+}
+
+mutation requestInterview($input: InterviewRequestInput!) {
+    requestInterview(input: $input) {
+        id
+    }
+}
+
+mutation cancelEvent($input: CanceledEventInput!) {
+    cancelEvent(input: $input) {
+        id
+        description
+    }
+}
+
+mutation cancelInterview($input: CanceledInterviewInput!) {
+    cancelInterview(input: $input) {
         id
         description
     }

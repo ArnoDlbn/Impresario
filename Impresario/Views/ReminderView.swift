@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ReminderView: View {
-    @ObservedObject var eventsViewModel = EventsViewModel()
+    @ObservedObject var interviewsViewModel = InterviewsViewModel()
+    @State private var isViewProfile = false
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationView {
-            List(eventsViewModel.events) { event in
-                NavigationLink(destination: Text("Sevdaliza")) {
-                    EventRowView(viewModel: event)
+            List(interviewsViewModel.interviews) { interview in
+                NavigationLink(destination: DetailInterviewView(interview: interview)) {
+                    InterviewRowView(interview: interview)
                 }
             }
             .onAppear {
-                loadEvents()
+                loadInterviews()
             }
             .navigationBarTitle(Text("Juin"))
             .toolbar {
@@ -30,23 +32,26 @@ struct ReminderView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
                         .onTapGesture {
-//                            isViewProfile.toggle()
+                            isViewProfile.toggle()
                         }
                         .foregroundColor(Color.init(.darkGray))
                         .font(.system(size: 25))
                 }
             }
         }
+        .sheet(isPresented: $isViewProfile, content: {
+            ProfileView(userViewModel: userViewModel)
+        })
     }
     
-    func loadEvents() {
+    func loadInterviews() {
         debugPrint("dismiss")
-        self.eventsViewModel.performEventsQuery()
+        self.interviewsViewModel.interviewsQuery()
     }
 }
 
-struct ReminderView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReminderView()
-    }
-}
+//struct ReminderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReminderView()
+//    }
+//}

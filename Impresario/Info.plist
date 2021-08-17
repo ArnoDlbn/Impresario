@@ -53,5 +53,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Biometrics needed for authentication</string>
 </dict>
 </plist>

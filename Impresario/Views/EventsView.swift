@@ -11,6 +11,7 @@ struct EventsView: View {
     @ObservedObject var eventsViewModel = EventsViewModel()
     @State private var isAddEvent = false
     @State private var isViewProfile = false
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationView {
@@ -25,14 +26,10 @@ struct EventsView: View {
             .navigationTitle(Text("Juin"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Add event")
-                        .onTapGesture {
-                            isAddEvent.toggle()
-                        }
+                    Text("Events")
                         .foregroundColor(Color.init(.darkGray))
                         .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
                 }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
                         .onTapGesture {
@@ -42,12 +39,23 @@ struct EventsView: View {
                         .font(.system(size: 25))
                 }
             }
+//            RoundedRectangle(cornerRadius: 10)
+//                .foregroundColor(Color.init(.darkGray))
+//                .frame(width: 100, height: 40, alignment: .center)
+//                .overlay(Text(" Add event ")
+//                            .foregroundColor(.white)
+//                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+//                )
+//                .onTapGesture {
+//                    isAddEvent.toggle()
+//                }
+//                .padding(.bottom, 10)
         }
         .sheet(isPresented: $isAddEvent, onDismiss: loadEvents, content: {
             AddEventView()
         })
         .sheet(isPresented: $isViewProfile, content: {
-            ProfileView()
+            ProfileView(userViewModel: userViewModel)
         })
     }
     
@@ -57,8 +65,8 @@ struct EventsView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventsView()
-    }
-}
+//struct SwiftUIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventsView()
+//    }
+//}

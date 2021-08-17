@@ -1,45 +1,44 @@
 
 import Foundation
-import Apollo
 
 class EventViewModel: Identifiable {
     
-    let startEvent: String
-    let endEvent: String
+    let startEvent: String?
+    let endEvent: String?
     let description: String?
-    let bandName: String
-    let duration: Int
+    let bandName: String?
+    let duration: Int?
     let timeSlot: [TimeSlot]?
+    let eventId: String
+    let address: Address?
     
-    init(startEvent: String, endEvent: String, description: String?, bandName: String, duration: Int, timeSlot: [TimeSlot]?) {
+    init(startEvent: String? = nil,
+         endEvent: String? = nil,
+         description: String? = nil,
+         bandName: String? = nil,
+         duration: Int? = nil,
+         timeSlot: [TimeSlot]? = nil,
+         eventId: String,
+         address: Address? = nil) {
+        
         self.startEvent = startEvent
         self.endEvent = endEvent
         self.description = description
         self.bandName = bandName
         self.duration = duration
         self.timeSlot = timeSlot
+        self.eventId = eventId
+        self.address = address
     }
-    
-//    func performEventsQuery() {
-//        Network.shared.apollo.fetch(query: EventsQuery()) { result in
-//            switch result {
-//            case .success(let graphQLResult):
-//                type(of: self).init(startEvent: <#T##String#>, endEvent: <#T##String#>, description: <#T##String?#>, bandName: <#T##String#>)
-//            case .failure(let error):
-//            print(error)
-//            }
-//        }
-//    }
-    
-    static func from(edge: EventsQuery.Data.Event.Edge) -> EventViewModel {
-        let content = edge
-        
-        let startEvent = content.node.startsAt
-        let endEvent = content.node.endsAt
-        let description = content.node.description
-        let bandName = content.node.band.name
-        let duration = content.node.interviewDuration
-        let timeSlot: [TimeSlot] = content.node.timeSlots!.map { timeSlot in
+
+    static func from(content: EventsQuery.Data.Event.Edge.Node) -> EventViewModel {
+        let eventId = content.id
+        let startEvent = content.startsAt
+        let endEvent = content.endsAt
+        let description = content.description
+        let bandName = content.band.name
+        let duration = content.interviewDuration
+        let timeSlot: [TimeSlot] = content.timeSlots!.map { timeSlot in
             let date = Date()
             let dateForm = ISO8601DateFormatter()
             dateForm.timeZone = TimeZone.current
@@ -50,26 +49,18 @@ class EventViewModel: Identifiable {
             // *** create calendar object ***
             var calendar = Calendar.current
 
-            // *** Get components using current Local & Timezone ***
-            print(calendar.dateComponents([.year, .month, .day, .hour, .minute], from: newDate ?? date))
-
             // *** define calendar components to use as well Timezone to UTC ***
             calendar.timeZone = TimeZone(identifier: "UTC")!
-
-            // *** Get All components from date ***
-            let components = calendar.dateComponents([.hour, .year, .minute], from: newDate ?? date)
-            print("All Components : \(components)")
 
             // *** Get Individual components from date ***
             let hour = calendar.component(.hour, from: newDate ?? date)
             let minutes = calendar.component(.minute, from: newDate ?? date)
             let minutesString = minutes<10 ? String(format: "%02d", minutes) : String(minutes)
-            print("\(hour):\(minutes)")
             
-            let result = TimeSlot.init(startsAt: "\(hour):\(minutesString)", isAvailable: timeSlot!.isAvailable)
+            let result = TimeSlot.init(startsAt: "\(hour):\(minutesString)", isAvailable: timeSlot!.isAvailable, rawStartsAt: timeSlot!.startsAt)
             return result
         }
-        
+//        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
         
         return EventViewModel(
             startEvent: startEvent,
@@ -77,7 +68,23 @@ class EventViewModel: Identifiable {
             description: description,
             bandName: bandName,
             duration: duration,
-            timeSlot: timeSlot)
+            timeSlot: timeSlot,
+            eventId: eventId
+//            address: address
+        )
+    }
+    
+    static func from(content: InterviewsQuery.Data.Interview.Edge.Node.Event) -> EventViewModel {
+        let description = content.description
+        let bandName = content.band.name
+        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
+        let eventId = content.id
+        
+        return EventViewModel(
+            description: description,
+            bandName: bandName,
+            eventId: eventId,
+            address: address)
     }
     
     func getEventHoursAndMinutes(date: String) -> String {
@@ -128,4 +135,29 @@ class EventViewModel: Identifiable {
 struct TimeSlot: Hashable {
     let startsAt: String
     let isAvailable: Bool
+    let rawStartsAt: String
+}
+
+struct Address {
+    let label: String?
+    let street: String?
+    let zipCode: String?
+    let city: String?
+    let country: String?
+    let countryCode: String?
+    
+    init(label: String? = nil,
+        street: String? = nil,
+        zipCode: String? = nil,
+        city: String? = nil,
+        country: String? = nil,
+        countryCode: String? = nil) {
+        
+        self.label = label
+        self.street = street
+        self.zipCode = zipCode
+        self.city = city
+        self.country = country
+        self.countryCode = countryCode
+    }
 }

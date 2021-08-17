@@ -4,7 +4,7 @@ import SwiftUI
 struct StartView: View {
     @State private var signUp = false
     @State private var buttonSignUpText = " Sign up "
-    @ObservedObject var user: User
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct StartView: View {
                 if signUp {
                     RegisterView()
                 } else {
-                    AuthenticationView(user: user)
+                    AuthenticationView(userViewModel: userViewModel)
                 }
             }
         }

@@ -1,23 +1,26 @@
 
 import SwiftUI
-import KeychainSwift
+import LocalAuthentication
+//import KeychainSwift
 
 struct AuthenticationView: View {
     @State private var username = "impresarioapp+sevdaalizadeh@gmail.com"
     @State private var password = "Sevdaliza!"
     @State var signUp = false
-    let loginViewModel = LoginViewModel()
-    @ObservedObject var user: User
+    @State var showAlert = false
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         VStack {
             Spacer()
             TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textContentType(.username)
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textContentType(.password)
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
             Spacer()
@@ -27,9 +30,7 @@ struct AuthenticationView: View {
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(
                     Button(action: {
-                        loginViewModel.perfomLoginMutation(username: username, password: password) { token in
-                            user.token = token
-                        }
+                        authenticateTapped()
                     }, label: {
                         Text(" Sign In ")
                             .foregroundColor(.white)
@@ -44,6 +45,40 @@ struct AuthenticationView: View {
             Spacer()
         }
         .padding()
+    }
+    
+    func authenticateTapped() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself with TouchID!"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+
+                DispatchQueue.main.async {
+                    if success {
+//                        showAlert.toggle()
+//                        self.alert(isPresented: $showAlert, content: {
+                            Alert(title: Text("Important message"), message: Text("Authentication is a success !"), dismissButton: .default(Text("Got it!")))
+//                        })
+                        userViewModel.perfomLoginMutation(username: username, password: password)
+                    } else {
+//                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        showAlert.toggle()
+                        self.alert(isPresented: $showAlert, content: {
+                            Alert(title: Text("Important message"), message: Text("Authentication failed !"), dismissButton: .default(Text("Got it!")))
+                        })
+                    }
+                }
+            }
+        } else {
+            self.alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Biometry unavailable"), message: Text("Your device is not configured for biometric authentication."), dismissButton: .default(Text("Got it!")))
+            })
+            userViewModel.perfomLoginMutation(username: username, password: password)
+        }
     }
 }
 

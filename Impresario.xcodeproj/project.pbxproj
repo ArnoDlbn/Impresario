@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511A180C26C2DBC400FF6767 /* InterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */; };
+		511A180E26C2DBD600FF6767 /* InterviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */; };
+		511A181026C9012B00FF6767 /* InterviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180F26C9012B00FF6767 /* InterviewRowView.swift */; };
+		511A181226C9029500FF6767 /* DetailInterviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181126C9029500FF6767 /* DetailInterviewView.swift */; };
+		511A181426C9644300FF6767 /* CancelEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181326C9644300FF6767 /* CancelEventViewModel.swift */; };
+		511A181626C969FB00FF6767 /* CancelInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181526C969FB00FF6767 /* CancelInterviewViewModel.swift */; };
+		511A181826CA8F7D00FF6767 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181726CA8F7D00FF6767 /* UserViewModel.swift */; };
+		511A181A26CBE07900FF6767 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181926CBE07900FF6767 /* User.swift */; };
+		511A181D26CBE59600FF6767 /* Interview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A181C26CBE59600FF6767 /* Interview.swift */; };
 		51278BD6268241CB00D5D106 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD5268241CB00D5D106 /* API.swift */; };
 		51278BD82687A47800D5D106 /* EventDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD72687A47700D5D106 /* EventDatesView.swift */; };
 		51278BDA2687A48B00D5D106 /* EventAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51278BD92687A48B00D5D106 /* EventAddressView.swift */; };
-		5132875B26A30A6B00D2D6D9 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 5132875A26A30A6B00D2D6D9 /* schema.json */; };
 		5132875D26A42F1100D2D6D9 /* TimeSlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */; };
 		516EA572264EC32E007E3508 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA571264EC32E007E3508 /* EventRowView.swift */; };
 		516EA574265105B5007E3508 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516EA573265105B5007E3508 /* MainView.swift */; };
@@ -34,7 +42,8 @@
 		518478C0269F208F00C9AE34 /* AddEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518478BF269F208F00C9AE34 /* AddEventViewModel.swift */; };
 		518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518478C3269F469C00C9AE34 /* EventsViewModel.swift */; };
 		5194244B267DE852001EBCAD /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5194244A267DE852001EBCAD /* AddEventView.swift */; };
-		51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */; };
+		51995B0226BEC37200F3CF26 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 51995B0126BEC37200F3CF26 /* schema.json */; };
+		51995B0426BECD9300F3CF26 /* AddInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51995B0326BECD9300F3CF26 /* AddInterviewViewModel.swift */; };
 		51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DBE57D265D51FE0046A366 /* DetailEventView.swift */; };
 		51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */; };
 		51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51ECEDCD26233A2B00D4C67E /* Assets.xcassets */; };
@@ -77,10 +86,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewViewModel.swift; sourceTree = "<group>"; };
+		511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewsViewModel.swift; sourceTree = "<group>"; };
+		511A180F26C9012B00FF6767 /* InterviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewRowView.swift; sourceTree = "<group>"; };
+		511A181126C9029500FF6767 /* DetailInterviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInterviewView.swift; sourceTree = "<group>"; };
+		511A181326C9644300FF6767 /* CancelEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelEventViewModel.swift; sourceTree = "<group>"; };
+		511A181526C969FB00FF6767 /* CancelInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelInterviewViewModel.swift; sourceTree = "<group>"; };
+		511A181726CA8F7D00FF6767 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		511A181926CBE07900FF6767 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		511A181C26CBE59600FF6767 /* Interview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interview.swift; sourceTree = "<group>"; };
 		51278BD5268241CB00D5D106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		51278BD72687A47700D5D106 /* EventDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDatesView.swift; sourceTree = "<group>"; };
 		51278BD92687A48B00D5D106 /* EventAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddressView.swift; sourceTree = "<group>"; };
-		5132875A26A30A6B00D2D6D9 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotView.swift; sourceTree = "<group>"; };
 		516EA571264EC32E007E3508 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		516EA573265105B5007E3508 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -98,7 +115,8 @@
 		518478BF269F208F00C9AE34 /* AddEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewModel.swift; sourceTree = "<group>"; };
 		518478C3269F469C00C9AE34 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		5194244A267DE852001EBCAD /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
-		51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioQueries.swift; sourceTree = "<group>"; };
+		51995B0126BEC37200F3CF26 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		51995B0326BECD9300F3CF26 /* AddInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewViewModel.swift; sourceTree = "<group>"; };
 		51DBE57D265D51FE0046A366 /* DetailEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventView.swift; sourceTree = "<group>"; };
 		51ECEDC626233A2800D4C67E /* Impresario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Impresario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpresarioApp.swift; sourceTree = "<group>"; };
@@ -147,6 +165,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511A181B26CBE4F700FF6767 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */,
+				511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */,
+				511A181726CA8F7D00FF6767 /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		51ECEDBD26233A2800D4C67E = {
 			isa = PBXGroup;
 			children = (
@@ -170,22 +198,25 @@
 		51ECEDC826233A2800D4C67E /* Impresario */ = {
 			isa = PBXGroup;
 			children = (
-				5132875A26A30A6B00D2D6D9 /* schema.json */,
-				51278BD5268241CB00D5D106 /* API.swift */,
-				51ECEE072623568700D4C67E /* Supporting files */,
-				51ECEDF826233A6F00D4C67E /* Views */,
-				51ECEDF726233A6500D4C67E /* Models */,
-				51ECEDD226233A2B00D4C67E /* Info.plist */,
-				51ECEDCF26233A2B00D4C67E /* Preview Content */,
+				511A181B26CBE4F700FF6767 /* ViewModel */,
 				518478BF269F208F00C9AE34 /* AddEventViewModel.swift */,
+				51995B0326BECD9300F3CF26 /* AddInterviewViewModel.swift */,
 				516EA591265443F7007E3508 /* API.graphql */,
-				516EA5952654459B007E3508 /* Network.swift */,
-				516EA59A265BE07A007E3508 /* LoginViewModel.swift */,
-				516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */,
-				516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */,
-				516EA5A3265CDA71007E3508 /* EventViewModel.swift */,
-				51DBE579265D4F5C0046A366 /* ImpresarioQueries.swift */,
+				51278BD5268241CB00D5D106 /* API.swift */,
 				518478C3269F469C00C9AE34 /* EventsViewModel.swift */,
+				516EA5A3265CDA71007E3508 /* EventViewModel.swift */,
+				51ECEDD226233A2B00D4C67E /* Info.plist */,
+				516EA59A265BE07A007E3508 /* LoginViewModel.swift */,
+				51ECEDF726233A6500D4C67E /* Model */,
+				516EA5952654459B007E3508 /* Network.swift */,
+				516EA5A1265C18E8007E3508 /* NetworkInterceptorProvider.swift */,
+				51ECEDCF26233A2B00D4C67E /* Preview Content */,
+				51995B0126BEC37200F3CF26 /* schema.json */,
+				51ECEE072623568700D4C67E /* Supporting files */,
+				516EA59C265C0902007E3508 /* TokenAddingInterceptor.swift */,
+				51ECEDF826233A6F00D4C67E /* Views */,
+				511A181326C9644300FF6767 /* CancelEventViewModel.swift */,
+				511A181526C969FB00FF6767 /* CancelInterviewViewModel.swift */,
 			);
 			path = Impresario;
 			sourceTree = "<group>";
@@ -216,11 +247,13 @@
 			path = ImpresarioUITests;
 			sourceTree = "<group>";
 		};
-		51ECEDF726233A6500D4C67E /* Models */ = {
+		51ECEDF726233A6500D4C67E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				511A181C26CBE59600FF6767 /* Interview.swift */,
+				511A181926CBE07900FF6767 /* User.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		51ECEDF826233A6F00D4C67E /* Views */ = {
@@ -229,6 +262,8 @@
 				5194244A267DE852001EBCAD /* AddEventView.swift */,
 				51ECEDFD2623428A00D4C67E /* AuthenticationView.swift */,
 				51DBE57D265D51FE0046A366 /* DetailEventView.swift */,
+				51278BD92687A48B00D5D106 /* EventAddressView.swift */,
+				51278BD72687A47700D5D106 /* EventDatesView.swift */,
 				516EA571264EC32E007E3508 /* EventRowView.swift */,
 				516EA57726510610007E3508 /* EventsView.swift */,
 				51ECEDC926233A2800D4C67E /* ImpresarioApp.swift */,
@@ -239,9 +274,9 @@
 				516EA575265105FB007E3508 /* ReminderView.swift */,
 				51ECEE1026357E5500D4C67E /* StartView.swift */,
 				516EA5792651198A007E3508 /* test.swift */,
-				51278BD72687A47700D5D106 /* EventDatesView.swift */,
-				51278BD92687A48B00D5D106 /* EventAddressView.swift */,
 				5132875C26A42F1100D2D6D9 /* TimeSlotView.swift */,
+				511A180F26C9012B00FF6767 /* InterviewRowView.swift */,
+				511A181126C9029500FF6767 /* DetailInterviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -371,7 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5132875B26A30A6B00D2D6D9 /* schema.json in Resources */,
+				51995B0226BEC37200F3CF26 /* schema.json in Resources */,
 				51ECEDD126233A2B00D4C67E /* Preview Assets.xcassets in Resources */,
 				516EA592265443F7007E3508 /* API.graphql in Resources */,
 				51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */,
@@ -421,15 +456,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5194244B267DE852001EBCAD /* AddEventView.swift in Sources */,
+				511A180C26C2DBC400FF6767 /* InterviewViewModel.swift in Sources */,
 				518478C0269F208F00C9AE34 /* AddEventViewModel.swift in Sources */,
 				516EA5A4265CDA71007E3508 /* EventViewModel.swift in Sources */,
 				51278BD82687A47800D5D106 /* EventDatesView.swift in Sources */,
+				51995B0426BECD9300F3CF26 /* AddInterviewViewModel.swift in Sources */,
 				516EA574265105B5007E3508 /* MainView.swift in Sources */,
 				516EA57826510610007E3508 /* EventsView.swift in Sources */,
-				51DBE57A265D4F5C0046A366 /* ImpresarioQueries.swift in Sources */,
 				516EA57A2651198A007E3508 /* test.swift in Sources */,
 				516EA57E26516F35007E3508 /* ProfileView.swift in Sources */,
 				518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */,
+				511A180E26C2DBD600FF6767 /* InterviewsViewModel.swift in Sources */,
 				516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */,
 				51DBE57E265D51FE0046A366 /* DetailEventView.swift in Sources */,
 				5132875D26A42F1100D2D6D9 /* TimeSlotView.swift in Sources */,
@@ -437,14 +474,21 @@
 				516EA57C26516D61007E3508 /* NewEventView.swift in Sources */,
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,
 				516EA59B265BE07A007E3508 /* LoginViewModel.swift in Sources */,
+				511A181D26CBE59600FF6767 /* Interview.swift in Sources */,
 				51ECEE1126357E5500D4C67E /* StartView.swift in Sources */,
 				51278BDA2687A48B00D5D106 /* EventAddressView.swift in Sources */,
+				511A181426C9644300FF6767 /* CancelEventViewModel.swift in Sources */,
+				511A181626C969FB00FF6767 /* CancelInterviewViewModel.swift in Sources */,
 				51278BD6268241CB00D5D106 /* API.swift in Sources */,
 				516EA5A2265C18E8007E3508 /* NetworkInterceptorProvider.swift in Sources */,
+				511A181826CA8F7D00FF6767 /* UserViewModel.swift in Sources */,
 				51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */,
 				516EA576265105FB007E3508 /* ReminderView.swift in Sources */,
+				511A181026C9012B00FF6767 /* InterviewRowView.swift in Sources */,
 				516EA5962654459B007E3508 /* Network.swift in Sources */,
+				511A181226C9029500FF6767 /* DetailInterviewView.swift in Sources */,
 				51ECEDFE2623428A00D4C67E /* AuthenticationView.swift in Sources */,
+				511A181A26CBE07900FF6767 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,7 +655,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.arnauddalbin.Impresario;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appsolument.impresario;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -633,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.arnauddalbin.Impresario;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appsolument.impresario;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -688,6 +732,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				INFOPLIST_FILE = ImpresarioUITests/Info.plist;
@@ -708,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				INFOPLIST_FILE = ImpresarioUITests/Info.plist;

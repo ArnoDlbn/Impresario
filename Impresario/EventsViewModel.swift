@@ -12,14 +12,18 @@ class EventsViewModel: ObservableObject {
                     var eventViewModels: [EventViewModel] = []
                     for edge in edges {
                         if let e = edge {
-                            let eventViewModel = EventViewModel.from(edge: e)
+                            let eventViewModel = EventViewModel.from(content: e.node)
                             eventViewModels.append(eventViewModel)
                         }
                     }
                     self.events = eventViewModels
+                } else {
+                    graphQLResult.errors.map { error in
+                        print("1" + error.description)
+                    }
                 }
             case .failure(let error):
-                print(error)
+                print("2" + error.localizedDescription)
             }
         }
     }
