@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InterviewRowView: View {
-    let interview: Interview
+    let interviewViewModel: InterviewViewModel
     
     var body: some View {
         HStack {
@@ -29,10 +29,10 @@ struct InterviewRowView: View {
             Spacer()
                 .frame(width: 30)
             VStack(alignment: .leading) {
-                Text(interview.event.bandName ?? "")
+                Text(interviewViewModel.interview.event.bandName ?? "")
                     .font(.system(size: 25, weight: .bold))
                     .foregroundColor(Color.init(.darkGray))
-                Text(interview.event.description ?? "")
+                Text(interviewViewModel.interview.event.description ?? "")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                 Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")

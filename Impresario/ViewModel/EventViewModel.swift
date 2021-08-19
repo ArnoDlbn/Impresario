@@ -3,36 +3,14 @@ import Foundation
 
 class EventViewModel: Identifiable {
     
-    let startEvent: String?
-    let endEvent: String?
-    let description: String?
-    let bandName: String?
-    let duration: Int?
-    let timeSlot: [TimeSlot]?
-    let eventId: String
-    let address: Address?
+    var event: Event
     
-    init(startEvent: String? = nil,
-         endEvent: String? = nil,
-         description: String? = nil,
-         bandName: String? = nil,
-         duration: Int? = nil,
-         timeSlot: [TimeSlot]? = nil,
-         eventId: String,
-         address: Address? = nil) {
-        
-        self.startEvent = startEvent
-        self.endEvent = endEvent
-        self.description = description
-        self.bandName = bandName
-        self.duration = duration
-        self.timeSlot = timeSlot
-        self.eventId = eventId
-        self.address = address
+    init(withEvent event: Event) {
+        self.event = event
     }
-
-    static func from(content: EventsQuery.Data.Event.Edge.Node) -> EventViewModel {
-        let eventId = content.id
+    
+    static func from(content: EventsQuery.Data.Event.Edge.Node) -> Event {
+        let id = content.id
         let startEvent = content.startsAt
         let endEvent = content.endsAt
         let description = content.description
@@ -62,29 +40,42 @@ class EventViewModel: Identifiable {
         }
 //        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
         
-        return EventViewModel(
+        return Event(
             startEvent: startEvent,
             endEvent: endEvent,
             description: description,
             bandName: bandName,
             duration: duration,
             timeSlot: timeSlot,
-            eventId: eventId
+            id: id
 //            address: address
         )
     }
     
-    static func from(content: InterviewsQuery.Data.Interview.Edge.Node.Event) -> EventViewModel {
+    static func from(content: InterviewsQuery.Data.Interview.Edge.Node.Event) -> Event {
         let description = content.description
         let bandName = content.band.name
         let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
-        let eventId = content.id
+        let id = content.id
         
-        return EventViewModel(
+        return Event(
             description: description,
             bandName: bandName,
-            eventId: eventId,
+            id: id,
             address: address)
+    }
+    
+    static func createEvent(description: String, endsAt: String, startsAt: String, title: String, completion: @escaping () -> Void) {
+        Network.shared.apollo.perform(mutation: CreateEventMutation(input: EventInput(description: description, endsAt: endsAt, startsAt: startsAt, title: title))) { result in
+            switch result {
+            case .success(let graphQLResult):
+                debugPrint(graphQLResult.data ?? "")
+                debugPrint(graphQLResult.errors ?? "")
+                completion()
+            case .failure(let error):
+            debugPrint(error)
+            }
+        }
     }
     
     func getEventHoursAndMinutes(date: String) -> String {
@@ -129,35 +120,5 @@ class EventViewModel: Identifiable {
         let minutesString = minutes<10 ? String(format: "%02d", minutes) : String(minutes)
         let result = "\(day)/\(monthString)/\(year) at \(hour):\(minutesString)"
         return result
-    }
-}
-
-struct TimeSlot: Hashable {
-    let startsAt: String
-    let isAvailable: Bool
-    let rawStartsAt: String
-}
-
-struct Address {
-    let label: String?
-    let street: String?
-    let zipCode: String?
-    let city: String?
-    let country: String?
-    let countryCode: String?
-    
-    init(label: String? = nil,
-        street: String? = nil,
-        zipCode: String? = nil,
-        city: String? = nil,
-        country: String? = nil,
-        countryCode: String? = nil) {
-        
-        self.label = label
-        self.street = street
-        self.zipCode = zipCode
-        self.city = city
-        self.country = country
-        self.countryCode = countryCode
     }
 }

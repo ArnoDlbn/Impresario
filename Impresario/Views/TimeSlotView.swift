@@ -2,9 +2,9 @@
 import SwiftUI
 
 struct TimeSlotView: View {
+    
     let timeSlot: TimeSlot
     let eventID: String
-    let addInterviewViewModel = AddInterviewViewModel()
     
     @State private var showingAlert = false
     
@@ -13,7 +13,7 @@ struct TimeSlotView: View {
         RoundedRectangle(cornerRadius: 10)
             .foregroundColor(Color.init(.darkGray))
             .frame(width: 120, height: 30, alignment: .center)
-            .overlay(Button("\(timeSlot.startsAt)", action: { addInterviewViewModel.requestInterview(eventId: eventID, startsAt: timeSlot.rawStartsAt) {
+            .overlay(Button("\(timeSlot.startsAt)", action: { InterviewViewModel.requestInterview(eventId: eventID, startsAt: timeSlot.rawStartsAt) {
             }})
                         .foregroundColor(.white)
                         .font(.system(size: 15, weight: .semibold))

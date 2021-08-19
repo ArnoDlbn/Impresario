@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
+    
     @ObservedObject var eventsViewModel = EventsViewModel()
     @State private var isAddEvent = false
     @State private var isViewProfile = false
@@ -16,8 +17,8 @@ struct EventsView: View {
     var body: some View {
         NavigationView {
             List(eventsViewModel.events) { event in
-                NavigationLink(destination: DetailEventView(viewModel: event)) {
-                    EventRowView(viewModel: event)
+                NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event))) {
+                    EventRowView(eventViewModel: EventViewModel(withEvent: event))
                 }
             }
             .onAppear {
@@ -61,7 +62,7 @@ struct EventsView: View {
     
     func loadEvents() {
         debugPrint("dismiss")
-        self.eventsViewModel.performEventsQuery()
+        self.eventsViewModel.eventsQuery()
     }
 }
 

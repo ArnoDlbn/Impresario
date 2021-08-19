@@ -2,38 +2,38 @@
 import SwiftUI
 
 struct DetailEventView: View {
-    let viewModel: EventViewModel
+    let eventViewModel: EventViewModel
     
     var body: some View {
         ScrollView {
             Spacer()
-            Text(viewModel.bandName ?? "")
+            Text(eventViewModel.event.bandName ?? "")
                 .font(.system(size: 25, weight: .bold))
                 .foregroundColor(Color.init(.darkGray))
-            Text(viewModel.description ?? "")
+            Text(eventViewModel.event.description ?? "")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
             Spacer()
             HStack(alignment: .center) {
-                Text(viewModel.getEventEntireDate(date: viewModel.startEvent ?? ""))
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
-                    .frame(width: 150)
-                    .lineLimit(2)
+//                Text(verbatim: eventViewModel.event.getEventEntireDate(date: eventViewModel.event.startEvent ?? ""))
+//                    .font(.system(size: 20, weight: .semibold))
+//                    .foregroundColor(Color.init(.darkGray))
+//                    .frame(width: 150)
+//                    .lineLimit(2)
                 Image(systemName: "arrow.right.square")
                     .foregroundColor(Color.init(.darkGray))
                     .font(.system(size: 40))
-                Text(viewModel.getEventEntireDate(date: viewModel.endEvent ?? ""))
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
-                    .frame(width: 150)
-                    .lineLimit(2)
+//                Text(eventViewModel.event.getEventEntireDate(date: eventViewModel.event.endEvent ?? ""))
+//                    .font(.system(size: 20, weight: .semibold))
+//                    .foregroundColor(Color.init(.darkGray))
+//                    .frame(width: 150)
+//                    .lineLimit(2)
             }
             Text("Interviews duration")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
                 .padding(.top, 10)
-            Text("\(viewModel.duration!) min")
+            Text("\(eventViewModel.event.duration!) min")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
             //        Spacer()
@@ -41,7 +41,7 @@ struct DetailEventView: View {
                 ForEach(0..<getRowCount()) { row in // create number of rows
                     HStack {
                         ForEach(0..<getColumnCount(row: row)) { column in // create 3 columns
-                            TimeSlotView(timeSlot: viewModel.timeSlot![row * 3 + column], eventID: viewModel.eventId ?? "")
+                            TimeSlotView(timeSlot: eventViewModel.event.timeSlot![row * 3 + column], eventID: eventViewModel.event.id)
                         }
                     }
                 }
@@ -52,7 +52,7 @@ struct DetailEventView: View {
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(Button(action: {
-                    CancelEventViewModel.cancelEvent(eventId: viewModel.eventId ?? "")
+                    CancelEventViewModel.cancelEvent(eventId: eventViewModel.event.id)
                 }, label: {
                     Text(" Cancel your event ")
                         .foregroundColor(.white)
@@ -63,10 +63,10 @@ struct DetailEventView: View {
     func getRowCount() -> Int {
         var rowCount: Int
         
-        if viewModel.timeSlot!.count % 3 == 0 {
-            rowCount = viewModel.timeSlot!.count / 3
+        if eventViewModel.event.timeSlot!.count % 3 == 0 {
+            rowCount = eventViewModel.event.timeSlot!.count / 3
         } else {
-            rowCount = viewModel.timeSlot!.count / 3 + 1
+            rowCount = eventViewModel.event.timeSlot!.count / 3 + 1
         }
         return rowCount
     }
@@ -74,8 +74,8 @@ struct DetailEventView: View {
     func getColumnCount(row: Int) -> Int {
         var columnCount: Int = 3
         
-        if row == getRowCount() - 1 && viewModel.timeSlot!.count % 3 != 0 {
-            columnCount = viewModel.timeSlot!.count % 3
+        if row == getRowCount() - 1 && eventViewModel.event.timeSlot!.count % 3 != 0 {
+            columnCount = eventViewModel.event.timeSlot!.count % 3
         }
         return columnCount
     }

@@ -2,7 +2,8 @@
 import SwiftUI
 
 struct EventRowView: View {
-    let viewModel: EventViewModel
+    
+    let eventViewModel: EventViewModel
     
     var body: some View {
         HStack {
@@ -12,21 +13,21 @@ struct EventRowView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.init(.darkGray), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
-                    .overlay(Text(viewModel.getEventDay(date: viewModel.startEvent ?? ""))
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(Color.init(.darkGray))
-                    )
-                Text(viewModel.getEventHoursAndMinutes(date: viewModel.startEvent ?? ""))
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
+//                    .overlay(Text(eventViewModel.event.getEventDay(date: eventViewModel.event.startEvent ?? ""))
+//                                .font(.system(size: 20, weight: .bold))
+//                                .foregroundColor(Color.init(.darkGray))
+//                    )
+//                Text(eventViewModel.event.getEventHoursAndMinutes(date: eventViewModel.event.startEvent ?? ""))
+//                    .font(.system(size: 20, weight: .semibold))
+//                    .foregroundColor(Color.init(.darkGray))
             }
             Spacer()
                 .frame(width: 30)
             VStack(alignment: .leading) {
-                Text(viewModel.bandName ?? "")
+                Text(eventViewModel.event.bandName ?? "")
                     .font(.system(size: 25, weight: .bold))
                     .foregroundColor(Color.init(.darkGray))
-                Text(viewModel.description!)
+                Text(eventViewModel.event.description!)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                 Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")
@@ -39,8 +40,8 @@ struct EventRowView: View {
     }
 }
 
-struct EventCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza", duration: 30, timeSlot: nil, eventId: "123"))
-    }
-}
+//struct EventCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza", duration: 30, timeSlot: nil, eventId: "123"))
+//    }
+//}

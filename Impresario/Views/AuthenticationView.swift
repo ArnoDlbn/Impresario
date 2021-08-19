@@ -60,23 +60,23 @@ struct AuthenticationView: View {
                     if success {
 //                        showAlert.toggle()
 //                        self.alert(isPresented: $showAlert, content: {
-                            Alert(title: Text("Important message"), message: Text("Authentication is a success !"), dismissButton: .default(Text("Got it!")))
+//                            Alert(title: Text("Important message"), message: Text("Authentication is a success !"), dismissButton: .default(Text("Got it!")))
 //                        })
                         userViewModel.perfomLoginMutation(username: username, password: password)
                     } else {
 //                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
 //                        ac.addAction(UIAlertAction(title: "OK", style: .default))
                         showAlert.toggle()
-                        self.alert(isPresented: $showAlert, content: {
-                            Alert(title: Text("Important message"), message: Text("Authentication failed !"), dismissButton: .default(Text("Got it!")))
-                        })
+//                        self.alert(isPresented: $showAlert, content: {
+//                            Alert(title: Text("Important message"), message: Text("Authentication failed !"), dismissButton: .default(Text("Got it!")))
+//                        })
                     }
                 }
             }
         } else {
-            self.alert(isPresented: $showAlert, content: {
-                Alert(title: Text("Biometry unavailable"), message: Text("Your device is not configured for biometric authentication."), dismissButton: .default(Text("Got it!")))
-            })
+//            self.alert(isPresented: $showAlert, content: {
+//                Alert(title: Text("Biometry unavailable"), message: Text("Your device is not configured for biometric authentication."), dismissButton: .default(Text("Got it!")))
+//            })
             userViewModel.perfomLoginMutation(username: username, password: password)
         }
     }

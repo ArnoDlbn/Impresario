@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReminderView: View {
+    
     @ObservedObject var interviewsViewModel = InterviewsViewModel()
     @State private var isViewProfile = false
     @ObservedObject var userViewModel: UserViewModel
@@ -15,8 +16,8 @@ struct ReminderView: View {
     var body: some View {
         NavigationView {
             List(interviewsViewModel.interviews) { interview in
-                NavigationLink(destination: DetailInterviewView(interview: interview)) {
-                    InterviewRowView(interview: interview)
+                NavigationLink(destination: DetailInterviewView(interviewViewModel: InterviewViewModel(withInterview: interview))) {
+                    InterviewRowView(interviewViewModel: InterviewViewModel(withInterview: interview))
                 }
             }
             .onAppear {

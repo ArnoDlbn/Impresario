@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct DetailInterviewView: View {
-    let interview: Interview
+    let interviewViewModel: InterviewViewModel
     
     var body: some View {
         ScrollView {
             Spacer()
-            Text(interview.event.bandName ?? "")
+            Text(interviewViewModel.interview.event.bandName ?? "")
                 .font(.system(size: 25, weight: .bold))
                 .foregroundColor(Color.init(.darkGray))
-            Text(interview.event.description ?? "")
+            Text(interviewViewModel.interview.event.description ?? "")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
             Spacer()
@@ -58,7 +58,7 @@ struct DetailInterviewView: View {
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(Button(action: {
-                    CancelInterviewViewModel.cancelInterview(interviewId: interview.interviewId)
+                    interviewViewModel.cancelInterview(interviewId: interviewViewModel.interview.id)
                 }, label: {
                     Text(" Cancel your interview ")
                         .foregroundColor(.white)

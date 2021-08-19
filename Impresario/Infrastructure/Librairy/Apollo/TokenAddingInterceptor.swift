@@ -4,6 +4,7 @@ import Apollo
 import KeychainSwift
 
 class TokenAddingInterceptor: ApolloInterceptor {
+    
     let keychain: KeychainSwift
     
     init() {

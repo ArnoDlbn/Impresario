@@ -2,7 +2,6 @@
 import SwiftUI
 
 struct AddEventView: View {
-    let addEventViewModel = AddEventViewModel()
     
     @State private var eventDescription = ""
     @State private var eventTitle = "toto"
@@ -116,7 +115,7 @@ struct AddEventView: View {
                     dateForm.timeZone = TimeZone.current
                     let newEnd = dateForm.string(from: eventEnd)
                     let newStart = dateForm.string(from: eventStart)
-                    addEventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
+                    EventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }, label: {
