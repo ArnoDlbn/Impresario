@@ -1,13 +1,8 @@
-//
-//  InterviewRowView.swift
-//  Impresario
-//
-//  Created by Arnaud Dalbin on 15/08/2021.
-//
 
 import SwiftUI
 
 struct InterviewRowView: View {
+    
     let interviewViewModel: InterviewViewModel
     
     var body: some View {
@@ -18,13 +13,12 @@ struct InterviewRowView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.init(.darkGray), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
-//                    .overlay(Text(viewModel.getEventDay(date: interview.startsAt))
-//                                .font(.system(size: 20, weight: .bold))
-//                                .foregroundColor(Color.init(.darkGray))
-//                    )
-//                Text(viewModel.getEventHoursAndMinutes(date: interview.startsAt))
-//                    .font(.system(size: 20, weight: .semibold))
-//                    .foregroundColor(Color.init(.darkGray))
+                    .overlay(Text(interviewViewModel.interview.day ?? ""))
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(Color.init(.darkGray))
+                Text(interviewViewModel.interview.hourAndMinutes ?? "")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color.init(.darkGray))
             }
             Spacer()
                 .frame(width: 30)

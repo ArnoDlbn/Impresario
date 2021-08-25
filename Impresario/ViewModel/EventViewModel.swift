@@ -17,25 +17,7 @@ class EventViewModel: Identifiable {
         let bandName = content.band.name
         let duration = content.interviewDuration
         let timeSlot: [TimeSlot] = content.timeSlots!.map { timeSlot in
-            let date = Date()
-            let dateForm = ISO8601DateFormatter()
-            dateForm.timeZone = TimeZone.current
-            let newDate = dateForm.date(from: timeSlot!.startsAt)
-//            let dateFormatter = DateFormatter()
-//            let newDate = dateFormatter.date(from: timeSlot!.startsAt)""
-
-            // *** create calendar object ***
-            var calendar = Calendar.current
-
-            // *** define calendar components to use as well Timezone to UTC ***
-            calendar.timeZone = TimeZone(identifier: "UTC")!
-
-            // *** Get Individual components from date ***
-            let hour = calendar.component(.hour, from: newDate ?? date)
-            let minutes = calendar.component(.minute, from: newDate ?? date)
-            let minutesString = minutes<10 ? String(format: "%02d", minutes) : String(minutes)
-            
-            let result = TimeSlot.init(startsAt: "\(hour):\(minutesString)", isAvailable: timeSlot!.isAvailable, rawStartsAt: timeSlot!.startsAt)
+            let result = TimeSlot.init(startsAt: timeSlot!.startsAt, isAvailable: timeSlot!.isAvailable)
             return result
         }
 //        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
@@ -78,47 +60,16 @@ class EventViewModel: Identifiable {
         }
     }
     
-    func getEventHoursAndMinutes(date: String) -> String {
-        let currentDate = Date()
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        let dateFormatted = dateFormatter.date(from: date)
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "UTC")!
-        let hour = calendar.component(.hour, from: dateFormatted ?? currentDate)
-        let minutes = calendar.component(.minute, from: dateFormatted ?? currentDate)
-        let minutesString = minutes<10 ? String(format: "%02d", minutes) : String(minutes)
-        let result = "\(hour):\(minutesString)"
-        return result
-    }
-    
-    func getEventDay(date: String) -> String {
-        let currentDate = Date()
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        let dateFormatted = dateFormatter.date(from: date)
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "UTC")!
-        let day = calendar.component(.day, from: dateFormatted ?? currentDate)
-        let result = "\(day)"
-        return result
-    }
-    
-    func getEventEntireDate(date: String) -> String {
-        let currentDate = Date()
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        let dateFormatted = dateFormatter.date(from: date)
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "UTC")!
-        let month = calendar.component(.month, from: dateFormatted ?? currentDate)
-        let monthString = month<10 ? String(format: "%02d", month) : String(month)
-        let year = calendar.component(.year, from: dateFormatted ?? currentDate)
-        let day = calendar.component(.day, from: dateFormatted ?? currentDate)
-        let hour = calendar.component(.hour, from: dateFormatted ?? currentDate)
-        let minutes = calendar.component(.minute, from: dateFormatted ?? currentDate)
-        let minutesString = minutes<10 ? String(format: "%02d", minutes) : String(minutes)
-        let result = "\(day)/\(monthString)/\(year) at \(hour):\(minutesString)"
-        return result
+    func cancelEvent(eventId: String) {
+        Network.shared.apollo.perform(mutation: CancelEventMutation(input: CanceledEventInput(eventId: eventId))) { result in
+            switch result {
+            case .success(let graphQLResult):
+                debugPrint(graphQLResult.data ?? "")
+                debugPrint(graphQLResult.errors ?? "")
+            //                completion()
+            case .failure(let error):
+                debugPrint(error)
+            }
+        }
     }
 }

@@ -15,19 +15,19 @@ struct DetailEventView: View {
                 .foregroundColor(Color.init(.darkGray))
             Spacer()
             HStack(alignment: .center) {
-//                Text(verbatim: eventViewModel.event.getEventEntireDate(date: eventViewModel.event.startEvent ?? ""))
-//                    .font(.system(size: 20, weight: .semibold))
-//                    .foregroundColor(Color.init(.darkGray))
-//                    .frame(width: 150)
-//                    .lineLimit(2)
+                Text(eventViewModel.event.fullStartDate ?? "")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color.init(.darkGray))
+                    .frame(width: 150)
+                    .lineLimit(2)
                 Image(systemName: "arrow.right.square")
                     .foregroundColor(Color.init(.darkGray))
                     .font(.system(size: 40))
-//                Text(eventViewModel.event.getEventEntireDate(date: eventViewModel.event.endEvent ?? ""))
-//                    .font(.system(size: 20, weight: .semibold))
-//                    .foregroundColor(Color.init(.darkGray))
-//                    .frame(width: 150)
-//                    .lineLimit(2)
+                Text(eventViewModel.event.fullStartDate ?? "")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color.init(.darkGray))
+                    .frame(width: 150)
+                    .lineLimit(2)
             }
             Text("Interviews duration")
                 .font(.system(size: 20, weight: .semibold))
@@ -37,22 +37,25 @@ struct DetailEventView: View {
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(Color.init(.darkGray))
             //        Spacer()
-            VStack(alignment: .leading) {
+            VStack() {
                 ForEach(0..<getRowCount()) { row in // create number of rows
                     HStack {
                         ForEach(0..<getColumnCount(row: row)) { column in // create 3 columns
-                            TimeSlotView(timeSlot: eventViewModel.event.timeSlot![row * 3 + column], eventID: eventViewModel.event.id)
+                            TimeSlotView(timeSlotViewModel: TimeSlotViewModel(withTimeSlot: eventViewModel.event.timeSlot![row * 3 + column]), eventID: eventViewModel.event.id)
+//                            TimeSlotView(timeSlot: eventViewModel.event.timeSlot![row * 3 + column], eventID: eventViewModel.event.id)
                         }
                     }
                 }
             }
             .padding(.top, 20)
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
             Spacer()
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(Button(action: {
-                    CancelEventViewModel.cancelEvent(eventId: eventViewModel.event.id)
+                    eventViewModel.cancelEvent(eventId: eventViewModel.event.id)
                 }, label: {
                     Text(" Cancel your event ")
                         .foregroundColor(.white)
