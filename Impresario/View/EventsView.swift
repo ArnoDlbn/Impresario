@@ -21,9 +21,6 @@ struct EventsView: View {
                     EventRowView(eventViewModel: EventViewModel(withEvent: event))
                 }
             }
-            .onAppear {
-                loadEvents()
-            }
             .navigationTitle("Events")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -35,18 +32,22 @@ struct EventsView: View {
                         .font(.system(size: 25))
                 }
             }
-//            RoundedRectangle(cornerRadius: 10)
-//                .foregroundColor(Color.init(.darkGray))
-//                .frame(width: 100, height: 40, alignment: .center)
-//                .overlay(Text(" Add event ")
-//                            .foregroundColor(.white)
-//                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-//                )
-//                .onTapGesture {
-//                    isAddEvent.toggle()
-//                }
-//                .padding(.bottom, 10)
+            //            RoundedRectangle(cornerRadius: 10)
+            //                .foregroundColor(Color.init(.darkGray))
+            //                .frame(width: 100, height: 40, alignment: .center)
+            //                .overlay(Text(" Add event ")
+            //                            .foregroundColor(.white)
+            //                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+            //                )
+            //                .onTapGesture {
+            //                    isAddEvent.toggle()
+            //                }
+            //                .padding(.bottom, 10)
         }
+        .onAppear {
+            loadEvents()
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $isAddEvent, onDismiss: loadEvents, content: {
             AddEventView()
         })
@@ -56,11 +57,9 @@ struct EventsView: View {
     }
     
     func loadEvents() {
-        debugPrint("dismiss")
-        if self.eventsViewModel.isError == true {
-            userViewModel.logOut()
-        } else {
-        self.eventsViewModel.eventsQuery()
+        debugPrint("Load events")
+        self.eventsViewModel.eventsQuery() {
+            self.userViewModel.logOut()
         }
     }
 }

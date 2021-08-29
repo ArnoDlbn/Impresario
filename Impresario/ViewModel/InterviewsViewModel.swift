@@ -4,9 +4,8 @@ import Foundation
 class InterviewsViewModel: ObservableObject {
     
     @Published var interviews: [Interview] = []
-    @Published var isError: Bool = false
     
-    func interviewsQuery() {
+    func interviewsQuery(errorHandler: @escaping() -> ()) {
         Network.shared.apollo.fetch(query: InterviewsQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
             switch result {
             case .success(let graphQLResult):
@@ -18,7 +17,7 @@ class InterviewsViewModel: ObservableObject {
                             interviews.append(interview)
                         }
                     }
-                    print(interviews.count)
+                    debugPrint("\(interviews.count) fetched interviews")
                     self.interviews = interviews
                 } else {
                     print(graphQLResult.errors.debugDescription)
@@ -31,7 +30,7 @@ class InterviewsViewModel: ObservableObject {
             case .failure(let error):
                 print("2")
                 print(error.localizedDescription)
-                self.isError = true
+                errorHandler()
             }
         }
     }

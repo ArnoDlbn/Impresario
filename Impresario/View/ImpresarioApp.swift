@@ -11,6 +11,7 @@ struct ImpresarioApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     init() {
+        debugPrint("Get keychain")
         keychain = KeychainSwift()
     }
     
@@ -22,12 +23,14 @@ struct ImpresarioApp: App {
                 StartView(userViewModel: userViewModel)
             }
         }
+        /*
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
                 userViewModel.getUserInfo() {
-                    print("ImpresarioApp")
+                    debugPrint("Get user info from ImpresarioApp")
                 }
             }
         }
+        */
     }
 }

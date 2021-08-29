@@ -22,6 +22,7 @@ class TokenAddingInterceptor: ApolloInterceptor {
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
         
         if request.operation.operationName != "login" {
+            debugPrint("Get token from keychain for \(request.operation.operationName)")
             guard let token = keychain.get("token") else {
                 chain.handleErrorAsync(UserError.noUserLoggedIn,
                                        request: request,

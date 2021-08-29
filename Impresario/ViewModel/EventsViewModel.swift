@@ -4,9 +4,8 @@ import Foundation
 class EventsViewModel: ObservableObject {
     
     @Published var events: [Event] = []
-    @Published var isError: Bool = false
     
-    func eventsQuery() {
+    func eventsQuery(errorHandler: @escaping() -> ()) {
         Network.shared.apollo.fetch(query: EventsQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
             switch result {
             case .success(let graphQLResult):
@@ -30,7 +29,7 @@ class EventsViewModel: ObservableObject {
             case .failure(let error):
                 print("2")
                 print(error.localizedDescription)
-                self.isError = true
+                errorHandler()
             }
         }
     }

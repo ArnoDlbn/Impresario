@@ -20,9 +20,6 @@ struct ReminderView: View {
                     InterviewRowView(interviewViewModel: InterviewViewModel(withInterview: interview))
                 }
             }
-            .onAppear {
-                loadInterviews()
-            }
             .navigationTitle("Interviews")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -35,18 +32,20 @@ struct ReminderView: View {
                 }
             }
         }
+        .onAppear {
+            debugPrint("On appear Reminder view")
+            loadInterviews()
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $isViewProfile, content: {
             ProfileView(userViewModel: userViewModel)
         })
     }
     
     func loadInterviews() {
-        
-        if self.interviewsViewModel.isError == true {
-            userViewModel.logOut()
-        } else {
-            debugPrint("load interviews")
-            self.interviewsViewModel.interviewsQuery()
+        debugPrint("Fetch interviews")
+        self.interviewsViewModel.interviewsQuery() {
+            self.userViewModel.logOut()
         }
         
     }

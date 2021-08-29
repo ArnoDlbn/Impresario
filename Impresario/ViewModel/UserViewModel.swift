@@ -14,7 +14,7 @@ class UserViewModel: ObservableObject {
                 if let result = graphQLResult.data?.login.token {
                     self.keyChain.set(result, forKey: "token")
                     self.getUserInfo() {
-                        print("login")
+                        print("Get user info from login")
                     }
                     print(self.keyChain.get("token")!)
                 } else {
