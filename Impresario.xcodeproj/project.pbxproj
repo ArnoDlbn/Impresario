@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C08F77626D673F0005C3999 /* AlertViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C08F77526D673F0005C3999 /* AlertViewer.swift */; };
 		1C75E3C926CD5642006FE925 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3C826CD5642006FE925 /* Event.swift */; };
 		1C75E3E126CE8247006FE925 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E026CE8247006FE925 /* Address.swift */; };
 		1C75E3E726CE8270006FE925 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E626CE8270006FE925 /* TimeSlot.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C08F77526D673F0005C3999 /* AlertViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewer.swift; sourceTree = "<group>"; };
 		1C75E3C826CD5642006FE925 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1C75E3E026CE8247006FE925 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		1C75E3E626CE8270006FE925 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				511A181B26CBE4F700FF6767 /* ViewModel */,
 				51ECEDF826233A6F00D4C67E /* View */,
 				519D473426D2B70B0010DABC /* DateFormatter.swift */,
+				1C08F77526D673F0005C3999 /* AlertViewer.swift */,
 			);
 			path = Impresario;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				516EA576265105FB007E3508 /* ReminderView.swift in Sources */,
 				511A181026C9012B00FF6767 /* InterviewRowView.swift in Sources */,
 				516EA5962654459B007E3508 /* Network.swift in Sources */,
+				1C08F77626D673F0005C3999 /* AlertViewer.swift in Sources */,
 				511A181226C9029500FF6767 /* DetailInterviewView.swift in Sources */,
 				51ECEDFE2623428A00D4C67E /* AuthenticationView.swift in Sources */,
 				511A181A26CBE07900FF6767 /* User.swift in Sources */,

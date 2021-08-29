@@ -27,17 +27,20 @@ struct TimeSlotView: View {
                         primaryButton: .default(
                             Text("OK"),
                             action: {
-                                InterviewViewModel.requestInterview(eventId: eventID, startsAt: timeSlotViewModel.timeSlot.startsAt)
-                                var t = timeSlotViewModel.timeSlot
-                                t.isAvailable = false
-                                timeSlotViewModel.timeSlot = t
-//                                self.presentationMode.wrappedValue.dismiss()
+                                InterviewViewModel.requestInterview(eventId: eventID, startsAt: timeSlotViewModel.timeSlot.startsAt) {
+                                    //                                    print(timeSlotViewModel.timeSlot.startsAt)
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    //                                    var newTimeSlot = timeSlotViewModel.timeSlot
+                                    //                                    newTimeSlot.isAvailable = false
+                                    //                                    timeSlotViewModel.timeSlot = newTimeSlot
+                                    //                                    print(timeSlotViewModel.timeSlot.isAvailable)
+                                }
                             }
                         ),
                         secondaryButton: .destructive(
                             Text("Cancel"),
                             action: {
-                                self.presentationMode.wrappedValue.dismiss()
+                                //                                self.presentationMode.wrappedValue.dismiss()
                             }
                         )
                     )

@@ -1,13 +1,15 @@
 
 import SwiftUI
 import LocalAuthentication
-//import KeychainSwift
 
 struct AuthenticationView: View {
-    @State private var username = "impresarioapp+sevdaalizadeh@gmail.com"
-    @State private var password = "Sevdaliza!"
+    
+    @State private var username = "impresarioapp+louislepron@gmail.com"
+    @State private var password = "Konbini!"
+    
     @State var signUp = false
-    @State var showAlert = false
+    @State var showAlertFailure = false
+    @State var showAlertNoBiometry = false
     @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
@@ -37,8 +39,18 @@ struct AuthenticationView: View {
                             .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
                     })
                 )
+                .alert(isPresented: $showAlertFailure, content: {
+                    AlertViewer.showAlertWithActions(message: "Authentication failed!") {
+                        userViewModel.login(username: username, password: password)
+                    }
+                })
             Spacer()
                 .frame(height: 30)
+//                .alert(isPresented: $showAlertNoBiometry, content: {
+//                    AlertViewer.showAlertWithActions(message: "Your device is not configured for biometric authentication.") {
+//                        userViewModel.login(username: username, password: password)
+//                    }
+//                })
             Text("Forgot password ?")
                 .foregroundColor(Color.init(.darkGray))
                 .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
@@ -48,42 +60,25 @@ struct AuthenticationView: View {
     }
     
     func authenticateTapped() {
+        
         let context = LAContext()
         var error: NSError?
-
+        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Identify yourself with TouchID!"
-
+            
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-
                 DispatchQueue.main.async {
                     if success {
-//                        showAlert.toggle()
-//                        self.alert(isPresented: $showAlert, content: {
-//                            Alert(title: Text("Important message"), message: Text("Authentication is a success !"), dismissButton: .default(Text("Got it!")))
-//                        })
-                        userViewModel.perfomLoginMutation(username: username, password: password)
+                        userViewModel.login(username: username, password: password)
                     } else {
-//                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
-//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        showAlert.toggle()
-//                        self.alert(isPresented: $showAlert, content: {
-//                            Alert(title: Text("Important message"), message: Text("Authentication failed !"), dismissButton: .default(Text("Got it!")))
-//                        })
+                        showAlertFailure.toggle()
                     }
                 }
             }
         } else {
-//            self.alert(isPresented: $showAlert, content: {
-//                Alert(title: Text("Biometry unavailable"), message: Text("Your device is not configured for biometric authentication."), dismissButton: .default(Text("Got it!")))
-//            })
-            userViewModel.perfomLoginMutation(username: username, password: password)
+            showAlertNoBiometry.toggle()
+            userViewModel.login(username: username, password: password)
         }
     }
 }
-
-//struct AuthenticationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AuthenticationView()
-//    }
-//}

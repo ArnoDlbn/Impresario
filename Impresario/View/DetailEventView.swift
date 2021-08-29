@@ -2,7 +2,12 @@
 import SwiftUI
 
 struct DetailEventView: View {
+    
     let eventViewModel: EventViewModel
+    let userViewModel: UserViewModel
+    
+    @State private var showingAlert = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ScrollView {
@@ -42,7 +47,7 @@ struct DetailEventView: View {
                     HStack {
                         ForEach(0..<getColumnCount(row: row)) { column in // create 3 columns
                             TimeSlotView(timeSlotViewModel: TimeSlotViewModel(withTimeSlot: eventViewModel.event.timeSlot![row * 3 + column]), eventID: eventViewModel.event.id)
-//                            TimeSlotView(timeSlot: eventViewModel.event.timeSlot![row * 3 + column], eventID: eventViewModel.event.id)
+                            //                            TimeSlotView(timeSlot: eventViewModel.event.timeSlot![row * 3 + column], eventID: eventViewModel.event.id)
                         }
                     }
                 }
@@ -51,16 +56,40 @@ struct DetailEventView: View {
             .padding(.leading, 10)
             .padding(.trailing, 10)
             Spacer()
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
-                .overlay(Button(action: {
-                    eventViewModel.cancelEvent(eventId: eventViewModel.event.id)
-                }, label: {
-                    Text(" Cancel your event ")
-                        .foregroundColor(.white)
-                        .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-                }))
+            if let user = userViewModel.user {
+                if user.isArtist {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color.init(.darkGray))
+                        .frame(width: 200, height: 40, alignment: .center)
+                        .overlay(Button(action: {
+                            showingAlert.toggle()
+                            
+                        }, label: {
+                            Text(" Cancel your event ")
+                                .foregroundColor(.white)
+                                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                        }))
+                        .alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("Cancel an interview"),
+                                message: Text("Are you sure you want to cancel this interview?"),
+                                primaryButton: .default(
+                                    Text("OK"),
+                                    action: {
+                                        eventViewModel.cancelEvent(eventId: eventViewModel.event.id)
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                ),
+                                secondaryButton: .destructive(
+                                    Text("Cancel"),
+                                    action: {
+                                        //                                self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                )
+                            )
+                        }
+                }
+            }
         }
     }
     func getRowCount() -> Int {

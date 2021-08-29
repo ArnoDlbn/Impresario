@@ -4,6 +4,7 @@ import Foundation
 class InterviewsViewModel: ObservableObject {
     
     @Published var interviews: [Interview] = []
+    @Published var isError: Bool = false
     
     func interviewsQuery() {
         Network.shared.apollo.fetch(query: InterviewsQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
@@ -17,6 +18,7 @@ class InterviewsViewModel: ObservableObject {
                             interviews.append(interview)
                         }
                     }
+                    print(interviews.count)
                     self.interviews = interviews
                 } else {
                     print(graphQLResult.errors.debugDescription)
@@ -29,6 +31,7 @@ class InterviewsViewModel: ObservableObject {
             case .failure(let error):
                 print("2")
                 print(error.localizedDescription)
+                self.isError = true
             }
         }
     }

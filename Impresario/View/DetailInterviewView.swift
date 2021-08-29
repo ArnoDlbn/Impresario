@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct DetailInterviewView: View {
+    
     let interviewViewModel: InterviewViewModel
+    
+    @State private var showingAlert = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ScrollView {
@@ -58,12 +62,32 @@ struct DetailInterviewView: View {
                 .foregroundColor(Color.init(.darkGray))
                 .frame(width: 200, height: 40, alignment: .center)
                 .overlay(Button(action: {
-                    interviewViewModel.cancelInterview(interviewId: interviewViewModel.interview.id)
+                    showingAlert.toggle()
                 }, label: {
                     Text(" Cancel your interview ")
                         .foregroundColor(.white)
                         .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
                 }))
+                .alert(isPresented: $showingAlert) {
+                    Alert(
+                        title: Text("Cancel an interview"),
+                        message: Text("Are you sure you want to cancel this interview?"),
+                        primaryButton: .default(
+                            Text("OK"),
+                            action: {
+                                interviewViewModel.cancelInterview(interviewId: interviewViewModel.interview.id) {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }                                
+                            }
+                        ),
+                        secondaryButton: .destructive(
+                            Text("Cancel"),
+                            action: {
+//                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        )
+                    )
+                }
         }
     }
 //    func getRowCount() -> Int {

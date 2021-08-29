@@ -17,20 +17,15 @@ struct EventsView: View {
     var body: some View {
         NavigationView {
             List(eventsViewModel.events) { event in
-                NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event))) {
+                NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
                     EventRowView(eventViewModel: EventViewModel(withEvent: event))
                 }
             }
             .onAppear {
                 loadEvents()
             }
-            .navigationTitle(Text("Juin"))
+            .navigationTitle("Events")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Events")
-                        .foregroundColor(Color.init(.darkGray))
-                        .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
                         .onTapGesture {
@@ -62,7 +57,11 @@ struct EventsView: View {
     
     func loadEvents() {
         debugPrint("dismiss")
+        if self.eventsViewModel.isError == true {
+            userViewModel.logOut()
+        } else {
         self.eventsViewModel.eventsQuery()
+        }
     }
 }
 

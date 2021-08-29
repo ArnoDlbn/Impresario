@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct StartView: View {
+    
     @State private var signUp = false
     @State private var buttonSignUpText = " Sign up "
     @ObservedObject var userViewModel: UserViewModel
@@ -42,9 +43,3 @@ struct StartView: View {
         }
     }
 }
-
-//struct StartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StartView()
-//    }
-//}

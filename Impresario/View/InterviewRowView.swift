@@ -30,7 +30,7 @@ struct InterviewRowView: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
                 Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")
-                    .font(.system(size: 20))
+                    .font(.system(size: 15))
                     .foregroundColor(Color.init(.darkGray))
             }
             .foregroundColor(Color.init(.darkGray))

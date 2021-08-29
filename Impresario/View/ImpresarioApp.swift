@@ -4,23 +4,29 @@ import KeychainSwift
 
 @main
 struct ImpresarioApp: App {
-    @ObservedObject var userViewModel = UserViewModel()
-
+    
     let keychain: KeychainSwift
-
+    
+    @ObservedObject var userViewModel = UserViewModel()
+    @Environment(\.scenePhase) var scenePhase
     
     init() {
         keychain = KeychainSwift()
-//        keychain.delete("token")
     }
     
     var body: some Scene {
         WindowGroup {
-            
             if keychain.get("token") != nil {
-                MainView(userViewModel: userViewModel)
+                MainView(with: userViewModel)
             } else {
                 StartView(userViewModel: userViewModel)
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                userViewModel.getUserInfo() {
+                    print("ImpresarioApp")
+                }
             }
         }
     }

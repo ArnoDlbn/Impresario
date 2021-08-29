@@ -23,13 +23,8 @@ struct ReminderView: View {
             .onAppear {
                 loadInterviews()
             }
-            .navigationBarTitle(Text("Juin"))
+            .navigationTitle("Interviews")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Reminder")
-                        .foregroundColor(Color.init(.darkGray))
-                        .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Label("Profile", systemImage: "person.crop.circle")
                         .onTapGesture {
@@ -46,8 +41,14 @@ struct ReminderView: View {
     }
     
     func loadInterviews() {
-        debugPrint("dismiss")
-        self.interviewsViewModel.interviewsQuery()
+        
+        if self.interviewsViewModel.isError == true {
+            userViewModel.logOut()
+        } else {
+            debugPrint("load interviews")
+            self.interviewsViewModel.interviewsQuery()
+        }
+        
     }
 }
 
