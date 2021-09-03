@@ -14,8 +14,8 @@ struct EventRowView: View {
                     .stroke(Color.init(.darkGray), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
                     .overlay(Text(eventViewModel.event.day ?? ""))
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(Color.init(.darkGray))
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(Color.init(.darkGray))
                 Text(eventViewModel.event.hourAndMinutes ?? "")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
@@ -29,9 +29,16 @@ struct EventRowView: View {
                 Text(eventViewModel.event.description!)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color.init(.darkGray))
-                Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")
-                    .font(.system(size: 15))
-                    .foregroundColor(Color.init(.darkGray))
+                VStack(alignment: .leading) {
+                    Text(eventViewModel.event.address?.label ?? "Chez moi")
+                    Text(eventViewModel.event.address?.street ?? "9 rue Huntziger")
+                    HStack {
+                        Text(eventViewModel.event.address?.zipCode ?? "92110")
+                        Text(eventViewModel.event.address?.city ?? "Clichy")
+                    }
+                }
+                .font(.system(size: 15))
+                .foregroundColor(Color.init(.darkGray))
             }
             .foregroundColor(Color.init(.darkGray))
             Spacer()

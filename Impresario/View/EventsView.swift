@@ -1,9 +1,3 @@
-//
-//  SwiftUIView.swift
-//  Impresario
-//
-//  Created by Arnaud Dalbin on 16/05/2021.
-//
 
 import SwiftUI
 
@@ -13,47 +7,83 @@ struct EventsView: View {
     @State private var isAddEvent = false
     @State private var isViewProfile = false
     @ObservedObject var userViewModel: UserViewModel
+    @State private var activeSheet: SheetIdentifier?
+    
+    private var isJournalist: Bool {
+        if let user = userViewModel.user {
+            if user.isJournalist {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private struct SheetIdentifier: Identifiable {
+            var id: Choice
+
+            enum Choice {
+                case add
+                case profile
+            }
+        }
     
     var body: some View {
         NavigationView {
-            List(eventsViewModel.events) { event in
-                NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
-                    EventRowView(eventViewModel: EventViewModel(withEvent: event))
+            VStack {
+                List(eventsViewModel.events) { event in
+                    NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
+                        EventRowView(eventViewModel: EventViewModel(withEvent: event))
+                    }
                 }
-            }
-            .navigationTitle("Events")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Label("Profile", systemImage: "person.crop.circle")
-                        .onTapGesture {
-                            isViewProfile.toggle()
+                .navigationTitle("Events")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        ZStack{
+                        Button(action: {
+                            self.activeSheet = SheetIdentifier(id: .add)
+                        }) {
+                            Image(systemName: "plus.circle")
                         }
-                        .foregroundColor(Color.init(.darkGray))
-                        .font(.system(size: 25))
+                        
+//                        Label("AddEvent", systemImage: "plus.circle")
+//                            .onTapGesture {
+//                                self.activeSheet = SheetIdentifier(id: .add)
+//                            }
+//                            .foregroundColor(Color.init(.darkGray))
+//                            .font(.system(size: 25))
+                            .isHidden(isJournalist)
+                    }
+                        .accentColor(.gray)
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.activeSheet = SheetIdentifier(id: .profile)
+                        }) {
+                            Image(systemName: "person.crop.circle")
+                        }
+//                        Label("Profile", systemImage: "person.crop.circle")
+//                            .onTapGesture {
+//                                self.activeSheet = SheetIdentifier(id: .profile)
+//                            }
+//                            .foregroundColor(Color.init(.darkGray))
+//                            .font(.system(size: 25))
+                    }
                 }
+                .accentColor(.gray)
             }
-            //            RoundedRectangle(cornerRadius: 10)
-            //                .foregroundColor(Color.init(.darkGray))
-            //                .frame(width: 100, height: 40, alignment: .center)
-            //                .overlay(Text(" Add event ")
-            //                            .foregroundColor(.white)
-            //                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-            //                )
-            //                .onTapGesture {
-            //                    isAddEvent.toggle()
-            //                }
-            //                .padding(.bottom, 10)
-        }
-        .onAppear {
-            loadEvents()
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .sheet(isPresented: $isAddEvent, onDismiss: loadEvents, content: {
-            AddEventView()
-        })
-        .sheet(isPresented: $isViewProfile, content: {
-            ProfileView(userViewModel: userViewModel)
-        })
+        .sheet(item: $activeSheet) { item in
+            switch item.id {
+            case .add:
+                AddEventView()
+            case .profile:
+                ProfileView(userViewModel: userViewModel)
+            }
+        }
     }
     
     func loadEvents() {

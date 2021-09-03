@@ -5,6 +5,8 @@ class EventsViewModel: ObservableObject {
     
     @Published var events: [Event] = []
     
+    
+    
     func eventsQuery(errorHandler: @escaping() -> ()) {
         Network.shared.apollo.fetch(query: EventsQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
             switch result {

@@ -4,8 +4,8 @@ import LocalAuthentication
 
 struct AuthenticationView: View {
     
-    @State private var username = "impresarioapp+louislepron@gmail.com"
-    @State private var password = "Konbini!"
+    @State private var username = "impresarioapp+sevdaalizadeh@gmail.com"
+    @State private var password = "Sevdaliza!"
     
     @State var signUp = false
     @State var showAlertFailure = false

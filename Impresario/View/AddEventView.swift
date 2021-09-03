@@ -3,23 +3,31 @@ import SwiftUI
 
 struct AddEventView: View {
     
-    @State private var eventDescription = ""
-    @State private var eventTitle = "toto"
+    @State private var eventDescription = String()
+    @State private var eventTitle = "Toto"
     @State private var eventStart = Date()
     @State private var eventEnd = Date()
     @State private var interviewDuration = Int()
     @State private var durationsIndex = 0
     var durations = [5, 10, 15, 20, 25, 30]
     
-    @State private var isAddAddress = false
     @State private var label = String()
     @State private var street = String()
     @State private var zipCode = String()
     @State private var city = String()
     @State private var country = String()
-
+    @State private var showAlert = false
+    @State private var activeAlert: ActiveAlert? = .never
+    
+    enum ActiveAlert {
+        case never, success, failure
+        var id: Int {
+            hashValue
+        }
+    }
+    
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         VStack {
             Text("Add event")
@@ -29,16 +37,7 @@ struct AddEventView: View {
                 TextField("Event Description", text: $eventDescription)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .foregroundColor(Color.init(.darkGray))
-                    .frame(width: 200, height: 40, alignment: .center)
-//                DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event Start")
-//                    .foregroundColor(Color.init(.darkGray))
-//                }
-//                .frame(width: 350)
-//                DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event End")
-//                    .foregroundColor(Color.init(.darkGray))
-//                }
-//                .foregroundColor(Color.init(.darkGray))
-//                .frame(width: 350)
+                    .frame(width: 220, height: 40, alignment: .center)
                 Text("Event Start")
                     .foregroundColor(Color.init(.darkGray))
                 DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
@@ -48,87 +47,80 @@ struct AddEventView: View {
                 DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
                     .labelsHidden()
                 
-//                Text("Interview Duration")
-//                    .foregroundColor(Color.init(.darkGray))
-//
-//                Picker("", selection: $durationsIndex) {
-//                    ForEach(0..<durations.count) {
-//                        Text("\(self.durations[$0]) min")
-//                            .tag($0)
-//                    }
-//                }
-//                .pickerStyle(WheelPickerStyle())
-//                .frame(width: 200, height: 150)
-                
-                Text("Event Adress")
-                    .foregroundColor(Color.init(.darkGray))
-                    .onTapGesture {
-                        isAddAddress.toggle()
-                    }
-                    .sheet(isPresented: $isAddAddress, content: {
-                        EventAddressView(label: $label, street: $street, zipCode: $zipCode, city: $city, country: $country)
-                    })
-                //                TextField("Event Description", text: $eventDescription)
-                //                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                //                Text("Interview Duration")
                 //                    .foregroundColor(Color.init(.darkGray))
-                //                    .frame(width: 200, height: 40, alignment: .center)
-                //                NavigationView {
-                //                Form {
-                //                    Section {
-                //                        TextField("Event Description", text: $eventDescription)
-                //                            .foregroundColor(Color.init(.darkGray))
-                //                    }
-                //                    Section {
-                //                        DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event Start")
-                //                            .foregroundColor(Color.init(.darkGray))
-                //                        }
-                //                    }
-                //                    Section {
-                //                        DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) { Text("Event End")
-                //                            .foregroundColor(Color.init(.darkGray))
-                //                        }
-                //                    }
-                //                    Section {
-                //                        Picker("Duration", selection: $interviewDuration){
-                //                            ForEach(0..<durations.count) {
-                //                                Text("\(self.durations[$0]) min")
-                //                                    .tag($0)
-                //                            }
-                //                        }
-                ////                        .pickerStyle(WheelPickerStyle())
-                //        //                .frame(width: 180)
-                //        //                .clipped()
-                //                    }
                 //
-                //                }.navigationTitle("Add Event")
-                //                .foregroundColor(.black)
-                //                }.foregroundColor(.black)
-                
-                
+                //                Picker("", selection: $durationsIndex) {
+                //                    ForEach(0..<durations.count) {
+                //                        Text("\(self.durations[$0]) min")
+                //                            .tag($0)
+                //                    }
+                //                }
+                //                .pickerStyle(WheelPickerStyle())
+                //                .frame(width: 200, height: 150)
+                Section {
+                    Text("Event Adress")
+                        .foregroundColor(Color.init(.darkGray))
+                    TextField("Label", text: $label)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .foregroundColor(Color.init(.darkGray))
+                        .frame(width: 220, height: 40, alignment: .center)
+                    TextField("Street", text: $street)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .foregroundColor(Color.init(.darkGray))
+                        .frame(width: 220, height: 40, alignment: .center)
+                    HStack(spacing: 10) {
+                        TextField("Zip Code", text: $zipCode)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .foregroundColor(Color.init(.darkGray))
+                            .frame(width: 65, height: 40, alignment: .center)
+                        TextField("City", text: $city)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .foregroundColor(Color.init(.darkGray))
+                            .frame(width: 145, height: 40, alignment: .center)
+                    }
+                    TextField("Country", text: $country)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .foregroundColor(Color.init(.darkGray))
+                        .frame(width: 220, height: 40, alignment: .center)
+                }
             }
-            //            .frame(height: 700)
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
+                .frame(width: 180, height: 40, alignment: .center)
                 .overlay(Button(action: {
                     let dateForm = ISO8601DateFormatter()
                     dateForm.timeZone = TimeZone.current
                     let newEnd = dateForm.string(from: eventEnd)
                     let newStart = dateForm.string(from: eventStart)
-                    EventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
-                        self.presentationMode.wrappedValue.dismiss()
+                    if eventDescription.isEmpty || eventTitle.isEmpty || label.isEmpty || street.isEmpty || zipCode.isEmpty || city.isEmpty || country.isEmpty {
+                        activeAlert = .failure
+                        showAlert = true
+                    } else {
+                        activeAlert = .success
+                        showAlert = true
+                        EventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     }
                 }, label: {
                     Text(" Create your event ")
                         .foregroundColor(.white)
                         .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
                 }))
+                .alert(isPresented: $showAlert, content: {
+                    if activeAlert == .failure {
+                       return AlertViewer.showAlertWithNoActions(message: "All fields are required!")
+                    } else {
+                       return AlertViewer.showAlertWithNoActions(message: "Your event is created!")
+                    }
+                })
         }
     }
 }
 
-struct AddEventView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddEventView()
-    }
-}
+//struct AddEventView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddEventView()
+//    }
+//}

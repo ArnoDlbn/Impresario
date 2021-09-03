@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C08F77626D673F0005C3999 /* AlertViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C08F77526D673F0005C3999 /* AlertViewer.swift */; };
+		1C08F79426DE720C005C3999 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C08F79326DE720C005C3999 /* View+.swift */; };
 		1C75E3C926CD5642006FE925 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3C826CD5642006FE925 /* Event.swift */; };
 		1C75E3E126CE8247006FE925 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E026CE8247006FE925 /* Address.swift */; };
 		1C75E3E726CE8270006FE925 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E626CE8270006FE925 /* TimeSlot.swift */; };
@@ -89,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		1C08F77526D673F0005C3999 /* AlertViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewer.swift; sourceTree = "<group>"; };
+		1C08F79326DE720C005C3999 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		1C75E3C826CD5642006FE925 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1C75E3E026CE8247006FE925 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		1C75E3E626CE8270006FE925 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				519D473226D2B6810010DABC /* Event+.swift */,
 				519D473626D2BAA50010DABC /* Interview+.swift */,
 				519D473826D2BEAE0010DABC /* TimeSlot+.swift */,
+				1C08F79326DE720C005C3999 /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				511A181826CA8F7D00FF6767 /* UserViewModel.swift in Sources */,
 				51ECEDCA26233A2800D4C67E /* ImpresarioApp.swift in Sources */,
 				516EA576265105FB007E3508 /* ReminderView.swift in Sources */,
+				1C08F79426DE720C005C3999 /* View+.swift in Sources */,
 				511A181026C9012B00FF6767 /* InterviewRowView.swift in Sources */,
 				516EA5962654459B007E3508 /* Network.swift in Sources */,
 				1C08F77626D673F0005C3999 /* AlertViewer.swift in Sources */,
