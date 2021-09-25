@@ -8,7 +8,6 @@ struct ImpresarioApp: App {
     let keychain: KeychainSwift
     
     @ObservedObject var userViewModel = UserViewModel()
-    @Environment(\.scenePhase) var scenePhase
     
     init() {
         debugPrint("Get keychain")
@@ -23,14 +22,5 @@ struct ImpresarioApp: App {
                 StartView(userViewModel: userViewModel)
             }
         }
-        /*
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                userViewModel.getUserInfo() {
-                    debugPrint("Get user info from ImpresarioApp")
-                }
-            }
-        }
-        */
     }
 }

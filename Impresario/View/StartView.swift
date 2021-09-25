@@ -4,31 +4,31 @@ import SwiftUI
 struct StartView: View {
     
     @State private var signUp = false
-    @State private var buttonSignUpText = " Sign up "
+    @State private var buttonSignUpText = " sign up "
     @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         ZStack {
             VStack {
                 HStack {
-                    Text("IMPRESARIO")
-                        .font(.custom("Marker Felt Wide", size: 30, relativeTo: .largeTitle))
-                        .foregroundColor(Color.init(.darkGray))
+                    Text("impresario")
+                        .font(.custom("KoHo-SemiBold", size: 35, relativeTo: .largeTitle))
+                        .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     Spacer()
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.init(.darkGray), lineWidth: 2)
-                        .frame(width: 70, height: 25, alignment: .center)
+                        .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 2)
+                        .frame(width: 70, height: 35, alignment: .center)
                         .overlay(Button(action: {
                             signUp.toggle()
                             if signUp {
-                                buttonSignUpText = " Sign In "
+                                buttonSignUpText = " sign in "
                             } else {
-                                buttonSignUpText = " Sign Up "
+                                buttonSignUpText = " sign up "
                             }
                         }, label: {
                             Text(self.buttonSignUpText)
-                                .foregroundColor(Color.init(.darkGray))
-                                .font(.custom("Marker Felt", size: 20, relativeTo: .largeTitle))
+                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                                .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
                         }))
                 }
                 .padding(.leading)

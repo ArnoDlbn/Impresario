@@ -869,6 +869,21 @@
                         "deprecationReason": null
                     },
                     {
+                        "name": "title",
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
                         "name": "timeSlots",
                         "args": [],
                         "type": {
@@ -1639,7 +1654,7 @@
                                     "name": null,
                                     "ofType": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "InvitationInput",
+                                        "name": "JournalistEventInvitationInput",
                                         "ofType": null
                                     }
                                 },
@@ -1651,7 +1666,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "OBJECT",
-                                "name": "Invitation",
+                                "name": "JournalistEventInvitation",
                                 "ofType": null
                             }
                         },
@@ -1709,7 +1724,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "OBJECT",
-                                "name": "InterviewRequest",
+                                "name": "InterviewValidationRequest",
                                 "ofType": null
                             }
                         },
@@ -1792,7 +1807,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "validateRegistrationToken",
+                        "name": "validateUserRegistration",
                         "args": [
                             {
                                 "name": "input",
@@ -2343,7 +2358,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "InvitationInput",
+                "name": "JournalistEventInvitationInput",
                 "fields": null,
                 "inputFields": [
                     {
@@ -2379,7 +2394,7 @@
             },
             {
                 "kind": "OBJECT",
-                "name": "Invitation",
+                "name": "JournalistEventInvitation",
                 "fields": [
                     {
                         "name": "id",
@@ -2575,7 +2590,7 @@
             },
             {
                 "kind": "OBJECT",
-                "name": "InterviewRequest",
+                "name": "InterviewValidationRequest",
                 "fields": [
                     {
                         "name": "id",
@@ -2649,6 +2664,24 @@
                 "fields": null,
                 "inputFields": [
                     {
+                        "name": "artistName",
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "bandName",
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "email",
                         "type": {
                             "kind": "NON_NULL",
@@ -2669,6 +2702,32 @@
                             "ofType": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "isJournalist",
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "hasBand",
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
                                 "ofType": null
                             }
                         },

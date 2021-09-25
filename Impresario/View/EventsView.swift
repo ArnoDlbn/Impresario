@@ -32,31 +32,24 @@ struct EventsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
                 List(eventsViewModel.events) { event in
-                    NavigationLink(destination: DetailEventView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
+                    NavigationLink(destination: EventDetailView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
                         EventRowView(eventViewModel: EventViewModel(withEvent: event))
                     }
                 }
+                .padding(.leading, -20)
+                .listStyle(PlainListStyle())
                 .navigationTitle("Events")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         ZStack{
-                        Button(action: {
-                            self.activeSheet = SheetIdentifier(id: .add)
-                        }) {
-                            Image(systemName: "plus.circle")
-                        }
-                        
-//                        Label("AddEvent", systemImage: "plus.circle")
-//                            .onTapGesture {
-//                                self.activeSheet = SheetIdentifier(id: .add)
-//                            }
-//                            .foregroundColor(Color.init(.darkGray))
-//                            .font(.system(size: 25))
+                            Button(action: {
+                                self.activeSheet = SheetIdentifier(id: .add)
+                            }) {
+                                Image(systemName: "plus.circle")
+                            }
                             .isHidden(isJournalist)
-                    }
-                        .accentColor(.gray)
+                        }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -64,18 +57,13 @@ struct EventsView: View {
                         }) {
                             Image(systemName: "person.crop.circle")
                         }
-//                        Label("Profile", systemImage: "person.crop.circle")
-//                            .onTapGesture {
-//                                self.activeSheet = SheetIdentifier(id: .profile)
-//                            }
-//                            .foregroundColor(Color.init(.darkGray))
-//                            .font(.system(size: 25))
                     }
-                }
-                .accentColor(.gray)
-            }
+                }            
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear(perform: {
+            debugPrint("On appear Events view")
+            loadEvents()
+        })
         .sheet(item: $activeSheet) { item in
             switch item.id {
             case .add:

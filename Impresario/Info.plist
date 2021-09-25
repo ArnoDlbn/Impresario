@@ -17,9 +17,30 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Biometrics needed for authentication</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>KoHo-ExtraLight.ttf</string>
+		<string>KoHo-Light.ttf</string>
+		<string>KoHo-Regular.ttf</string>
+		<string>KoHo-Medium.ttf</string>
+		<string>KoHo-SemiBold.ttf</string>
+		<string>KoHo-Bold.ttf</string>
+		<string>Merriweather-Light.ttf</string>
+		<string>Merriweather-Regular.ttf</string>
+		<string>Merriweather-Bold.ttf</string>
+		<string>Merriweather-Black.ttf</string>
+		<string>MerriweatherSans-Light.ttf</string>
+		<string>MerriweatherSans-Regular.ttf</string>
+		<string>MerriweatherSans-Medium.ttf</string>
+		<string>MerriweatherSans-SemiBold.ttf</string>
+		<string>MerriweatherSans-Bold.ttf</string>
+		<string>MerriweatherSans-ExtraBold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -27,15 +48,8 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>ImpresarioLaunchScreenBackgroundColor</string>
-		<key>UIImageName</key>
-		<string>ImpresarioLaunchScreen</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
-	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -43,8 +57,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -55,7 +67,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Biometrics needed for authentication</string>
 </dict>
 </plist>

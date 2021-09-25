@@ -4,8 +4,8 @@ import LocalAuthentication
 
 struct AuthenticationView: View {
     
-    @State private var username = "impresarioapp+sevdaalizadeh@gmail.com"
-    @State private var password = "Sevdaliza!"
+    @State private var username = "contact+louislepron@appsolument.com"
+    @State private var password = "Konbini!"
     
     @State var signUp = false
     @State var showAlertFailure = false
@@ -15,28 +15,27 @@ struct AuthenticationView: View {
     var body: some View {
         VStack {
             Spacer()
-            TextField("Username", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .textContentType(.username)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .textContentType(.password)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
+            VStack(spacing: 10) {
+                TextField("Username", text: $username)
+                    .textContentType(.username)
+                SecureField("Password", text: $password)
+                    .textContentType(.password)
+            }
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
+            .frame(width: 220, height: 40, alignment: .center)
             Spacer()
                 .frame(height: 50)
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
+                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                .frame(width: 220, height: 40, alignment: .center)
                 .overlay(
                     Button(action: {
                         authenticateTapped()
                     }, label: {
-                        Text(" Sign In ")
+                        Text(" sign In ")
                             .foregroundColor(.white)
-                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                            .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     })
                 )
                 .alert(isPresented: $showAlertFailure, content: {
@@ -44,20 +43,20 @@ struct AuthenticationView: View {
                         userViewModel.login(username: username, password: password)
                     }
                 })
-            Spacer()
-                .frame(height: 30)
-//                .alert(isPresented: $showAlertNoBiometry, content: {
-//                    AlertViewer.showAlertWithActions(message: "Your device is not configured for biometric authentication.") {
-//                        userViewModel.login(username: username, password: password)
-//                    }
-//                })
-            Text("Forgot password ?")
-                .foregroundColor(Color.init(.darkGray))
-                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+//            Spacer()
+//                .frame(height: 30)
+            //                .alert(isPresented: $showAlertNoBiometry, content: {
+            //                    AlertViewer.showAlertWithActions(message: "Your device is not configured for biometric authentication.") {
+            //                        userViewModel.login(username: username, password: password)
+            //                    }
+            //                })
+            //            Text("Forgot password ?")
+            //                .foregroundColor(Color.init(.darkGray))
+            //                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
             Spacer()
         }
-        .padding()
     }
+    
     
     func authenticateTapped() {
         

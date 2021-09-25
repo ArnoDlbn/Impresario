@@ -8,11 +8,11 @@ struct MainView: View {
     init(with userViewModel: UserViewModel){
         
         self.userViewModel = userViewModel
-//        coloredNavAppearance.configureWithOpaqueBackground()
-//        coloredNavAppearance.backgroundColor = .white
+        coloredNavAppearance.configureWithOpaqueBackground()
+        coloredNavAppearance.backgroundColor = .white
 
-        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont(name: "Marker Felt Wide", size: 20)!]
-        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont(name: "Marker Felt Wide", size: 35)!]
+        coloredNavAppearance.titleTextAttributes = [.foregroundColor: UIColor.init(Color(red: 255/255, green: 203/255, blue: 164/255)), NSAttributedString.Key.font: UIFont(name: "KoHo-SemiBold", size: 20)!]
+        coloredNavAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color(red: 255/255, green: 203/255, blue: 164/255)), NSAttributedString.Key.font: UIFont(name: "KoHo-SemiBold", size: 35)!]
         
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
@@ -21,14 +21,12 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            
-                                        
+            InterviewsView(userViewModel: userViewModel)
+                .tabItem { Label("Interviews", systemImage: "calendar") }
             EventsView(userViewModel: userViewModel)
                 .tabItem { Label("Events", systemImage: "ticket") }
-            
-            ReminderView(userViewModel: userViewModel)
-                .tabItem { Label("Interviews", systemImage: "calendar") }
         }
+        .accentColor(Color(red: 255/255, green: 203/255, blue: 164/255))
     }
 }
 

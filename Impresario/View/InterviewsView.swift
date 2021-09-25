@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReminderView: View {
+struct InterviewsView: View {
     
     @ObservedObject var interviewsViewModel = InterviewsViewModel()
     @State private var isViewProfile = false
@@ -16,27 +16,27 @@ struct ReminderView: View {
     var body: some View {
         NavigationView {
             List(interviewsViewModel.interviews) { interview in
-                NavigationLink(destination: DetailInterviewView(interviewViewModel: InterviewViewModel(withInterview: interview))) {
+                NavigationLink(destination: InterviewDetailView(interviewViewModel: InterviewViewModel(withInterview: interview))) {
                     InterviewRowView(interviewViewModel: InterviewViewModel(withInterview: interview))
                 }
             }
+            .padding(.leading, -20)
+            .listStyle(PlainListStyle())
             .navigationTitle("Interviews")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Label("Profile", systemImage: "person.crop.circle")
-                        .onTapGesture {
-                            isViewProfile.toggle()
-                        }
-                        .foregroundColor(Color.init(.darkGray))
-                        .font(.system(size: 25))
+                    Button(action: {
+                        isViewProfile.toggle()
+                    }) {
+                        Image(systemName: "person.crop.circle")
+                    }
                 }
             }
         }
         .onAppear {
-            debugPrint("On appear Reminder view")
+            debugPrint("On appear Interviews view")
             loadInterviews()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $isViewProfile, content: {
             ProfileView(userViewModel: userViewModel)
         })
@@ -47,7 +47,6 @@ struct ReminderView: View {
         self.interviewsViewModel.interviewsQuery() {
             self.userViewModel.logOut()
         }
-        
     }
 }
 

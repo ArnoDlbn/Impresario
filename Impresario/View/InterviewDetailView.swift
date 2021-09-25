@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailInterviewView: View {
+struct InterviewDetailView: View {
     
     let interviewViewModel: InterviewViewModel
     
@@ -59,15 +59,17 @@ struct DetailInterviewView: View {
 //            .padding(.top, 20)
             Spacer()
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 200, height: 40, alignment: .center)
-                .overlay(Button(action: {
-                    showingAlert.toggle()
-                }, label: {
-                    Text(" Cancel your interview ")
-                        .foregroundColor(.white)
-                        .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
-                }))
+                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                .frame(width: 220, height: 40, alignment: .center)
+                .overlay(
+                    Button(action: {
+                        showingAlert.toggle()
+                    }, label: {
+                        Text(" Cancel your interview ")
+                            .foregroundColor(.white)
+                            .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
+                    })
+                )
                 .alert(isPresented: $showingAlert) {
                     Alert(
                         title: Text("Cancel an interview"),

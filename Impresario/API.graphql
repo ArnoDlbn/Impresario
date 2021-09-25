@@ -38,6 +38,7 @@ query events {
                         name
                     }
                 }
+                title
                 description
                 physicalAddress {
                     label

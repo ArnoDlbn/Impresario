@@ -8,33 +8,34 @@ struct InterviewRowView: View {
     var body: some View {
         HStack {
             Spacer()
-                .frame(width: 30)
+                .frame(width: 20)
             VStack {
+                Spacer()
                 RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.init(.darkGray), lineWidth: 3)
+                    .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
                     .overlay(Text(interviewViewModel.interview.day ?? ""))
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(Color.init(.darkGray))
                 Text(interviewViewModel.interview.hourAndMinutes ?? "")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
+                Spacer()
             }
+            .frame(width: 60)
+            .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
+            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
             Spacer()
-                .frame(width: 30)
-            VStack(alignment: .leading) {
+                .frame(width: 20)
+            VStack(alignment: .leading, spacing: 5) {
+                Spacer()
                 Text(interviewViewModel.interview.event.bandName ?? "")
-                    .font(.system(size: 25, weight: .bold))
-                    .foregroundColor(Color.init(.darkGray))
+                    .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
                 Text(interviewViewModel.interview.event.description ?? "")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
-                Text("La Gaîté Lyrique \n3bis rue Papin \n75003 Paris")
-                    .font(.system(size: 15))
-                    .foregroundColor(Color.init(.darkGray))
+                HStack {
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                    Text("La Gaîté Lyrique")
+                }
+                Spacer()
             }
-            .foregroundColor(Color.init(.darkGray))
-            Spacer()
+            .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
         }
     }
 }

@@ -19,7 +19,7 @@ struct ProfileView: View {
                         .scaledToFill()
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.init(.darkGray), lineWidth: 4))
+                        .overlay(Circle().stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 4))
                         .shadow(radius: 7)
                         if let user = userViewModel.user {
                             Text("\(user.firstName)")
@@ -33,7 +33,7 @@ struct ProfileView: View {
                     .padding()
                 Spacer()
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color.init(.darkGray))
+                    .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     .frame(width: 200, height: 40, alignment: .center)
                     .overlay(Button(action: {
                         let keychain = KeychainSwift()
@@ -43,7 +43,7 @@ struct ProfileView: View {
                     }, label: {
                         Text(" Log out ")
                             .foregroundColor(.white)
-                            .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                            .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     }))
                     .padding(.bottom, 10)
             }

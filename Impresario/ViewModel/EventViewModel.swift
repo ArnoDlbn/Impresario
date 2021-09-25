@@ -13,6 +13,7 @@ class EventViewModel: Identifiable {
         let id = content.id
         let startEvent = content.startsAt
         let endEvent = content.endsAt
+        let title = content.title
         let description = content.description
         let bandName = content.band.name
         let duration = content.interviewDuration
@@ -25,6 +26,7 @@ class EventViewModel: Identifiable {
         return Event(
             startEvent: startEvent,
             endEvent: endEvent,
+            title: title,
             description: description,
             bandName: bandName,
             duration: duration,

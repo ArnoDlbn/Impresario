@@ -8,40 +8,34 @@ struct EventRowView: View {
     var body: some View {
         HStack {
             Spacer()
-                .frame(width: 30)
+                .frame(width: 20)
             VStack {
+                Spacer()
                 RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.init(.darkGray), lineWidth: 3)
+                    .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
                     .overlay(Text(eventViewModel.event.day ?? ""))
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(Color.init(.darkGray))
                 Text(eventViewModel.event.hourAndMinutes ?? "")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
+                Spacer()
             }
+            .frame(width: 60)
+            .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
+            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
             Spacer()
-                .frame(width: 30)
-            VStack(alignment: .leading) {
+                .frame(width: 20)
+            VStack(alignment: .leading, spacing: 5) {
+                Spacer()
                 Text(eventViewModel.event.bandName ?? "")
-                    .font(.system(size: 25, weight: .bold))
-                    .foregroundColor(Color.init(.darkGray))
-                Text(eventViewModel.event.description!)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.init(.darkGray))
-                VStack(alignment: .leading) {
+                    .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
+                Text(eventViewModel.event.title ?? "")
+                HStack {
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     Text(eventViewModel.event.address?.label ?? "Chez moi")
-                    Text(eventViewModel.event.address?.street ?? "9 rue Huntziger")
-                    HStack {
-                        Text(eventViewModel.event.address?.zipCode ?? "92110")
-                        Text(eventViewModel.event.address?.city ?? "Clichy")
-                    }
                 }
-                .font(.system(size: 15))
-                .foregroundColor(Color.init(.darkGray))
+                Spacer()
             }
-            .foregroundColor(Color.init(.darkGray))
-            Spacer()
+            .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
         }
     }
 }

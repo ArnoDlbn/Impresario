@@ -37,12 +37,34 @@ public struct Registration: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
+  ///   - artistName
+  ///   - bandName
   ///   - email
   ///   - firstName
+  ///   - isJournalist
+  ///   - hasBand
   ///   - lastName
   ///   - password
-  public init(email: String, firstName: String, lastName: String, password: String) {
-    graphQLMap = ["email": email, "firstName": firstName, "lastName": lastName, "password": password]
+  public init(artistName: Swift.Optional<String?> = nil, bandName: Swift.Optional<String?> = nil, email: String, firstName: String, isJournalist: Bool, hasBand: Bool, lastName: String, password: String) {
+    graphQLMap = ["artistName": artistName, "bandName": bandName, "email": email, "firstName": firstName, "isJournalist": isJournalist, "hasBand": hasBand, "lastName": lastName, "password": password]
+  }
+
+  public var artistName: Swift.Optional<String?> {
+    get {
+      return graphQLMap["artistName"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "artistName")
+    }
+  }
+
+  public var bandName: Swift.Optional<String?> {
+    get {
+      return graphQLMap["bandName"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "bandName")
+    }
   }
 
   public var email: String {
@@ -60,6 +82,24 @@ public struct Registration: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "firstName")
+    }
+  }
+
+  public var isJournalist: Bool {
+    get {
+      return graphQLMap["isJournalist"] as! Bool
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "isJournalist")
+    }
+  }
+
+  public var hasBand: Bool {
+    get {
+      return graphQLMap["hasBand"] as! Bool
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "hasBand")
     }
   }
 
@@ -710,6 +750,7 @@ public final class EventsQuery: GraphQLQuery {
                 name
               }
             }
+            title
             description
             physicalAddress {
               __typename
@@ -864,6 +905,7 @@ public final class EventsQuery: GraphQLQuery {
               GraphQLField("startsAt", type: .nonNull(.scalar(String.self))),
               GraphQLField("endsAt", type: .nonNull(.scalar(String.self))),
               GraphQLField("band", type: .nonNull(.object(Band.selections))),
+              GraphQLField("title", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
               GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
               GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
@@ -878,8 +920,8 @@ public final class EventsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, author: Author, startsAt: String, endsAt: String, band: Band, description: String? = nil, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil, interviewDuration: Int, timeSlots: [TimeSlot?]? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Event", "id": id, "author": author.resultMap, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "description": description, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }, "interviewDuration": interviewDuration, "timeSlots": timeSlots.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }])
+          public init(id: GraphQLID, author: Author, startsAt: String, endsAt: String, band: Band, title: String, description: String? = nil, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil, interviewDuration: Int, timeSlots: [TimeSlot?]? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Event", "id": id, "author": author.resultMap, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "title": title, "description": description, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }, "interviewDuration": interviewDuration, "timeSlots": timeSlots.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }])
           }
 
           public var __typename: String {
@@ -933,6 +975,15 @@ public final class EventsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue.resultMap, forKey: "band")
+            }
+          }
+
+          public var title: String {
+            get {
+              return resultMap["title"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "title")
             }
           }
 
@@ -2055,7 +2106,7 @@ public final class RequestInterviewMutation: GraphQLMutation {
     }
 
     public struct RequestInterview: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["InterviewRequest"]
+      public static let possibleTypes: [String] = ["InterviewValidationRequest"]
 
       public static var selections: [GraphQLSelection] {
         return [
@@ -2071,7 +2122,7 @@ public final class RequestInterviewMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID) {
-        self.init(unsafeResultMap: ["__typename": "InterviewRequest", "id": id])
+        self.init(unsafeResultMap: ["__typename": "InterviewValidationRequest", "id": id])
       }
 
       public var __typename: String {

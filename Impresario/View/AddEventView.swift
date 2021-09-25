@@ -31,19 +31,19 @@ struct AddEventView: View {
     var body: some View {
         VStack {
             Text("Add event")
-                .foregroundColor(Color.init(.darkGray))
-                .font(.custom("Marker Felt Wide", size: 25, relativeTo: .largeTitle))
+                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                .font(.custom("KoHo-SemiBold", size: 25, relativeTo: .largeTitle))
             VStack {
                 TextField("Event Description", text: $eventDescription)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .foregroundColor(Color.init(.darkGray))
+//                    .foregroundColor(Color.init(.darkGray))
                     .frame(width: 220, height: 40, alignment: .center)
                 Text("Event Start")
-                    .foregroundColor(Color.init(.darkGray))
+//                    .foregroundColor(Color.init(.darkGray))
                 DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
                     .labelsHidden()
                 Text("Event End")
-                    .foregroundColor(Color.init(.darkGray))
+//                    .foregroundColor(Color.init(.darkGray))
                 DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
                     .labelsHidden()
                 
@@ -60,34 +60,34 @@ struct AddEventView: View {
                 //                .frame(width: 200, height: 150)
                 Section {
                     Text("Event Adress")
-                        .foregroundColor(Color.init(.darkGray))
+//                        .foregroundColor(Color.init(.darkGray))
                     TextField("Label", text: $label)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(Color.init(.darkGray))
+//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                     TextField("Street", text: $street)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(Color.init(.darkGray))
+//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                     HStack(spacing: 10) {
                         TextField("Zip Code", text: $zipCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .foregroundColor(Color.init(.darkGray))
+//                            .foregroundColor(Color.init(.darkGray))
                             .frame(width: 65, height: 40, alignment: .center)
                         TextField("City", text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .foregroundColor(Color.init(.darkGray))
+//                            .foregroundColor(Color.init(.darkGray))
                             .frame(width: 145, height: 40, alignment: .center)
                     }
                     TextField("Country", text: $country)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(Color.init(.darkGray))
+//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                 }
             }
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.init(.darkGray))
-                .frame(width: 180, height: 40, alignment: .center)
+                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                .frame(width: 220, height: 40, alignment: .center)
                 .overlay(Button(action: {
                     let dateForm = ISO8601DateFormatter()
                     dateForm.timeZone = TimeZone.current
@@ -106,7 +106,7 @@ struct AddEventView: View {
                 }, label: {
                     Text(" Create your event ")
                         .foregroundColor(.white)
-                        .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
+                        .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                 }))
                 .alert(isPresented: $showAlert, content: {
                     if activeAlert == .failure {

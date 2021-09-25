@@ -1,7 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
+      "filename" : "Frame.png",
+      "idiom" : "iphone"
     }
   ],
   "info" : {
