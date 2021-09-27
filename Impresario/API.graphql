@@ -45,8 +45,10 @@ query events {
                     street
                     city
                     zipCode
+                    countryCode
                 }
                 virtualAddress {
+                    label
                     url
                 }
                 interviewDuration
@@ -76,17 +78,21 @@ query interviews {
                 endsAt
                 event {
                     id
+                    title
                     description
                     band {
                         name
                     }
+                    interviewDuration
                     physicalAddress {
                         label
                         street
                         city
                         zipCode
+                        countryCode
                     }
                     virtualAddress {
+                        label
                         url
                     }
                 }

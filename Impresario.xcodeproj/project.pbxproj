@@ -13,6 +13,7 @@
 		1C75E3C926CD5642006FE925 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3C826CD5642006FE925 /* Event.swift */; };
 		1C75E3E126CE8247006FE925 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E026CE8247006FE925 /* Address.swift */; };
 		1C75E3E726CE8270006FE925 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E626CE8270006FE925 /* TimeSlot.swift */; };
+		1CD038EF2700C80500CD9F3B /* MapViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD038EE2700C80500CD9F3B /* MapViewer.swift */; };
 		511A180C26C2DBC400FF6767 /* InterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */; };
 		511A180E26C2DBD600FF6767 /* InterviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */; };
 		511A181026C9012B00FF6767 /* InterviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180F26C9012B00FF6767 /* InterviewRowView.swift */; };
@@ -131,6 +132,7 @@
 		1C75E3C826CD5642006FE925 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1C75E3E026CE8247006FE925 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		1C75E3E626CE8270006FE925 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		1CD038EE2700C80500CD9F3B /* MapViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewer.swift; sourceTree = "<group>"; };
 		511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewViewModel.swift; sourceTree = "<group>"; };
 		511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewsViewModel.swift; sourceTree = "<group>"; };
 		511A180F26C9012B00FF6767 /* InterviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewRowView.swift; sourceTree = "<group>"; };
@@ -258,17 +260,17 @@
 			isa = PBXGroup;
 			children = (
 				1C75E3ED26CE89D4006FE925 /* API */,
-				1C75E3EC26CE89C5006FE925 /* Librairy */,
+				1C75E3EC26CE89C5006FE925 /* Library */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
 		};
-		1C75E3EC26CE89C5006FE925 /* Librairy */ = {
+		1C75E3EC26CE89C5006FE925 /* Library */ = {
 			isa = PBXGroup;
 			children = (
 				1C75E3EE26CE8C2E006FE925 /* Apollo */,
 			);
-			path = Librairy;
+			path = Library;
 			sourceTree = "<group>";
 		};
 		1C75E3ED26CE89D4006FE925 /* API */ = {
@@ -410,6 +412,7 @@
 				51ECEDF826233A6F00D4C67E /* View */,
 				519D473426D2B70B0010DABC /* DateFormatter.swift */,
 				1C08F77526D673F0005C3999 /* AlertViewer.swift */,
+				1CD038EE2700C80500CD9F3B /* MapViewer.swift */,
 			);
 			path = Impresario;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 				516EA574265105B5007E3508 /* MainView.swift in Sources */,
 				516EA57826510610007E3508 /* EventsView.swift in Sources */,
 				1C75E3C926CD5642006FE925 /* Event.swift in Sources */,
+				1CD038EF2700C80500CD9F3B /* MapViewer.swift in Sources */,
 				1C75E3E726CE8270006FE925 /* TimeSlot.swift in Sources */,
 				516EA57E26516F35007E3508 /* ProfileView.swift in Sources */,
 				518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */,
@@ -882,7 +886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Impresario/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				ENABLE_PREVIEWS = YES;
@@ -905,7 +909,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Impresario/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				ENABLE_PREVIEWS = YES;

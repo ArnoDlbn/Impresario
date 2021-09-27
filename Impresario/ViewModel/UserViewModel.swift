@@ -30,7 +30,7 @@ class UserViewModel: ObservableObject {
     }
     
     func getUserInfo(completion: @escaping () -> ()) {
-        Network.shared.apollo.fetch(query: MeQuery()) { result in
+        Network.shared.apollo.fetch(query: MeQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
             switch result {
             case .success(let graphQLResult):
                 if let result = graphQLResult.data?.me {

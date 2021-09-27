@@ -27,11 +27,19 @@ struct InterviewRowView: View {
                 Spacer()
                 Text(interviewViewModel.interview.event.bandName ?? "")
                     .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
-                Text(interviewViewModel.interview.event.description ?? "")
+                Text(interviewViewModel.interview.event.title ?? "")
                 HStack {
-                    Image(systemName: "mappin.and.ellipse")
-                        .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                    Text("La Gaîté Lyrique")
+                    if let address = interviewViewModel.interview.event.address {
+                        if let physicalAddress = address.physicalAddress {
+                            Image(systemName: "mappin.and.ellipse")
+                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                            Text(physicalAddress.label ?? physicalAddress.city)
+                        } else if let virtualAddress = address.virtualAddress {
+                            Image(systemName: "video")
+                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                            Text(virtualAddress.label ?? "Virtual meeting")
+                        }
+                    }
                 }
                 Spacer()
             }

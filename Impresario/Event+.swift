@@ -16,4 +16,20 @@ extension Event {
     var fullEndDate : String? {
         DateFormatter.getFullDate(date: self.endEvent)
     }
+    
+    var fullAddress : String? {
+        if let address = self.address {
+            if let physicalAddress = address.physicalAddress {
+                if let label = physicalAddress.label {
+                    return "\(label) \n\(physicalAddress.street) \n\(physicalAddress.zipCode) \(physicalAddress.city)"
+                } else {
+                    return "\(physicalAddress.street) \n\(physicalAddress.zipCode) \(physicalAddress.city)"
+                }
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
 }

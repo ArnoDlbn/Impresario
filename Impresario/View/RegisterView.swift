@@ -8,7 +8,7 @@ struct RegisterView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var profile = ""
-
+    
     var body: some View {
         VStack {
             Spacer()
@@ -30,7 +30,7 @@ struct RegisterView: View {
             .frame(width: 220, height: 40, alignment: .center)
             Spacer()
                 .frame(height: 100)
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                 .frame(width: 220, height: 40, alignment: .center)
                 .overlay(Button(action: {

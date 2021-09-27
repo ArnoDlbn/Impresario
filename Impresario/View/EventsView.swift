@@ -22,43 +22,43 @@ struct EventsView: View {
     }
     
     private struct SheetIdentifier: Identifiable {
-            var id: Choice
-
-            enum Choice {
-                case add
-                case profile
-            }
+        var id: Choice
+        
+        enum Choice {
+            case add
+            case profile
         }
+    }
     
     var body: some View {
         NavigationView {
-                List(eventsViewModel.events) { event in
-                    NavigationLink(destination: EventDetailView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
-                        EventRowView(eventViewModel: EventViewModel(withEvent: event))
+            List(eventsViewModel.events) { event in
+                NavigationLink(destination: EventDetailView(eventViewModel: EventViewModel(withEvent: event), userViewModel: userViewModel)) {
+                    EventRowView(eventViewModel: EventViewModel(withEvent: event))
+                }
+            }
+            .padding(.leading, -20)
+            .listStyle(PlainListStyle())
+            .navigationTitle("Events")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    ZStack{
+                        Button(action: {
+                            self.activeSheet = SheetIdentifier(id: .add)
+                        }) {
+                            Image(systemName: "plus.circle")
+                        }
+                        .isHidden(isJournalist)
                     }
                 }
-                .padding(.leading, -20)
-                .listStyle(PlainListStyle())
-                .navigationTitle("Events")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        ZStack{
-                            Button(action: {
-                                self.activeSheet = SheetIdentifier(id: .add)
-                            }) {
-                                Image(systemName: "plus.circle")
-                            }
-                            .isHidden(isJournalist)
-                        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        self.activeSheet = SheetIdentifier(id: .profile)
+                    }) {
+                        Image(systemName: "person.crop.circle")
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            self.activeSheet = SheetIdentifier(id: .profile)
-                        }) {
-                            Image(systemName: "person.crop.circle")
-                        }
-                    }
-                }            
+                }
+            }
         }
         .onAppear(perform: {
             debugPrint("On appear Events view")

@@ -15,7 +15,7 @@ struct StartView: View {
                         .font(.custom("KoHo-SemiBold", size: 35, relativeTo: .largeTitle))
                         .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     Spacer()
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 17.5)
                         .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 2)
                         .frame(width: 70, height: 35, alignment: .center)
                         .overlay(Button(action: {

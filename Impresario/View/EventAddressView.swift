@@ -7,7 +7,7 @@ struct EventAddressView: View {
     @Binding var zipCode: String
     @Binding var city: String
     @Binding var country: String
-
+    
     var body: some View {
         VStack {
             TextField("Event Address Label", text: $label)

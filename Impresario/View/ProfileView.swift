@@ -4,9 +4,10 @@ import KeychainSwift
 
 struct ProfileView: View {
     @ObservedObject var userViewModel: UserViewModel
+    @State private var isLoggedOut = false
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         GeometryReader { geo in
             VStack(alignment: .center, spacing: 0) {
@@ -21,34 +22,38 @@ struct ProfileView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 4))
                         .shadow(radius: 7)
-                        if let user = userViewModel.user {
-                            Text("\(user.firstName)")
-                            Text("\(user.firstName)")
-                            Text("\(user.email)")
-                        }
+                    if let user = userViewModel.user {
+                        Text("\(user.firstName)")
+                        Text("\(user.firstName)")
+                        Text("\(user.email)")
+                    }
                 }
                 .padding(.top, -100)
                 .padding(.leading, 20)
                 Divider()
                     .padding()
                 Spacer()
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     .frame(width: 200, height: 40, alignment: .center)
                     .overlay(Button(action: {
                         let keychain = KeychainSwift()
                         keychain.delete("token")
-                        userViewModel.user = nil
+                        isLoggedOut.toggle()
                         self.presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text(" Log out ")
                             .foregroundColor(.white)
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     }))
+                    .onDisappear {
+                        if isLoggedOut {
+                            userViewModel.user = nil
+                        }
+                    }
                     .padding(.bottom, 10)
             }
             .frame(width: geo.size.width, height: geo.size.height)
-//                    .ignoresSafeArea()
         }
     }
 }

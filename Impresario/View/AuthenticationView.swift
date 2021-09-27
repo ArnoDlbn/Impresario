@@ -26,7 +26,7 @@ struct AuthenticationView: View {
             .frame(width: 220, height: 40, alignment: .center)
             Spacer()
                 .frame(height: 50)
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                 .frame(width: 220, height: 40, alignment: .center)
                 .overlay(
@@ -43,8 +43,8 @@ struct AuthenticationView: View {
                         userViewModel.login(username: username, password: password)
                     }
                 })
-//            Spacer()
-//                .frame(height: 30)
+            //            Spacer()
+            //                .frame(height: 30)
             //                .alert(isPresented: $showAlertNoBiometry, content: {
             //                    AlertViewer.showAlertWithActions(message: "Your device is not configured for biometric authentication.") {
             //                        userViewModel.login(username: username, password: password)

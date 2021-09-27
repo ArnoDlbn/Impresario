@@ -21,7 +21,22 @@ class EventViewModel: Identifiable {
             let result = TimeSlot.init(startsAt: timeSlot!.startsAt, isAvailable: timeSlot!.isAvailable)
             return result
         }
-//        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
+        
+        let firstAddress: PhysicalAddress?
+        if let physicalAddress = content.physicalAddress {
+            firstAddress = PhysicalAddress(label: physicalAddress.label, street: physicalAddress.street, zipCode: physicalAddress.zipCode, city: physicalAddress.city, countryCode: physicalAddress.countryCode)
+        } else {
+            firstAddress = nil
+        }
+        
+        let secondAddress: VirtualAddress?
+        if let virtualAddress = content.virtualAddress {
+            secondAddress = VirtualAddress(label: virtualAddress.label, url: virtualAddress.url)
+        } else {
+            secondAddress = nil
+        }
+        
+        let address = Address(physicalAddress: firstAddress, virtualAddress: secondAddress)
         
         return Event(
             startEvent: startEvent,
@@ -31,20 +46,39 @@ class EventViewModel: Identifiable {
             bandName: bandName,
             duration: duration,
             timeSlot: timeSlot,
-            id: id
-//            address: address
+            id: id,
+            address: address
         )
     }
     
     static func from(content: InterviewsQuery.Data.Interview.Edge.Node.Event) -> Event {
+        let title = content.title
         let description = content.description
         let bandName = content.band.name
-        let address = Address(label: content.physicalAddress?.label, street: content.physicalAddress?.street, zipCode: content.physicalAddress?.zipCode, city: content.physicalAddress?.city)
+        let duration = content.interviewDuration
         let id = content.id
         
+        let firstAddress: PhysicalAddress?
+        if let physicalAddress = content.physicalAddress {
+            firstAddress = PhysicalAddress(label: physicalAddress.label, street: physicalAddress.street, zipCode: physicalAddress.zipCode, city: physicalAddress.city, countryCode: physicalAddress.countryCode)
+        } else {
+            firstAddress = nil
+        }
+        
+        let secondAddress: VirtualAddress?
+        if let virtualAddress = content.virtualAddress {
+            secondAddress = VirtualAddress(label: virtualAddress.label, url: virtualAddress.url)
+        } else {
+            secondAddress = nil
+        }
+        
+        let address = Address(physicalAddress: firstAddress, virtualAddress: secondAddress)
+        
         return Event(
+            title: title,
             description: description,
             bandName: bandName,
+            duration: duration,
             id: id,
             address: address)
     }

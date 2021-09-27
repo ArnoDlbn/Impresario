@@ -758,9 +758,11 @@ public final class EventsQuery: GraphQLQuery {
               street
               city
               zipCode
+              countryCode
             }
             virtualAddress {
               __typename
+              label
               url
             }
             interviewDuration
@@ -1179,6 +1181,7 @@ public final class EventsQuery: GraphQLQuery {
                 GraphQLField("street", type: .nonNull(.scalar(String.self))),
                 GraphQLField("city", type: .nonNull(.scalar(String.self))),
                 GraphQLField("zipCode", type: .nonNull(.scalar(String.self))),
+                GraphQLField("countryCode", type: .nonNull(.scalar(String.self))),
               ]
             }
 
@@ -1188,8 +1191,8 @@ public final class EventsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(label: String? = nil, street: String, city: String, zipCode: String) {
-              self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode])
+            public init(label: String? = nil, street: String, city: String, zipCode: String, countryCode: String) {
+              self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode, "countryCode": countryCode])
             }
 
             public var __typename: String {
@@ -1236,6 +1239,15 @@ public final class EventsQuery: GraphQLQuery {
                 resultMap.updateValue(newValue, forKey: "zipCode")
               }
             }
+
+            public var countryCode: String {
+              get {
+                return resultMap["countryCode"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "countryCode")
+              }
+            }
           }
 
           public struct VirtualAddress: GraphQLSelectionSet {
@@ -1244,6 +1256,7 @@ public final class EventsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("label", type: .scalar(String.self)),
                 GraphQLField("url", type: .nonNull(.scalar(String.self))),
               ]
             }
@@ -1254,8 +1267,8 @@ public final class EventsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(url: String) {
-              self.init(unsafeResultMap: ["__typename": "VirtualAddress", "url": url])
+            public init(label: String? = nil, url: String) {
+              self.init(unsafeResultMap: ["__typename": "VirtualAddress", "label": label, "url": url])
             }
 
             public var __typename: String {
@@ -1264,6 +1277,15 @@ public final class EventsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var label: String? {
+              get {
+                return resultMap["label"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "label")
               }
             }
 
@@ -1453,20 +1475,24 @@ public final class InterviewsQuery: GraphQLQuery {
             event {
               __typename
               id
+              title
               description
               band {
                 __typename
                 name
               }
+              interviewDuration
               physicalAddress {
                 __typename
                 label
                 street
                 city
                 zipCode
+                countryCode
               }
               virtualAddress {
                 __typename
+                label
                 url
               }
             }
@@ -1692,8 +1718,10 @@ public final class InterviewsQuery: GraphQLQuery {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+                GraphQLField("title", type: .nonNull(.scalar(String.self))),
                 GraphQLField("description", type: .scalar(String.self)),
                 GraphQLField("band", type: .nonNull(.object(Band.selections))),
+                GraphQLField("interviewDuration", type: .nonNull(.scalar(Int.self))),
                 GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
                 GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
               ]
@@ -1705,8 +1733,8 @@ public final class InterviewsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(id: GraphQLID, description: String? = nil, band: Band, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil) {
-              self.init(unsafeResultMap: ["__typename": "Event", "id": id, "description": description, "band": band.resultMap, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }])
+            public init(id: GraphQLID, title: String, description: String? = nil, band: Band, interviewDuration: Int, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil) {
+              self.init(unsafeResultMap: ["__typename": "Event", "id": id, "title": title, "description": description, "band": band.resultMap, "interviewDuration": interviewDuration, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }])
             }
 
             public var __typename: String {
@@ -1727,6 +1755,15 @@ public final class InterviewsQuery: GraphQLQuery {
               }
             }
 
+            public var title: String {
+              get {
+                return resultMap["title"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "title")
+              }
+            }
+
             public var description: String? {
               get {
                 return resultMap["description"] as? String
@@ -1742,6 +1779,15 @@ public final class InterviewsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue.resultMap, forKey: "band")
+              }
+            }
+
+            public var interviewDuration: Int {
+              get {
+                return resultMap["interviewDuration"]! as! Int
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "interviewDuration")
               }
             }
 
@@ -1812,6 +1858,7 @@ public final class InterviewsQuery: GraphQLQuery {
                   GraphQLField("street", type: .nonNull(.scalar(String.self))),
                   GraphQLField("city", type: .nonNull(.scalar(String.self))),
                   GraphQLField("zipCode", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("countryCode", type: .nonNull(.scalar(String.self))),
                 ]
               }
 
@@ -1821,8 +1868,8 @@ public final class InterviewsQuery: GraphQLQuery {
                 self.resultMap = unsafeResultMap
               }
 
-              public init(label: String? = nil, street: String, city: String, zipCode: String) {
-                self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode])
+              public init(label: String? = nil, street: String, city: String, zipCode: String, countryCode: String) {
+                self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode, "countryCode": countryCode])
               }
 
               public var __typename: String {
@@ -1869,6 +1916,15 @@ public final class InterviewsQuery: GraphQLQuery {
                   resultMap.updateValue(newValue, forKey: "zipCode")
                 }
               }
+
+              public var countryCode: String {
+                get {
+                  return resultMap["countryCode"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "countryCode")
+                }
+              }
             }
 
             public struct VirtualAddress: GraphQLSelectionSet {
@@ -1877,6 +1933,7 @@ public final class InterviewsQuery: GraphQLQuery {
               public static var selections: [GraphQLSelection] {
                 return [
                   GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("label", type: .scalar(String.self)),
                   GraphQLField("url", type: .nonNull(.scalar(String.self))),
                 ]
               }
@@ -1887,8 +1944,8 @@ public final class InterviewsQuery: GraphQLQuery {
                 self.resultMap = unsafeResultMap
               }
 
-              public init(url: String) {
-                self.init(unsafeResultMap: ["__typename": "VirtualAddress", "url": url])
+              public init(label: String? = nil, url: String) {
+                self.init(unsafeResultMap: ["__typename": "VirtualAddress", "label": label, "url": url])
               }
 
               public var __typename: String {
@@ -1897,6 +1954,15 @@ public final class InterviewsQuery: GraphQLQuery {
                 }
                 set {
                   resultMap.updateValue(newValue, forKey: "__typename")
+                }
+              }
+
+              public var label: String? {
+                get {
+                  return resultMap["label"] as? String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "label")
                 }
               }
 

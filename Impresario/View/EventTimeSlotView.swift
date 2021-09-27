@@ -14,16 +14,16 @@ struct EventTimeSlotView: View {
         if let user = userViewModel.user {
             if user.isArtist {
                 if timeSlotViewModel.timeSlot.isAvailable {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 15)
                         .stroke(Color(red: 255/255, green: 203/255, blue: 164/255))
                         .foregroundColor(Color.init(.white))
                         .frame(width: 120, height: 30, alignment: .center)
                         .overlay(Text(timeSlotViewModel.timeSlot.hourAndMinutes!)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                                     .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
                         )
                 } else {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 15)
                         .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                         .frame(width: 120, height: 30, alignment: .center)
                         .overlay(Text(timeSlotViewModel.timeSlot.hourAndMinutes!)
@@ -33,15 +33,15 @@ struct EventTimeSlotView: View {
                 }
             } else {
                 if timeSlotViewModel.timeSlot.isAvailable {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 15)
                         .stroke(Color(red: 255/255, green: 203/255, blue: 164/255))
                         .foregroundColor(Color.init(.white))
                         .frame(width: 120, height: 30, alignment: .center)
                         .overlay(Button(timeSlotViewModel.timeSlot.hourAndMinutes!, action: {
                             showingAlert.toggle()                    
                         })
-                        .foregroundColor(.black)
-                        .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
+                                    .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                                    .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
                         )
                         .alert(isPresented: $showingAlert) {
                             Alert(
@@ -60,14 +60,12 @@ struct EventTimeSlotView: View {
                                 ),
                                 secondaryButton: .destructive(
                                     Text("Cancel"),
-                                    action: {
-                                        //                                self.presentationMode.wrappedValue.dismiss()
-                                    }
+                                    action: {}
                                 )
                             )
                         }
                 } else {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 15)
                         .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                         .frame(width: 120, height: 30, alignment: .center)
                         .overlay(Text(timeSlotViewModel.timeSlot.hourAndMinutes!)

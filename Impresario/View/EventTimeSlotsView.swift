@@ -39,14 +39,14 @@ struct EventTimeSlotsView: View {
                 }
             }
             HStack {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 15)
                     .stroke(Color(red: 255/255, green: 203/255, blue: 164/255))
                     .foregroundColor(Color.init(.white))
                     .frame(width: 120, height: 30, alignment: .center)
                     .overlay(Text("Available")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     )
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 15)
                     .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     .frame(width: 120, height: 30, alignment: .center)
                     .overlay(Text("Unavailable")

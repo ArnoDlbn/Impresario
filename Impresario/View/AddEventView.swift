@@ -36,16 +36,13 @@ struct AddEventView: View {
             VStack {
                 TextField("Event Description", text: $eventDescription)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .foregroundColor(Color.init(.darkGray))
                     .frame(width: 220, height: 40, alignment: .center)
                 Text("Event Start")
-//                    .foregroundColor(Color.init(.darkGray))
                 DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
-                    .labelsHidden()
+                .labelsHidden()
                 Text("Event End")
-//                    .foregroundColor(Color.init(.darkGray))
                 DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
-                    .labelsHidden()
+                .labelsHidden()
                 
                 //                Text("Interview Duration")
                 //                    .foregroundColor(Color.init(.darkGray))
@@ -60,32 +57,26 @@ struct AddEventView: View {
                 //                .frame(width: 200, height: 150)
                 Section {
                     Text("Event Adress")
-//                        .foregroundColor(Color.init(.darkGray))
                     TextField("Label", text: $label)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                     TextField("Street", text: $street)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                     HStack(spacing: 10) {
                         TextField("Zip Code", text: $zipCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-//                            .foregroundColor(Color.init(.darkGray))
                             .frame(width: 65, height: 40, alignment: .center)
                         TextField("City", text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-//                            .foregroundColor(Color.init(.darkGray))
                             .frame(width: 145, height: 40, alignment: .center)
                     }
                     TextField("Country", text: $country)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-//                        .foregroundColor(Color.init(.darkGray))
                         .frame(width: 220, height: 40, alignment: .center)
                 }
             }
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                 .frame(width: 220, height: 40, alignment: .center)
                 .overlay(Button(action: {
@@ -110,9 +101,9 @@ struct AddEventView: View {
                 }))
                 .alert(isPresented: $showAlert, content: {
                     if activeAlert == .failure {
-                       return AlertViewer.showAlertWithNoActions(message: "All fields are required!")
+                        return AlertViewer.showAlertWithNoActions(message: "All fields are required!")
                     } else {
-                       return AlertViewer.showAlertWithNoActions(message: "Your event is created!")
+                        return AlertViewer.showAlertWithNoActions(message: "Your event is created!")
                     }
                 })
         }
