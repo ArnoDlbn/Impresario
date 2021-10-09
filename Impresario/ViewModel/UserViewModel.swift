@@ -4,58 +4,37 @@ import KeychainSwift
 
 class UserViewModel: ObservableObject {
     
-    @Published var user: User?
-    let keyChain = KeychainSwift()
+    @Published var user: User = User()
     
-    func login(username: String, password: String) {
-        Network.shared.apollo.perform(mutation: LoginMutation(input: Credentials(email: username, password: password))) { result in
-            switch result {
-            case .success(let graphQLResult):
-                if let result = graphQLResult.data?.login.token {
-                    self.keyChain.set(result, forKey: "token")
-                    self.getUserInfo() {
-                        print("Get user info from login")
-                    }
-                    print(self.keyChain.get("token")!)
-                } else {
-                    graphQLResult.errors.map { error in
-                        print(error.description)
-                    }
-                    self.keyChain.delete("token")
-                }
-            case .failure:
-                self.logOut()
+    func login(email: String, password: String) {
+        APIManager.shared.login(
+            email: email,
+            password: password,
+            successHandler: { token in
+                self.user.token = token
+            },
+            errorHandler: {
+                self.user.token = nil
             }
-        }
+        )
     }
     
-    func getUserInfo(completion: @escaping () -> ()) {
-        Network.shared.apollo.fetch(query: MeQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in
-            switch result {
-            case .success(let graphQLResult):
-                if let result = graphQLResult.data?.me {
-                    
-                    self.user = User(email: result.email,
-                                     firstName: result.firstName,
-                                     lastName: result.lastName,
-                                     isJournalist: result.isJournalist,
-                                     isArtist: result.isArtist)
-                    completion()
-                } else {
-                    graphQLResult.errors.map { error in
-                        print(error.description)
-                    }
-                    self.user = nil
-                }
-            case .failure(let error):
-                print(error)
-                self.logOut()
+    func getUser() {
+        APIManager.shared.getUser(
+            successHandler: { user in
+                self.user.email = user.email
+                self.user.firstName = user.firstName
+                self.user.lastName = user.lastName
+                self.user.isArtist = user.isArtist
+                self.user.isJournalist = user.isJournalist
+            },
+            errorHandler: {
+                self.user.token = nil
             }
-        }
+        )
     }
     
     func logOut() {
-        self.keyChain.delete("token")
-        self.user = nil
+        self.user.token = nil
     }
 }

@@ -5,7 +5,7 @@ struct StartView: View {
     
     @State private var signUp = false
     @State private var buttonSignUpText = " sign up "
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         ZStack {
@@ -37,7 +37,7 @@ struct StartView: View {
                 if signUp {
                     RegisterView()
                 } else {
-                    AuthenticationView(userViewModel: userViewModel)
+                    AuthenticationView()
                 }
             }
         }

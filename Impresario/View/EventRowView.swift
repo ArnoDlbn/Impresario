@@ -29,16 +29,14 @@ struct EventRowView: View {
                     .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
                 Text(eventViewModel.event.title ?? "")
                 HStack {
-                    if let address = eventViewModel.event.address {
-                        if let physicalAddress = address.physicalAddress {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                            Text(physicalAddress.label ?? physicalAddress.city)
-                        } else if let virtualAddress = address.virtualAddress {
-                            Image(systemName: "video")
-                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                            Text(virtualAddress.label ?? "Virtual meeting")
-                        }
+                    if let physicalAddress = eventViewModel.event.physicalAddress {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                        Text(physicalAddress.label ?? physicalAddress.city)
+                    } else if let virtualAddress = eventViewModel.event.virtualAddress {
+                        Image(systemName: "video")
+                            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                        Text(virtualAddress.label ?? "Virtual meeting")
                     }
                 }
                 Spacer()
@@ -47,9 +45,3 @@ struct EventRowView: View {
         }
     }
 }
-
-//struct EventCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventRowView(viewModel: EventViewModel(startEvent: "23", endEvent: "24", description: "Promo radio", bandName: "Sevdaliza", duration: 30, timeSlot: nil, eventId: "123"))
-//    }
-//}

@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Event: Identifiable {
+struct Event: Identifiable, Decodable {
     
     let startEvent: String?
     let endEvent: String?
@@ -11,7 +11,8 @@ struct Event: Identifiable {
     let duration: Int?
     let timeSlot: [TimeSlot]?
     let id: String
-    let address: Address?
+    let physicalAddress: PhysicalAddress?
+    let virtualAddress: VirtualAddress?
     
     init(startEvent: String? = nil,
          endEvent: String? = nil,
@@ -21,8 +22,9 @@ struct Event: Identifiable {
          duration: Int? = nil,
          timeSlot: [TimeSlot]? = nil,
          id: String,
-         address: Address? = nil) {
-        
+         physicalAddress: PhysicalAddress? = nil,
+         virtualAddress: VirtualAddress? = nil) {
+
         self.startEvent = startEvent
         self.endEvent = endEvent
         self.title = title
@@ -31,6 +33,7 @@ struct Event: Identifiable {
         self.duration = duration
         self.timeSlot = timeSlot
         self.id = id
-        self.address = address
+        self.physicalAddress = physicalAddress
+        self.virtualAddress = virtualAddress
     }
 }

@@ -3,19 +3,16 @@ import SwiftUI
 
 struct AddEventView: View {
     
-    @State private var eventDescription = String()
-    @State private var eventTitle = "Toto"
+    @State private var eventDescription = "Mon nouvel album !"
+    @State private var eventTitle = "Safari Disco Club"
     @State private var eventStart = Date()
     @State private var eventEnd = Date()
-    @State private var interviewDuration = Int()
-    @State private var durationsIndex = 0
-    var durations = [5, 10, 15, 20, 25, 30]
-    
-    @State private var label = String()
-    @State private var street = String()
-    @State private var zipCode = String()
-    @State private var city = String()
-    @State private var country = String()
+    @State private var label = "Chez moi"
+    @State private var street = "9 rue Huntziger"
+    @State private var zipCode = "92110"
+    @State private var city = "Clichy"
+    @State private var virtualLabel = "Skype"
+    @State private var url = "https://www.skype.com"
     @State private var showAlert = false
     @State private var activeAlert: ActiveAlert? = .never
     
@@ -34,29 +31,25 @@ struct AddEventView: View {
                 .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                 .font(.custom("KoHo-SemiBold", size: 25, relativeTo: .largeTitle))
             VStack {
-                TextField("Event Description", text: $eventDescription)
+                TextField("Title", text: $eventTitle)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 220, height: 40, alignment: .center)
-                Text("Event Start")
-                DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
-                .labelsHidden()
-                Text("Event End")
-                DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
-                .labelsHidden()
-                
-                //                Text("Interview Duration")
-                //                    .foregroundColor(Color.init(.darkGray))
-                //
-                //                Picker("", selection: $durationsIndex) {
-                //                    ForEach(0..<durations.count) {
-                //                        Text("\(self.durations[$0]) min")
-                //                            .tag($0)
-                //                    }
-                //                }
-                //                .pickerStyle(WheelPickerStyle())
-                //                .frame(width: 200, height: 150)
+                Text("Description")
+                TextEditor(text: $eventDescription)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.primary.opacity(0.1)))
+                    .frame(width: 220, height: 80, alignment: .center)
                 Section {
-                    Text("Event Adress")
+                    Text("Start")
+                    DatePicker(selection: $eventStart, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
+                    .labelsHidden()
+                    Text("End")
+                    DatePicker(selection: $eventEnd, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {}
+                    .labelsHidden()
+                }
+                Section {
+                    Text("Physical Address")
                     TextField("Label", text: $label)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(width: 220, height: 40, alignment: .center)
@@ -71,7 +64,13 @@ struct AddEventView: View {
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 145, height: 40, alignment: .center)
                     }
-                    TextField("Country", text: $country)
+                }
+                Section {
+                    Text("Virtual Address")
+                    TextField("Label", text: $virtualLabel)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 220, height: 40, alignment: .center)
+                    TextField("URL", text: $url)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(width: 220, height: 40, alignment: .center)
                 }
@@ -84,34 +83,43 @@ struct AddEventView: View {
                     dateForm.timeZone = TimeZone.current
                     let newEnd = dateForm.string(from: eventEnd)
                     let newStart = dateForm.string(from: eventStart)
-                    if eventDescription.isEmpty || eventTitle.isEmpty || label.isEmpty || street.isEmpty || zipCode.isEmpty || city.isEmpty || country.isEmpty {
+                    if eventDescription.isEmpty || eventTitle.isEmpty || label.isEmpty || street.isEmpty || zipCode.isEmpty || city.isEmpty || virtualLabel.isEmpty || url.isEmpty {
                         activeAlert = .failure
                         showAlert = true
                     } else {
                         activeAlert = .success
                         showAlert = true
-                        EventViewModel.createEvent(description: eventDescription, endsAt: newEnd, startsAt: newStart, title: eventTitle) {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
+                        debugPrint(newStart)
+                        debugPrint(newEnd)
+                        EventViewModel.createEvent(title: eventTitle,
+                                                   description: eventDescription,
+                                                   startsAt: newStart,
+                                                   endsAt: newEnd,
+                                                   label: label,
+                                                   street: street,
+                                                   zipCode: zipCode,
+                                                   city: city,
+                                                   countryCode: "FR",
+                                                   virtualLabel: virtualLabel,
+                                                   url: url,
+                                                   successHandler: {},
+                                                   errorHandler: {})
                     }
                 }, label: {
                     Text(" Create your event ")
                         .foregroundColor(.white)
+                        .frame(width: 200)
                         .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                 }))
                 .alert(isPresented: $showAlert, content: {
                     if activeAlert == .failure {
-                        return AlertViewer.showAlertWithNoActions(message: "All fields are required!")
+                        return AlertViewer.showAlertWithNoActions(message: "All fields are required!") {}
                     } else {
-                        return AlertViewer.showAlertWithNoActions(message: "Your event is created!")
+                        return AlertViewer.showAlertWithNoActions(message: "Your event is created!") {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     }
                 })
         }
     }
 }
-
-//struct AddEventView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddEventView()
-//    }
-//}

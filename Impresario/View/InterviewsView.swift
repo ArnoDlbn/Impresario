@@ -3,9 +3,10 @@ import SwiftUI
 
 struct InterviewsView: View {
     
-    @ObservedObject var interviewsViewModel = InterviewsViewModel()
+    @EnvironmentObject var interviewsViewModel: InterviewsViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
+    
     @State private var isViewProfile = false
-    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationView {
@@ -27,25 +28,19 @@ struct InterviewsView: View {
                 }
             }
         }
+        .sheet(isPresented: $isViewProfile, content: {
+            ProfileView()
+        })
         .onAppear {
             debugPrint("On appear Interviews view")
             loadInterviews()
         }
-        .sheet(isPresented: $isViewProfile, content: {
-            ProfileView(userViewModel: userViewModel)
-        })
     }
     
     func loadInterviews() {
         debugPrint("Fetch interviews")
-        self.interviewsViewModel.interviewsQuery() {
-            self.userViewModel.logOut()
+        interviewsViewModel.getInterviews {
+            userViewModel.logOut()
         }
     }
 }
-
-//struct ReminderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReminderView()
-//    }
-//}

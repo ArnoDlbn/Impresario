@@ -23,11 +23,11 @@ class AlertViewer {
         return alert
     }
     
-    static func showAlertWithNoActions(message: String) -> Alert {
+    static func showAlertWithNoActions(message: String, completion: @escaping () -> Void) -> Alert {
         
         let alert = Alert(title: Text("Important message"),
                           message: Text("\(message)"),
-                          dismissButton: .default(Text("OK"))
+                          dismissButton: .default(Text("OK"),action: {completion()})
         )
         
         return alert

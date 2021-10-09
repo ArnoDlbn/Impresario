@@ -3,6 +3,9 @@ import SwiftUI
 
 struct InterviewDetailView: View {
     
+    @EnvironmentObject var interviewsViewModel: InterviewsViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
+    
     let interviewViewModel: InterviewViewModel
     
     @State private var showingAlert = false
@@ -34,24 +37,22 @@ struct InterviewDetailView: View {
                     }
                     .padding(.top, 5)
                     .padding(.bottom, 5)
-                    if let address = interviewViewModel.interview.event.address {
-                        if address.physicalAddress != nil {
-                            Text(interviewViewModel.interview.event.fullAddress ?? "")
-                                .padding(.bottom, 5)
+                    if let physicalMeeting = interviewViewModel.interview.event.physicalAddress {
+                        Text(physicalMeeting.fullAddress ?? "")
+                            .padding(.bottom, 5)
+                    }
+                    if let virtualMeeting = interviewViewModel.interview.event.virtualAddress {
+                        HStack {
+                            Image(systemName: "video")
+                                .font(.system(size: 20))
+                                .padding(.leading, 10)
+                            Link(virtualMeeting.label ?? "Virtual meeting", destination: URL(string: virtualMeeting.url)!)
+                                .padding(.trailing, 10)
                         }
-                        if let meeting = address.virtualAddress {
-                            HStack {
-                                Image(systemName: "video")
-                                    .font(.system(size: 20))
-                                    .padding(.leading, 10)
-                                Link(meeting.label ?? "Virtual meeting", destination: URL(string: meeting.url)!)
-                                    .padding(.trailing, 10)
-                            }
-                            .overlay(RoundedRectangle(cornerRadius: 15)
-                                        .stroke(.white)
-                                        .foregroundColor(Color.init(.white))
-                                        .frame(height: 30))
-                        }
+                        .overlay(RoundedRectangle(cornerRadius: 15)
+                                    .stroke(.white)
+                                    .foregroundColor(Color.init(.white))
+                                    .frame(height: 30))
                     }
                     //                            Spacer()
                     //                        Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 48.9006988, longitude: 2.3029164), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))), interactionModes: [])
@@ -82,6 +83,7 @@ struct InterviewDetailView: View {
                     }, label: {
                         Text(" Cancel your interview ")
                             .foregroundColor(.white)
+                            .frame(width: 200)
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     })
                 )
@@ -92,9 +94,18 @@ struct InterviewDetailView: View {
                         primaryButton: .default(
                             Text("OK"),
                             action: {
-                                interviewViewModel.cancelInterview(interviewId: interviewViewModel.interview.id) {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
+                                let interviewId: String = interviewViewModel.interview.id
+                                interviewViewModel.cancelInterview(
+                                    interviewId: interviewId,
+                                    successHandler: {
+                                        interviewsViewModel.interviews = interviewsViewModel.interviews.filter { $0.id != interviewId }
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    },
+                                    errorHandler: {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                        userViewModel.logOut()
+                                    }
+                                )
                             }
                         ),
                         secondaryButton: .destructive(
@@ -107,9 +118,3 @@ struct InterviewDetailView: View {
         .navigationTitle(Text(interviewViewModel.interview.event.bandName ?? ""))
     }
 }
-
-//struct DetailInterviewView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailInterviewView()
-//    }
-//}

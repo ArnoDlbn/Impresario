@@ -10,6 +10,40 @@ mutation signup($input: Registration!) {
     }
 }
 
+fragment EventDetails on Event {
+    id
+    author {
+        firstName
+        lastName
+    }
+    startsAt
+    endsAt
+    band {
+        name
+        artists {
+            name
+        }
+    }
+    title
+    description
+    physicalAddress {
+        label
+        street
+        city
+        zipCode
+        countryCode
+    }
+    virtualAddress {
+        label
+        url
+    }
+    interviewDuration
+    timeSlots {
+        startsAt
+        isAvailable
+    }
+}
+
 query me {
     me {
         email
@@ -25,37 +59,7 @@ query events {
         edges {
             cursor
             node {
-                id
-                author {
-                    firstName
-                    lastName
-                }
-                startsAt
-                endsAt
-                band {
-                    name
-                    artists {
-                        name
-                    }
-                }
-                title
-                description
-                physicalAddress {
-                    label
-                    street
-                    city
-                    zipCode
-                    countryCode
-                }
-                virtualAddress {
-                    label
-                    url
-                }
-                interviewDuration
-                timeSlots {
-                    startsAt
-                    isAvailable
-                }
+                ...EventDetails
             }
         }
     }
@@ -63,8 +67,7 @@ query events {
 
 mutation createEvent($input: EventInput!) {
     createEvent(input: $input) {
-        id
-        description
+        ...EventDetails
     }
 }
 
@@ -77,24 +80,7 @@ query interviews {
                 startsAt
                 endsAt
                 event {
-                    id
-                    title
-                    description
-                    band {
-                        name
-                    }
-                    interviewDuration
-                    physicalAddress {
-                        label
-                        street
-                        city
-                        zipCode
-                        countryCode
-                    }
-                    virtualAddress {
-                        label
-                        url
-                    }
+                    ...EventDetails
                 }
                 journalist {
                     medium {

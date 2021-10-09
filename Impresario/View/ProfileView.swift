@@ -3,7 +3,7 @@ import SwiftUI
 import KeychainSwift
 
 struct ProfileView: View {
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @State private var isLoggedOut = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -22,11 +22,9 @@ struct ProfileView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 4))
                         .shadow(radius: 7)
-                    if let user = userViewModel.user {
-                        Text("\(user.firstName)")
-                        Text("\(user.firstName)")
-                        Text("\(user.email)")
-                    }
+                    Text(userViewModel.user.firstName ?? "")
+                    + Text("  ") + Text(userViewModel.user.lastName ?? "")
+                    Text(userViewModel.user.email ?? "")
                 }
                 .padding(.top, -100)
                 .padding(.leading, 20)
@@ -35,20 +33,19 @@ struct ProfileView: View {
                 Spacer()
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                    .frame(width: 200, height: 40, alignment: .center)
+                    .frame(width: 220, height: 40, alignment: .center)
                     .overlay(Button(action: {
-                        let keychain = KeychainSwift()
-                        keychain.delete("token")
                         isLoggedOut.toggle()
                         self.presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text(" Log out ")
                             .foregroundColor(.white)
+                            .frame(width: 200)
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     }))
                     .onDisappear {
                         if isLoggedOut {
-                            userViewModel.user = nil
+                            userViewModel.user.token = nil
                         }
                     }
                     .padding(.bottom, 10)
@@ -57,9 +54,3 @@ struct ProfileView: View {
         }
     }
 }
-
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}

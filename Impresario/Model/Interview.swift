@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Interview: Identifiable {
+struct Interview: Identifiable, Decodable {
     
     let startsAt: String
     let endsAt: String

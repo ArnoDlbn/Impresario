@@ -4,20 +4,24 @@ import LocalAuthentication
 
 struct AuthenticationView: View {
     
-    @State private var username = "contact+louislepron@appsolument.com"
-    @State private var password = "Konbini!"
+    @EnvironmentObject var userViewModel: UserViewModel
+    
+    @State private var email = "contact+juliebudet@appsolument.com"
+    @State private var password = "Yelle!"
     
     @State var signUp = false
     @State var showAlertFailure = false
     @State var showAlertNoBiometry = false
-    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         VStack {
             Spacer()
             VStack(spacing: 10) {
-                TextField("Username", text: $username)
-                    .textContentType(.username)
+                TextField("Email", text: $email)
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                 SecureField("Password", text: $password)
                     .textContentType(.password)
             }
@@ -36,11 +40,13 @@ struct AuthenticationView: View {
                         Text(" sign In ")
                             .foregroundColor(.white)
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
+                            .frame(width: 200)
                     })
+                        .disabled(email.isEmpty || password.isEmpty)
                 )
                 .alert(isPresented: $showAlertFailure, content: {
                     AlertViewer.showAlertWithActions(message: "Authentication failed!") {
-                        userViewModel.login(username: username, password: password)
+                        userViewModel.login(email: email, password: password)
                     }
                 })
             //            Spacer()
@@ -50,10 +56,11 @@ struct AuthenticationView: View {
             //                        userViewModel.login(username: username, password: password)
             //                    }
             //                })
-            //            Text("Forgot password ?")
-            //                .foregroundColor(Color.init(.darkGray))
-            //                .font(.custom("Marker Felt Wide", size: 20, relativeTo: .largeTitle))
             Spacer()
+        }.onChange(of: userViewModel.user.token) { newToken in
+            if (newToken != nil) {
+                userViewModel.getUser()
+            }
         }
     }
     
@@ -69,7 +76,7 @@ struct AuthenticationView: View {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
-                        userViewModel.login(username: username, password: password)
+                        userViewModel.login(email: email, password: password)
                     } else {
                         showAlertFailure.toggle()
                     }
@@ -77,7 +84,7 @@ struct AuthenticationView: View {
             }
         } else {
             showAlertNoBiometry.toggle()
-            userViewModel.login(username: username, password: password)
+            userViewModel.login(email: email, password: password)
         }
     }
 }

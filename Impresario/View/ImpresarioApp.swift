@@ -1,26 +1,29 @@
 
 import SwiftUI
-import KeychainSwift
 
 @main
 struct ImpresarioApp: App {
     
-    let keychain: KeychainSwift
-    
-    @ObservedObject var userViewModel = UserViewModel()
-    
-    init() {
-        debugPrint("Get keychain")
-        keychain = KeychainSwift()
-    }
+    @StateObject var userViewModel = UserViewModel()
+    @State private var isAuthenticated = false
     
     var body: some Scene {
         WindowGroup {
-            if keychain.get("token") != nil {
-                MainView(with: userViewModel)
+            if isAuthenticated {
+                MainView()
+                    .environmentObject(userViewModel)
             } else {
-                StartView(userViewModel: userViewModel)
+                StartView()
+                    .environmentObject(userViewModel)
+                    .onAppear {
+                        if userViewModel.user.token != nil {
+                            userViewModel.getUser()
+                        }
+                    }
             }
         }
+        .onChange(of: userViewModel.user.email, perform: { email in
+            isAuthenticated = (email != nil)
+        })
     }
 }

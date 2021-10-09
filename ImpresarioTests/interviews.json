@@ -1,0 +1,27 @@
+[
+    {
+        "id": "072038ac-1af0-11ec-95e7-0242ac170005",
+        "startsAt": "2021-12-21T12:00:00+00:00",
+        "endsAt": "2021-12-21T12:15:00+00:00",
+        "event": {
+            "id": "070ea6d2-1af0-11ec-b355-0242ac170005",
+            "description": "Shabrang (Persian for \"night color\") is the second studio album by Dutch-Iranian singer Sevdaliza. It was released on 28 August 2020, by Twisted Elegance. The singer wrote and produced the album, primarily alongside Mucky. The album encompasses art pop, trip hop and alternative R&B.\nThe album spawned the singles \"Darkest Hour\", \"Oh My God\", \"Lamp Lady\", \"Joanna\" and \"Habibi\", as well as \"Human Nature\", which was originally released as part of Sevdaliza's 2018 extended play The Calling, her previous release. The album cover was shot by Tré Koch.\nUpon its release, Shabrang was met with critical acclaim. Critics praised its emotional background, and its \"slow-moving beauty\".",
+            "band": {
+                "name": "Sevdaliza"
+            },
+            "physicalAddress": null,
+            "virtualAddress": {
+                "url": "https://zoom.com/impresario"
+            }
+        },
+        "journalist": {
+            "medium": {
+                "name": "Konbini"
+            },
+            "user": {
+                "firstName": "Louis",
+                "lastName": "Lepron"
+            }
+        }
+    }
+]

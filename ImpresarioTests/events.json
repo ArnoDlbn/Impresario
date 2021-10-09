@@ -1,0 +1,180 @@
+[
+  {
+    "id": "07174c10-1af0-11ec-9988-0242ac170005",
+    "author": {
+      "firstName": "Arnaud",
+      "lastName": "Dalbin"
+    },
+    "startsAt": "2021-12-21T09:00:00+00:00",
+    "endsAt": "2021-12-21T12:30:00+00:00",
+    "band": {
+      "name": "Yelle",
+      "artists": [
+        {
+          "name": "Yelle"
+        },
+        {
+          "name": "Grandmarnier"
+        }
+      ]
+    },
+    "description": "L\u0027\u00c8re du Verseau (French for \u0027The Age of Aquarius\u0027) is the fourth studio album by French dance-pop band Yelle. It was released on 4 September 2020 by Recreation Center, the record label founded by the band. It is the band\u0027s first album since the release of Compl\u00e8tement fou six years prior.\nYelle began writing L\u0027\u00c8re du Verseau in the spring of 2019. The band was in Montreal to record a song with Billboard, a music producer who previously collaborated with the band on Compl\u00e8tement fou. The album was completed just before the COVID-19 pandemic placed France in lockdown.",
+    "physicalAddress": {
+      "label": "L\u0027Olympia",
+      "street": "28 boulevard des Capucines",
+      "city": "Paris",
+      "zipCode": "75009"
+    },
+    "virtualAddress": {
+      "url": "https:\/\/zoom.com\/impresario"
+    },
+    "interviewDuration": 30,
+    "timeSlots": [
+      {
+        "startsAt": "2021-12-21T09:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T09:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T10:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T10:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T11:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T11:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T12:00:00+00:00",
+        "isAvailable": true
+      }
+    ]
+  },
+  {
+    "id": "070ea6d2-1af0-11ec-b355-0242ac170005",
+    "author": {
+      "firstName": "Arnaud",
+      "lastName": "Dalbin"
+    },
+    "startsAt": "2021-12-21T12:00:00+00:00",
+    "endsAt": "2021-12-21T14:00:00+00:00",
+    "band": {
+      "name": "Sevdaliza",
+      "artists": [
+        {
+          "name": "Sevdaliza"
+        }
+      ]
+    },
+    "description": "Shabrang (Persian for \u0022night color\u0022) is the second studio album by Dutch-Iranian singer Sevdaliza. It was released on 28 August 2020, by Twisted Elegance. The singer wrote and produced the album, primarily alongside Mucky. The album encompasses art pop, trip hop and alternative R\u0026B.\nThe album spawned the singles \u0022Darkest Hour\u0022, \u0022Oh My God\u0022, \u0022Lamp Lady\u0022, \u0022Joanna\u0022 and \u0022Habibi\u0022, as well as \u0022Human Nature\u0022, which was originally released as part of Sevdaliza\u0027s 2018 extended play The Calling, her previous release. The album cover was shot by Tr\u00e9 Koch.\nUpon its release, Shabrang was met with critical acclaim. Critics praised its emotional background, and its \u0022slow-moving beauty\u0022.",
+    "physicalAddress": null,
+    "virtualAddress": {
+      "url": "https:\/\/zoom.com\/impresario"
+    },
+    "interviewDuration": 15,
+    "timeSlots": [
+      {
+        "startsAt": "2021-12-21T12:00:00+00:00",
+        "isAvailable": false
+      },
+      {
+        "startsAt": "2021-12-21T12:15:00+00:00",
+        "isAvailable": false
+      },
+      {
+        "startsAt": "2021-12-21T12:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T12:45:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T13:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T13:15:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T13:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T13:45:00+00:00",
+        "isAvailable": true
+      }
+    ]
+  },
+  {
+    "id": "0717f53e-1af0-11ec-a961-0242ac170005",
+    "author": {
+      "firstName": "Arnaud",
+      "lastName": "Dalbin"
+    },
+    "startsAt": "2021-12-21T14:00:00+00:00",
+    "endsAt": "2021-12-21T18:00:00+00:00",
+    "band": {
+      "name": "Yelle",
+      "artists": [
+        {
+          "name": "Yelle"
+        },
+        {
+          "name": "Grandmarnier"
+        }
+      ]
+    },
+    "description": "L\u0027\u00c8re du Verseau (French for \u0027The Age of Aquarius\u0027) is the fourth studio album by French dance-pop band Yelle. It was released on 4 September 2020 by Recreation Center, the record label founded by the band. It is the band\u0027s first album since the release of Compl\u00e8tement fou six years prior.\nYelle began writing L\u0027\u00c8re du Verseau in the spring of 2019. The band was in Montreal to record a song with Billboard, a music producer who previously collaborated with the band on Compl\u00e8tement fou. The album was completed just before the COVID-19 pandemic placed France in lockdown.",
+    "physicalAddress": null,
+    "virtualAddress": {
+      "url": "https:\/\/zoom.com\/impresario"
+    },
+    "interviewDuration": 30,
+    "timeSlots": [
+      {
+        "startsAt": "2021-12-21T14:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T14:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T15:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T15:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T16:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T16:30:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T17:00:00+00:00",
+        "isAvailable": true
+      },
+      {
+        "startsAt": "2021-12-21T17:30:00+00:00",
+        "isAvailable": true
+      }
+    ]
+  }
+]

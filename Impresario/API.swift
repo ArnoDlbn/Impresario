@@ -734,43 +734,7 @@ public final class EventsQuery: GraphQLQuery {
           cursor
           node {
             __typename
-            id
-            author {
-              __typename
-              firstName
-              lastName
-            }
-            startsAt
-            endsAt
-            band {
-              __typename
-              name
-              artists {
-                __typename
-                name
-              }
-            }
-            title
-            description
-            physicalAddress {
-              __typename
-              label
-              street
-              city
-              zipCode
-              countryCode
-            }
-            virtualAddress {
-              __typename
-              label
-              url
-            }
-            interviewDuration
-            timeSlots {
-              __typename
-              startsAt
-              isAvailable
-            }
+            ...EventDetails
           }
         }
       }
@@ -778,6 +742,12 @@ public final class EventsQuery: GraphQLQuery {
     """
 
   public let operationName: String = "events"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + EventDetails.fragmentDefinition)
+    return document
+  }
 
   public init() {
   }
@@ -902,17 +872,7 @@ public final class EventsQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("author", type: .nonNull(.object(Author.selections))),
-              GraphQLField("startsAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("endsAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("band", type: .nonNull(.object(Band.selections))),
-              GraphQLField("title", type: .nonNull(.scalar(String.self))),
-              GraphQLField("description", type: .scalar(String.self)),
-              GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
-              GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
-              GraphQLField("interviewDuration", type: .nonNull(.scalar(Int.self))),
-              GraphQLField("timeSlots", type: .list(.object(TimeSlot.selections))),
+              GraphQLFragmentSpread(EventDetails.self),
             ]
           }
 
@@ -920,10 +880,6 @@ public final class EventsQuery: GraphQLQuery {
 
           public init(unsafeResultMap: ResultMap) {
             self.resultMap = unsafeResultMap
-          }
-
-          public init(id: GraphQLID, author: Author, startsAt: String, endsAt: String, band: Band, title: String, description: String? = nil, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil, interviewDuration: Int, timeSlots: [TimeSlot?]? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Event", "id": id, "author": author.resultMap, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "title": title, "description": description, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }, "interviewDuration": interviewDuration, "timeSlots": timeSlots.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }])
           }
 
           public var __typename: String {
@@ -935,415 +891,28 @@ public final class EventsQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var fragments: Fragments {
             get {
-              return resultMap["id"]! as! GraphQLID
+              return Fragments(unsafeResultMap: resultMap)
             }
             set {
-              resultMap.updateValue(newValue, forKey: "id")
+              resultMap += newValue.resultMap
             }
           }
 
-          public var author: Author {
-            get {
-              return Author(unsafeResultMap: resultMap["author"]! as! ResultMap)
-            }
-            set {
-              resultMap.updateValue(newValue.resultMap, forKey: "author")
-            }
-          }
-
-          public var startsAt: String {
-            get {
-              return resultMap["startsAt"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "startsAt")
-            }
-          }
-
-          public var endsAt: String {
-            get {
-              return resultMap["endsAt"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "endsAt")
-            }
-          }
-
-          public var band: Band {
-            get {
-              return Band(unsafeResultMap: resultMap["band"]! as! ResultMap)
-            }
-            set {
-              resultMap.updateValue(newValue.resultMap, forKey: "band")
-            }
-          }
-
-          public var title: String {
-            get {
-              return resultMap["title"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "title")
-            }
-          }
-
-          public var description: String? {
-            get {
-              return resultMap["description"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "description")
-            }
-          }
-
-          public var physicalAddress: PhysicalAddress? {
-            get {
-              return (resultMap["physicalAddress"] as? ResultMap).flatMap { PhysicalAddress(unsafeResultMap: $0) }
-            }
-            set {
-              resultMap.updateValue(newValue?.resultMap, forKey: "physicalAddress")
-            }
-          }
-
-          public var virtualAddress: VirtualAddress? {
-            get {
-              return (resultMap["virtualAddress"] as? ResultMap).flatMap { VirtualAddress(unsafeResultMap: $0) }
-            }
-            set {
-              resultMap.updateValue(newValue?.resultMap, forKey: "virtualAddress")
-            }
-          }
-
-          public var interviewDuration: Int {
-            get {
-              return resultMap["interviewDuration"]! as! Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "interviewDuration")
-            }
-          }
-
-          public var timeSlots: [TimeSlot?]? {
-            get {
-              return (resultMap["timeSlots"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [TimeSlot?] in value.map { (value: ResultMap?) -> TimeSlot? in value.flatMap { (value: ResultMap) -> TimeSlot in TimeSlot(unsafeResultMap: value) } } }
-            }
-            set {
-              resultMap.updateValue(newValue.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }, forKey: "timeSlots")
-            }
-          }
-
-          public struct Author: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["User"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("firstName", type: .nonNull(.scalar(String.self))),
-                GraphQLField("lastName", type: .nonNull(.scalar(String.self))),
-              ]
-            }
-
+          public struct Fragments {
             public private(set) var resultMap: ResultMap
 
             public init(unsafeResultMap: ResultMap) {
               self.resultMap = unsafeResultMap
             }
 
-            public init(firstName: String, lastName: String) {
-              self.init(unsafeResultMap: ["__typename": "User", "firstName": firstName, "lastName": lastName])
-            }
-
-            public var __typename: String {
+            public var eventDetails: EventDetails {
               get {
-                return resultMap["__typename"]! as! String
+                return EventDetails(unsafeResultMap: resultMap)
               }
               set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var firstName: String {
-              get {
-                return resultMap["firstName"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "firstName")
-              }
-            }
-
-            public var lastName: String {
-              get {
-                return resultMap["lastName"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "lastName")
-              }
-            }
-          }
-
-          public struct Band: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["Band"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                GraphQLField("artists", type: .list(.object(Artist.selections))),
-              ]
-            }
-
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public init(name: String, artists: [Artist?]? = nil) {
-              self.init(unsafeResultMap: ["__typename": "Band", "name": name, "artists": artists.flatMap { (value: [Artist?]) -> [ResultMap?] in value.map { (value: Artist?) -> ResultMap? in value.flatMap { (value: Artist) -> ResultMap in value.resultMap } } }])
-            }
-
-            public var __typename: String {
-              get {
-                return resultMap["__typename"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var name: String {
-              get {
-                return resultMap["name"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "name")
-              }
-            }
-
-            public var artists: [Artist?]? {
-              get {
-                return (resultMap["artists"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Artist?] in value.map { (value: ResultMap?) -> Artist? in value.flatMap { (value: ResultMap) -> Artist in Artist(unsafeResultMap: value) } } }
-              }
-              set {
-                resultMap.updateValue(newValue.flatMap { (value: [Artist?]) -> [ResultMap?] in value.map { (value: Artist?) -> ResultMap? in value.flatMap { (value: Artist) -> ResultMap in value.resultMap } } }, forKey: "artists")
-              }
-            }
-
-            public struct Artist: GraphQLSelectionSet {
-              public static let possibleTypes: [String] = ["Artist"]
-
-              public static var selections: [GraphQLSelection] {
-                return [
-                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                ]
-              }
-
-              public private(set) var resultMap: ResultMap
-
-              public init(unsafeResultMap: ResultMap) {
-                self.resultMap = unsafeResultMap
-              }
-
-              public init(name: String) {
-                self.init(unsafeResultMap: ["__typename": "Artist", "name": name])
-              }
-
-              public var __typename: String {
-                get {
-                  return resultMap["__typename"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "__typename")
-                }
-              }
-
-              public var name: String {
-                get {
-                  return resultMap["name"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "name")
-                }
-              }
-            }
-          }
-
-          public struct PhysicalAddress: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["PhysicalAddress"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("label", type: .scalar(String.self)),
-                GraphQLField("street", type: .nonNull(.scalar(String.self))),
-                GraphQLField("city", type: .nonNull(.scalar(String.self))),
-                GraphQLField("zipCode", type: .nonNull(.scalar(String.self))),
-                GraphQLField("countryCode", type: .nonNull(.scalar(String.self))),
-              ]
-            }
-
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public init(label: String? = nil, street: String, city: String, zipCode: String, countryCode: String) {
-              self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode, "countryCode": countryCode])
-            }
-
-            public var __typename: String {
-              get {
-                return resultMap["__typename"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var label: String? {
-              get {
-                return resultMap["label"] as? String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "label")
-              }
-            }
-
-            public var street: String {
-              get {
-                return resultMap["street"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "street")
-              }
-            }
-
-            public var city: String {
-              get {
-                return resultMap["city"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "city")
-              }
-            }
-
-            public var zipCode: String {
-              get {
-                return resultMap["zipCode"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "zipCode")
-              }
-            }
-
-            public var countryCode: String {
-              get {
-                return resultMap["countryCode"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "countryCode")
-              }
-            }
-          }
-
-          public struct VirtualAddress: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["VirtualAddress"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("label", type: .scalar(String.self)),
-                GraphQLField("url", type: .nonNull(.scalar(String.self))),
-              ]
-            }
-
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public init(label: String? = nil, url: String) {
-              self.init(unsafeResultMap: ["__typename": "VirtualAddress", "label": label, "url": url])
-            }
-
-            public var __typename: String {
-              get {
-                return resultMap["__typename"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var label: String? {
-              get {
-                return resultMap["label"] as? String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "label")
-              }
-            }
-
-            public var url: String {
-              get {
-                return resultMap["url"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "url")
-              }
-            }
-          }
-
-          public struct TimeSlot: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["TimeSlot"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("startsAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("isAvailable", type: .nonNull(.scalar(Bool.self))),
-              ]
-            }
-
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public init(startsAt: String, isAvailable: Bool) {
-              self.init(unsafeResultMap: ["__typename": "TimeSlot", "startsAt": startsAt, "isAvailable": isAvailable])
-            }
-
-            public var __typename: String {
-              get {
-                return resultMap["__typename"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var startsAt: String {
-              get {
-                return resultMap["startsAt"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "startsAt")
-              }
-            }
-
-            public var isAvailable: Bool {
-              get {
-                return resultMap["isAvailable"]! as! Bool
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "isAvailable")
+                resultMap += newValue.resultMap
               }
             }
           }
@@ -1360,13 +929,18 @@ public final class CreateEventMutation: GraphQLMutation {
     mutation createEvent($input: EventInput!) {
       createEvent(input: $input) {
         __typename
-        id
-        description
+        ...EventDetails
       }
     }
     """
 
   public let operationName: String = "createEvent"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + EventDetails.fragmentDefinition)
+    return document
+  }
 
   public var input: EventInput
 
@@ -1412,8 +986,7 @@ public final class CreateEventMutation: GraphQLMutation {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("description", type: .scalar(String.self)),
+          GraphQLFragmentSpread(EventDetails.self),
         ]
       }
 
@@ -1421,10 +994,6 @@ public final class CreateEventMutation: GraphQLMutation {
 
       public init(unsafeResultMap: ResultMap) {
         self.resultMap = unsafeResultMap
-      }
-
-      public init(id: GraphQLID, description: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Event", "id": id, "description": description])
       }
 
       public var __typename: String {
@@ -1436,21 +1005,29 @@ public final class CreateEventMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var fragments: Fragments {
         get {
-          return resultMap["id"]! as! GraphQLID
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "id")
+          resultMap += newValue.resultMap
         }
       }
 
-      public var description: String? {
-        get {
-          return resultMap["description"] as? String
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
         }
-        set {
-          resultMap.updateValue(newValue, forKey: "description")
+
+        public var eventDetails: EventDetails {
+          get {
+            return EventDetails(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
     }
@@ -1474,27 +1051,7 @@ public final class InterviewsQuery: GraphQLQuery {
             endsAt
             event {
               __typename
-              id
-              title
-              description
-              band {
-                __typename
-                name
-              }
-              interviewDuration
-              physicalAddress {
-                __typename
-                label
-                street
-                city
-                zipCode
-                countryCode
-              }
-              virtualAddress {
-                __typename
-                label
-                url
-              }
+              ...EventDetails
             }
             journalist {
               __typename
@@ -1515,6 +1072,12 @@ public final class InterviewsQuery: GraphQLQuery {
     """
 
   public let operationName: String = "interviews"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + EventDetails.fragmentDefinition)
+    return document
+  }
 
   public init() {
   }
@@ -1717,13 +1280,7 @@ public final class InterviewsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("title", type: .nonNull(.scalar(String.self))),
-                GraphQLField("description", type: .scalar(String.self)),
-                GraphQLField("band", type: .nonNull(.object(Band.selections))),
-                GraphQLField("interviewDuration", type: .nonNull(.scalar(Int.self))),
-                GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
-                GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
+                GraphQLFragmentSpread(EventDetails.self),
               ]
             }
 
@@ -1731,10 +1288,6 @@ public final class InterviewsQuery: GraphQLQuery {
 
             public init(unsafeResultMap: ResultMap) {
               self.resultMap = unsafeResultMap
-            }
-
-            public init(id: GraphQLID, title: String, description: String? = nil, band: Band, interviewDuration: Int, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil) {
-              self.init(unsafeResultMap: ["__typename": "Event", "id": id, "title": title, "description": description, "band": band.resultMap, "interviewDuration": interviewDuration, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }])
             }
 
             public var __typename: String {
@@ -1746,232 +1299,28 @@ public final class InterviewsQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var fragments: Fragments {
               get {
-                return resultMap["id"]! as! GraphQLID
+                return Fragments(unsafeResultMap: resultMap)
               }
               set {
-                resultMap.updateValue(newValue, forKey: "id")
+                resultMap += newValue.resultMap
               }
             }
 
-            public var title: String {
-              get {
-                return resultMap["title"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "title")
-              }
-            }
-
-            public var description: String? {
-              get {
-                return resultMap["description"] as? String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "description")
-              }
-            }
-
-            public var band: Band {
-              get {
-                return Band(unsafeResultMap: resultMap["band"]! as! ResultMap)
-              }
-              set {
-                resultMap.updateValue(newValue.resultMap, forKey: "band")
-              }
-            }
-
-            public var interviewDuration: Int {
-              get {
-                return resultMap["interviewDuration"]! as! Int
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "interviewDuration")
-              }
-            }
-
-            public var physicalAddress: PhysicalAddress? {
-              get {
-                return (resultMap["physicalAddress"] as? ResultMap).flatMap { PhysicalAddress(unsafeResultMap: $0) }
-              }
-              set {
-                resultMap.updateValue(newValue?.resultMap, forKey: "physicalAddress")
-              }
-            }
-
-            public var virtualAddress: VirtualAddress? {
-              get {
-                return (resultMap["virtualAddress"] as? ResultMap).flatMap { VirtualAddress(unsafeResultMap: $0) }
-              }
-              set {
-                resultMap.updateValue(newValue?.resultMap, forKey: "virtualAddress")
-              }
-            }
-
-            public struct Band: GraphQLSelectionSet {
-              public static let possibleTypes: [String] = ["Band"]
-
-              public static var selections: [GraphQLSelection] {
-                return [
-                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                ]
-              }
-
+            public struct Fragments {
               public private(set) var resultMap: ResultMap
 
               public init(unsafeResultMap: ResultMap) {
                 self.resultMap = unsafeResultMap
               }
 
-              public init(name: String) {
-                self.init(unsafeResultMap: ["__typename": "Band", "name": name])
-              }
-
-              public var __typename: String {
+              public var eventDetails: EventDetails {
                 get {
-                  return resultMap["__typename"]! as! String
+                  return EventDetails(unsafeResultMap: resultMap)
                 }
                 set {
-                  resultMap.updateValue(newValue, forKey: "__typename")
-                }
-              }
-
-              public var name: String {
-                get {
-                  return resultMap["name"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "name")
-                }
-              }
-            }
-
-            public struct PhysicalAddress: GraphQLSelectionSet {
-              public static let possibleTypes: [String] = ["PhysicalAddress"]
-
-              public static var selections: [GraphQLSelection] {
-                return [
-                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("label", type: .scalar(String.self)),
-                  GraphQLField("street", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("city", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("zipCode", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("countryCode", type: .nonNull(.scalar(String.self))),
-                ]
-              }
-
-              public private(set) var resultMap: ResultMap
-
-              public init(unsafeResultMap: ResultMap) {
-                self.resultMap = unsafeResultMap
-              }
-
-              public init(label: String? = nil, street: String, city: String, zipCode: String, countryCode: String) {
-                self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode, "countryCode": countryCode])
-              }
-
-              public var __typename: String {
-                get {
-                  return resultMap["__typename"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "__typename")
-                }
-              }
-
-              public var label: String? {
-                get {
-                  return resultMap["label"] as? String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "label")
-                }
-              }
-
-              public var street: String {
-                get {
-                  return resultMap["street"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "street")
-                }
-              }
-
-              public var city: String {
-                get {
-                  return resultMap["city"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "city")
-                }
-              }
-
-              public var zipCode: String {
-                get {
-                  return resultMap["zipCode"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "zipCode")
-                }
-              }
-
-              public var countryCode: String {
-                get {
-                  return resultMap["countryCode"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "countryCode")
-                }
-              }
-            }
-
-            public struct VirtualAddress: GraphQLSelectionSet {
-              public static let possibleTypes: [String] = ["VirtualAddress"]
-
-              public static var selections: [GraphQLSelection] {
-                return [
-                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                  GraphQLField("label", type: .scalar(String.self)),
-                  GraphQLField("url", type: .nonNull(.scalar(String.self))),
-                ]
-              }
-
-              public private(set) var resultMap: ResultMap
-
-              public init(unsafeResultMap: ResultMap) {
-                self.resultMap = unsafeResultMap
-              }
-
-              public init(label: String? = nil, url: String) {
-                self.init(unsafeResultMap: ["__typename": "VirtualAddress", "label": label, "url": url])
-              }
-
-              public var __typename: String {
-                get {
-                  return resultMap["__typename"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "__typename")
-                }
-              }
-
-              public var label: String? {
-                get {
-                  return resultMap["label"] as? String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "label")
-                }
-              }
-
-              public var url: String {
-                get {
-                  return resultMap["url"]! as! String
-                }
-                set {
-                  resultMap.updateValue(newValue, forKey: "url")
+                  resultMap += newValue.resultMap
                 }
               }
             }
@@ -2415,6 +1764,504 @@ public final class CancelInterviewMutation: GraphQLMutation {
         set {
           resultMap.updateValue(newValue, forKey: "description")
         }
+      }
+    }
+  }
+}
+
+public struct EventDetails: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment EventDetails on Event {
+      __typename
+      id
+      author {
+        __typename
+        firstName
+        lastName
+      }
+      startsAt
+      endsAt
+      band {
+        __typename
+        name
+        artists {
+          __typename
+          name
+        }
+      }
+      title
+      description
+      physicalAddress {
+        __typename
+        label
+        street
+        city
+        zipCode
+        countryCode
+      }
+      virtualAddress {
+        __typename
+        label
+        url
+      }
+      interviewDuration
+      timeSlots {
+        __typename
+        startsAt
+        isAvailable
+      }
+    }
+    """
+
+  public static let possibleTypes: [String] = ["Event"]
+
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      GraphQLField("author", type: .nonNull(.object(Author.selections))),
+      GraphQLField("startsAt", type: .nonNull(.scalar(String.self))),
+      GraphQLField("endsAt", type: .nonNull(.scalar(String.self))),
+      GraphQLField("band", type: .nonNull(.object(Band.selections))),
+      GraphQLField("title", type: .nonNull(.scalar(String.self))),
+      GraphQLField("description", type: .scalar(String.self)),
+      GraphQLField("physicalAddress", type: .object(PhysicalAddress.selections)),
+      GraphQLField("virtualAddress", type: .object(VirtualAddress.selections)),
+      GraphQLField("interviewDuration", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("timeSlots", type: .list(.object(TimeSlot.selections))),
+    ]
+  }
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(id: GraphQLID, author: Author, startsAt: String, endsAt: String, band: Band, title: String, description: String? = nil, physicalAddress: PhysicalAddress? = nil, virtualAddress: VirtualAddress? = nil, interviewDuration: Int, timeSlots: [TimeSlot?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Event", "id": id, "author": author.resultMap, "startsAt": startsAt, "endsAt": endsAt, "band": band.resultMap, "title": title, "description": description, "physicalAddress": physicalAddress.flatMap { (value: PhysicalAddress) -> ResultMap in value.resultMap }, "virtualAddress": virtualAddress.flatMap { (value: VirtualAddress) -> ResultMap in value.resultMap }, "interviewDuration": interviewDuration, "timeSlots": timeSlots.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var id: GraphQLID {
+    get {
+      return resultMap["id"]! as! GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var author: Author {
+    get {
+      return Author(unsafeResultMap: resultMap["author"]! as! ResultMap)
+    }
+    set {
+      resultMap.updateValue(newValue.resultMap, forKey: "author")
+    }
+  }
+
+  public var startsAt: String {
+    get {
+      return resultMap["startsAt"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "startsAt")
+    }
+  }
+
+  public var endsAt: String {
+    get {
+      return resultMap["endsAt"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "endsAt")
+    }
+  }
+
+  public var band: Band {
+    get {
+      return Band(unsafeResultMap: resultMap["band"]! as! ResultMap)
+    }
+    set {
+      resultMap.updateValue(newValue.resultMap, forKey: "band")
+    }
+  }
+
+  public var title: String {
+    get {
+      return resultMap["title"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "title")
+    }
+  }
+
+  public var description: String? {
+    get {
+      return resultMap["description"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var physicalAddress: PhysicalAddress? {
+    get {
+      return (resultMap["physicalAddress"] as? ResultMap).flatMap { PhysicalAddress(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "physicalAddress")
+    }
+  }
+
+  public var virtualAddress: VirtualAddress? {
+    get {
+      return (resultMap["virtualAddress"] as? ResultMap).flatMap { VirtualAddress(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "virtualAddress")
+    }
+  }
+
+  public var interviewDuration: Int {
+    get {
+      return resultMap["interviewDuration"]! as! Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "interviewDuration")
+    }
+  }
+
+  public var timeSlots: [TimeSlot?]? {
+    get {
+      return (resultMap["timeSlots"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [TimeSlot?] in value.map { (value: ResultMap?) -> TimeSlot? in value.flatMap { (value: ResultMap) -> TimeSlot in TimeSlot(unsafeResultMap: value) } } }
+    }
+    set {
+      resultMap.updateValue(newValue.flatMap { (value: [TimeSlot?]) -> [ResultMap?] in value.map { (value: TimeSlot?) -> ResultMap? in value.flatMap { (value: TimeSlot) -> ResultMap in value.resultMap } } }, forKey: "timeSlots")
+    }
+  }
+
+  public struct Author: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["User"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("firstName", type: .nonNull(.scalar(String.self))),
+        GraphQLField("lastName", type: .nonNull(.scalar(String.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(firstName: String, lastName: String) {
+      self.init(unsafeResultMap: ["__typename": "User", "firstName": firstName, "lastName": lastName])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var firstName: String {
+      get {
+        return resultMap["firstName"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "firstName")
+      }
+    }
+
+    public var lastName: String {
+      get {
+        return resultMap["lastName"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "lastName")
+      }
+    }
+  }
+
+  public struct Band: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Band"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("artists", type: .list(.object(Artist.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(name: String, artists: [Artist?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Band", "name": name, "artists": artists.flatMap { (value: [Artist?]) -> [ResultMap?] in value.map { (value: Artist?) -> ResultMap? in value.flatMap { (value: Artist) -> ResultMap in value.resultMap } } }])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var name: String {
+      get {
+        return resultMap["name"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+
+    public var artists: [Artist?]? {
+      get {
+        return (resultMap["artists"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Artist?] in value.map { (value: ResultMap?) -> Artist? in value.flatMap { (value: ResultMap) -> Artist in Artist(unsafeResultMap: value) } } }
+      }
+      set {
+        resultMap.updateValue(newValue.flatMap { (value: [Artist?]) -> [ResultMap?] in value.map { (value: Artist?) -> ResultMap? in value.flatMap { (value: Artist) -> ResultMap in value.resultMap } } }, forKey: "artists")
+      }
+    }
+
+    public struct Artist: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Artist"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(name: String) {
+        self.init(unsafeResultMap: ["__typename": "Artist", "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+    }
+  }
+
+  public struct PhysicalAddress: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["PhysicalAddress"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("label", type: .scalar(String.self)),
+        GraphQLField("street", type: .nonNull(.scalar(String.self))),
+        GraphQLField("city", type: .nonNull(.scalar(String.self))),
+        GraphQLField("zipCode", type: .nonNull(.scalar(String.self))),
+        GraphQLField("countryCode", type: .nonNull(.scalar(String.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(label: String? = nil, street: String, city: String, zipCode: String, countryCode: String) {
+      self.init(unsafeResultMap: ["__typename": "PhysicalAddress", "label": label, "street": street, "city": city, "zipCode": zipCode, "countryCode": countryCode])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var label: String? {
+      get {
+        return resultMap["label"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "label")
+      }
+    }
+
+    public var street: String {
+      get {
+        return resultMap["street"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "street")
+      }
+    }
+
+    public var city: String {
+      get {
+        return resultMap["city"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "city")
+      }
+    }
+
+    public var zipCode: String {
+      get {
+        return resultMap["zipCode"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "zipCode")
+      }
+    }
+
+    public var countryCode: String {
+      get {
+        return resultMap["countryCode"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "countryCode")
+      }
+    }
+  }
+
+  public struct VirtualAddress: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["VirtualAddress"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("label", type: .scalar(String.self)),
+        GraphQLField("url", type: .nonNull(.scalar(String.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(label: String? = nil, url: String) {
+      self.init(unsafeResultMap: ["__typename": "VirtualAddress", "label": label, "url": url])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var label: String? {
+      get {
+        return resultMap["label"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "label")
+      }
+    }
+
+    public var url: String {
+      get {
+        return resultMap["url"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "url")
+      }
+    }
+  }
+
+  public struct TimeSlot: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["TimeSlot"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("startsAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("isAvailable", type: .nonNull(.scalar(Bool.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(startsAt: String, isAvailable: Bool) {
+      self.init(unsafeResultMap: ["__typename": "TimeSlot", "startsAt": startsAt, "isAvailable": isAvailable])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var startsAt: String {
+      get {
+        return resultMap["startsAt"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "startsAt")
+      }
+    }
+
+    public var isAvailable: Bool {
+      get {
+        return resultMap["isAvailable"]! as! Bool
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "isAvailable")
       }
     }
   }

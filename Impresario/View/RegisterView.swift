@@ -37,6 +37,7 @@ struct RegisterView: View {
                 }, label: {
                     Text(" create your account ")
                         .foregroundColor(.white)
+                        .frame(width: 200)
                         .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                 }))
             Spacer()
@@ -44,9 +45,3 @@ struct RegisterView: View {
         .padding()
     }
 }
-
-//struct RegisterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RegisterView()
-//    }
-//}

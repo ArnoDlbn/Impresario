@@ -29,16 +29,14 @@ struct InterviewRowView: View {
                     .font(.custom("Merriweather-Regular", size: 20, relativeTo: .body))
                 Text(interviewViewModel.interview.event.title ?? "")
                 HStack {
-                    if let address = interviewViewModel.interview.event.address {
-                        if let physicalAddress = address.physicalAddress {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                            Text(physicalAddress.label ?? physicalAddress.city)
-                        } else if let virtualAddress = address.virtualAddress {
-                            Image(systemName: "video")
-                                .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
-                            Text(virtualAddress.label ?? "Virtual meeting")
-                        }
+                    if let physicalAddress = interviewViewModel.interview.event.physicalAddress {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                        Text(physicalAddress.label ?? physicalAddress.city)
+                    } else if let virtualAddress = interviewViewModel.interview.event.virtualAddress {
+                        Image(systemName: "video")
+                            .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+                        Text(virtualAddress.label ?? "Virtual meeting")
                     }
                 }
                 Spacer()
@@ -47,9 +45,3 @@ struct InterviewRowView: View {
         }
     }
 }
-
-//struct InterviewRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InterviewRowView()
-//    }
-//}

@@ -2,12 +2,17 @@
 import SwiftUI
 
 struct MainView: View {
-    let coloredNavAppearance = UINavigationBarAppearance()
-    @ObservedObject var userViewModel: UserViewModel
     
-    init(with userViewModel: UserViewModel){
+    @EnvironmentObject var userViewModel: UserViewModel
+    
+    @StateObject var eventsViewModel = EventsViewModel()
+    @StateObject var interviewsViewModel = InterviewsViewModel()
+    
+    let coloredNavAppearance = UINavigationBarAppearance()
+    
+    
+    init(){
         
-        self.userViewModel = userViewModel
         coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = .white
         
@@ -21,17 +26,13 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            InterviewsView(userViewModel: userViewModel)
+            InterviewsView()
                 .tabItem { Label("Interviews", systemImage: "calendar") }
-            EventsView(userViewModel: userViewModel)
+            EventsView()
                 .tabItem { Label("Events", systemImage: "ticket") }
         }
         .accentColor(Color(red: 255/255, green: 203/255, blue: 164/255))
+        .environmentObject(eventsViewModel)
+        .environmentObject(interviewsViewModel)
     }
 }
-
-//struct MainView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainView()
-//    }
-//}
