@@ -106,7 +106,6 @@ struct EventDetailView: View {
                         .frame(width: 220, height: 40, alignment: .center)
                         .overlay(Button(action: {
                             showingAlert.toggle()
-                            
                         }, label: {
                             Text(" Cancel your event ")
                                 .foregroundColor(.white)
@@ -114,31 +113,20 @@ struct EventDetailView: View {
                                 .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                         }))
                         .alert(isPresented: $showingAlert) {
-                            Alert(
-                                title: Text("Cancel an event"),
-                                message: Text("Are you sure you want to cancel this event?"),
-                                primaryButton: .default(
-                                    Text("OK"),
-                                    action: {
-                                        let eventId: String = eventViewModel.event.id
-                                        eventViewModel.cancelEvent(
-                                            eventId: eventId,
-                                            successHandler: {
-                                                eventsViewModel.events = eventsViewModel.events.filter { $0.id != eventId }
-                                                self.presentationMode.wrappedValue.dismiss()
-                                            },
-                                            errorHandler: {
-                                                self.presentationMode.wrappedValue.dismiss()
-                                                userViewModel.logOut()
-                                            }
-                                        )
+                            AlertViewer.showAlertWithActions(message: "Are you sure you want to cancel this event?") {
+                                let eventId: String = eventViewModel.event.id
+                                eventViewModel.cancelEvent(
+                                    eventId: eventId,
+                                    successHandler: {
+                                        eventsViewModel.events = eventsViewModel.events.filter { $0.id != eventId }
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    },
+                                    errorHandler: {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                        userViewModel.logOut()
                                     }
-                                ),
-                                secondaryButton: .destructive(
-                                    Text("Cancel"),
-                                    action: {}
                                 )
-                            )
+                            }
                         }
                 }
             }

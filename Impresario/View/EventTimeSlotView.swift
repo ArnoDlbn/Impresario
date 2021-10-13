@@ -3,12 +3,15 @@ import SwiftUI
 
 struct EventTimeSlotView: View {
     
+    @EnvironmentObject var eventsViewModel: EventsViewModel
+    
     @ObservedObject var timeSlotViewModel: TimeSlotViewModel
     @EnvironmentObject var userViewModel: UserViewModel
     
     let eventID: String
     
     @State private var showingAlert = false
+    @State private var errorMessage: String? = nil
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -46,32 +49,28 @@ struct EventTimeSlotView: View {
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
                     }))
                     .alert(isPresented: $showingAlert) {
-                        Alert(
-                            title: Text("Request an interview"),
-                            message: Text("Are you sure you want to request this interview?"),
-                            primaryButton: .default(
-                                Text("OK"),
-                                action: {
-                                    InterviewViewModel.requestInterview(
-                                        eventId: eventID,
-                                        startsAt: timeSlotViewModel.timeSlot.startsAt,
-                                        successHandler: {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        },
-                                        errorHandler: {
-                                            userViewModel.logOut()
-                                        }
-                                        //                                    var newTimeSlot = timeSlotViewModel.timeSlot
-                                        //                                    newTimeSlot.isAvailable = false
-                                        //                                    timeSlotViewModel.timeSlot = newTimeSlot
-                                    )
-                                }
-                            ),
-                            secondaryButton: .destructive(
-                                Text("Cancel"),
-                                action: {}
-                            )
-                        )
+                        if errorMessage != nil {
+                            return AlertViewer.showAlertWithNoActions(message: errorMessage!) {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        } else {
+                            return AlertViewer.showAlertWithActions(message: "Are you sure you want to request this interview?") {
+                                InterviewViewModel.requestInterview(
+                                    eventId: eventID,
+                                    startsAt: timeSlotViewModel.timeSlot.startsAt,
+                                    successHandler: {
+                                        self.eventsViewModel.getEvents {}
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    },
+                                    errorHandler: { errorMessage in
+                                        showingAlert = false
+                                        self.errorMessage = errorMessage
+                                        showingAlert = true
+                                        //                                    userViewModel.logOut()
+                                    }
+                                )
+                            }
+                        }
                     }
             } else {
                 RoundedRectangle(cornerRadius: 15)

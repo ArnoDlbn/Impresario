@@ -27,7 +27,7 @@ struct AuthenticationView: View {
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
-            .frame(width: 220, height: 40, alignment: .center)
+            .frame(width: 220)
             Spacer()
                 .frame(height: 50)
             RoundedRectangle(cornerRadius: 20)

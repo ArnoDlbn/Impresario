@@ -4,20 +4,19 @@ import SwiftUI
 
 class AlertViewer {
     
-    static func showAlertWithActions(message: String, completion: @escaping (() -> Void)) -> Alert {
+    static func showAlertWithActions(message: String, completion: @escaping () -> Void) -> Alert {
         
         let alert = Alert(title: Text("Important message"),
                           message: Text("\(message)"),
                           primaryButton: .default(
-                            Text("OK"),
+                            Text("Yes"),
                             action: {
                                 completion()
                             }
                           ),
-                          secondaryButton: .default(
+                          secondaryButton: .destructive(
                             Text("Cancel"),
-                            action: {
-                            }
+                            action: {}
                           )
         )
         return alert

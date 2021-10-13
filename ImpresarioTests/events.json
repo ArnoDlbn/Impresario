@@ -5,8 +5,8 @@
       "firstName": "Arnaud",
       "lastName": "Dalbin"
     },
-    "startsAt": "2021-12-21T09:00:00+00:00",
-    "endsAt": "2021-12-21T12:30:00+00:00",
+    "startEvent": "2021-12-21T09:00:00+00:00",
+    "endEvent": "2021-12-21T12:30:00+00:00",
     "band": {
       "name": "Yelle",
       "artists": [
@@ -29,7 +29,7 @@
       "url": "https:\/\/zoom.com\/impresario"
     },
     "interviewDuration": 30,
-    "timeSlots": [
+    "timeSlot": [
       {
         "startsAt": "2021-12-21T09:00:00+00:00",
         "isAvailable": true

@@ -2118,6 +2118,15 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "refusesSimultaneousInterviewsAutomatically",
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Boolean",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "startsAt",
                         "type": {
                             "kind": "NON_NULL",
@@ -2140,6 +2149,15 @@
                                 "name": "String",
                                 "ofType": null
                             }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "validatesInterviewRequestAutomatically",
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Boolean",
+                            "ofType": null
                         },
                         "defaultValue": null
                     },

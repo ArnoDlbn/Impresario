@@ -131,11 +131,13 @@ public struct EventInput: GraphQLMapConvertible {
   ///   - endsAt
   ///   - interviewDuration
   ///   - physicalAddress
+  ///   - refusesSimultaneousInterviewsAutomatically
   ///   - startsAt
   ///   - title
+  ///   - validatesInterviewRequestAutomatically
   ///   - virtualAddress
-  public init(bandId: Swift.Optional<GraphQLID?> = nil, description: Swift.Optional<String?> = nil, endsAt: String, interviewDuration: Swift.Optional<Int?> = nil, physicalAddress: Swift.Optional<PhysicalAddressInput?> = nil, startsAt: String, title: String, virtualAddress: Swift.Optional<VirtualAddressInput?> = nil) {
-    graphQLMap = ["bandId": bandId, "description": description, "endsAt": endsAt, "interviewDuration": interviewDuration, "physicalAddress": physicalAddress, "startsAt": startsAt, "title": title, "virtualAddress": virtualAddress]
+  public init(bandId: Swift.Optional<GraphQLID?> = nil, description: Swift.Optional<String?> = nil, endsAt: String, interviewDuration: Swift.Optional<Int?> = nil, physicalAddress: Swift.Optional<PhysicalAddressInput?> = nil, refusesSimultaneousInterviewsAutomatically: Swift.Optional<Bool?> = nil, startsAt: String, title: String, validatesInterviewRequestAutomatically: Swift.Optional<Bool?> = nil, virtualAddress: Swift.Optional<VirtualAddressInput?> = nil) {
+    graphQLMap = ["bandId": bandId, "description": description, "endsAt": endsAt, "interviewDuration": interviewDuration, "physicalAddress": physicalAddress, "refusesSimultaneousInterviewsAutomatically": refusesSimultaneousInterviewsAutomatically, "startsAt": startsAt, "title": title, "validatesInterviewRequestAutomatically": validatesInterviewRequestAutomatically, "virtualAddress": virtualAddress]
   }
 
   public var bandId: Swift.Optional<GraphQLID?> {
@@ -183,6 +185,15 @@ public struct EventInput: GraphQLMapConvertible {
     }
   }
 
+  public var refusesSimultaneousInterviewsAutomatically: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["refusesSimultaneousInterviewsAutomatically"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "refusesSimultaneousInterviewsAutomatically")
+    }
+  }
+
   public var startsAt: String {
     get {
       return graphQLMap["startsAt"] as! String
@@ -198,6 +209,15 @@ public struct EventInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "title")
+    }
+  }
+
+  public var validatesInterviewRequestAutomatically: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["validatesInterviewRequestAutomatically"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "validatesInterviewRequestAutomatically")
     }
   }
 

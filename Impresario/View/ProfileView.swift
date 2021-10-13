@@ -5,6 +5,7 @@ import KeychainSwift
 struct ProfileView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @State private var isLoggedOut = false
+    @State private var showingAlert = false
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -35,22 +36,27 @@ struct ProfileView: View {
                     .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                     .frame(width: 220, height: 40, alignment: .center)
                     .overlay(Button(action: {
-                        isLoggedOut.toggle()
-                        self.presentationMode.wrappedValue.dismiss()
+                        showingAlert.toggle()
                     }, label: {
                         Text(" Log out ")
                             .foregroundColor(.white)
                             .frame(width: 200)
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .largeTitle))
                     }))
-                    .onDisappear {
-                        if isLoggedOut {
-                            userViewModel.user.token = nil
-                        }
-                    }
                     .padding(.bottom, 10)
             }
             .frame(width: geo.size.width, height: geo.size.height)
+            .alert(isPresented: $showingAlert) {
+                AlertViewer.showAlertWithActions(message: "Are you sure you want to log out?") {
+                    isLoggedOut.toggle()
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
+            .onDisappear {
+                if isLoggedOut {
+                    userViewModel.user.token = nil
+                }
+            }
         }
     }
 }

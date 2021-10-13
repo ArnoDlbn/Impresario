@@ -20,6 +20,8 @@
 		1C2E2155270DEC2C00958B0F /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E2154270DEC2C00958B0F /* user.json */; };
 		1C2E2156270DEC2C00958B0F /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E2154270DEC2C00958B0F /* user.json */; };
 		1C2E215B2711D58A00958B0F /* VirtualAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E215A2711D58A00958B0F /* VirtualAddress.swift */; };
+		1C4E684C271478F10013485D /* timeSlot.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C4E684B271478F10013485D /* timeSlot.json */; };
+		1C4E684D271478F10013485D /* timeSlot.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C4E684B271478F10013485D /* timeSlot.json */; };
 		1C5EA34C26FF808400D71931 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5EA34B26FF808400D71931 /* API.swift */; };
 		1C75E3C926CD5642006FE925 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3C826CD5642006FE925 /* Event.swift */; };
 		1C75E3E126CE8247006FE925 /* PhysicalAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E026CE8247006FE925 /* PhysicalAddress.swift */; };
@@ -144,6 +146,7 @@
 		1C2E2151270DEB9700958B0F /* interviews.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = interviews.json; sourceTree = "<group>"; };
 		1C2E2154270DEC2C00958B0F /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		1C2E215A2711D58A00958B0F /* VirtualAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualAddress.swift; sourceTree = "<group>"; };
+		1C4E684B271478F10013485D /* timeSlot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = timeSlot.json; sourceTree = "<group>"; };
 		1C5EA34B26FF808400D71931 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1C75E3C826CD5642006FE925 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1C75E3E026CE8247006FE925 /* PhysicalAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalAddress.swift; sourceTree = "<group>"; };
@@ -448,6 +451,7 @@
 				51ECEDDD26233A2C00D4C67E /* Info.plist */,
 				1C2E2151270DEB9700958B0F /* interviews.json */,
 				1C0FBE58270C79C400560D7A /* MockAPIGraphQLClient.swift */,
+				1C4E684B271478F10013485D /* timeSlot.json */,
 				1C2E2154270DEC2C00958B0F /* user.json */,
 			);
 			path = ImpresarioTests;
@@ -663,6 +667,7 @@
 				515F7B2026F0C4F100189806 /* KoHo-LightItalic.ttf in Resources */,
 				515F7B4C26F0F16100189806 /* MerriweatherSans-Regular.ttf in Resources */,
 				515F7B4926F0F16100189806 /* MerriweatherSans-ExtraBold.ttf in Resources */,
+				1C4E684C271478F10013485D /* timeSlot.json in Resources */,
 				515F7B1526F0C4F100189806 /* KoHo-Medium.ttf in Resources */,
 				51ECEDCE26233A2B00D4C67E /* Assets.xcassets in Resources */,
 				515F7B1726F0C4F100189806 /* KoHo-Light.ttf in Resources */,
@@ -674,6 +679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C2E2156270DEC2C00958B0F /* user.json in Resources */,
+				1C4E684D271478F10013485D /* timeSlot.json in Resources */,
 				1C2E2153270DEB9700958B0F /* interviews.json in Resources */,
 				1C0FBE57270C546500560D7A /* events.json in Resources */,
 			);
@@ -912,7 +918,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Impresario/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				ENABLE_PREVIEWS = YES;
@@ -935,7 +941,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Impresario/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B72U9J467;
 				ENABLE_PREVIEWS = YES;

@@ -15,7 +15,7 @@ struct EventTimeSlotsView: View {
                     .font(.custom("KoHo-SemiBold", size: 25, relativeTo: .largeTitle))
                     .padding(.bottom, 20)
                 HStack {
-                    Text("Slots avalaible")
+                    Text("Available slots")
                         .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
                     Image(systemName: "arrow.down")
                 }
@@ -30,9 +30,9 @@ struct EventTimeSlotsView: View {
                     Image(systemName: "arrow.down")
                 }
             }
-            ForEach(0..<getRowCount()) { row in // create number of rows
+            ForEach(0..<getRowCount()) { row in
                 HStack {
-                    ForEach(0..<getColumnCount(row: row)) { column in // create 3 columns
+                    ForEach(0..<getColumnCount(row: row)) { column in
                         EventTimeSlotView(timeSlotViewModel: TimeSlotViewModel(withTimeSlot: eventViewModel.event.timeSlot![row * 3 + column]), eventID: eventViewModel.event.id)
                     }
                 }
@@ -57,6 +57,7 @@ struct EventTimeSlotsView: View {
         }
     }
     
+    // create number of rows
     func getRowCount() -> Int {
         var rowCount: Int
         
@@ -68,6 +69,7 @@ struct EventTimeSlotsView: View {
         return rowCount
     }
     
+    // create 3 columns
     func getColumnCount(row: Int) -> Int {
         var columnCount: Int = 3
         

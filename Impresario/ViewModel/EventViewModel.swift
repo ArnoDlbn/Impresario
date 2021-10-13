@@ -23,6 +23,7 @@ class EventViewModel: Identifiable {
             countryCode: countryCode,
             virtualLabel: virtualLabel,
             url: url,
+            validatesInterviewRequestAutomatically: true,
             successHandler: successHandler,
             errorHandler: errorHandler
         )

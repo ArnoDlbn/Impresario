@@ -3,6 +3,8 @@ import SwiftUI
 
 struct AddEventView: View {
     
+    @EnvironmentObject var eventsViewModel: EventsViewModel
+    
     @State private var eventDescription = "Mon nouvel album !"
     @State private var eventTitle = "Safari Disco Club"
     @State private var eventStart = Date()
@@ -89,8 +91,6 @@ struct AddEventView: View {
                     } else {
                         activeAlert = .success
                         showAlert = true
-                        debugPrint(newStart)
-                        debugPrint(newEnd)
                         EventViewModel.createEvent(title: eventTitle,
                                                    description: eventDescription,
                                                    startsAt: newStart,
@@ -116,6 +116,7 @@ struct AddEventView: View {
                         return AlertViewer.showAlertWithNoActions(message: "All fields are required!") {}
                     } else {
                         return AlertViewer.showAlertWithNoActions(message: "Your event is created!") {
+                            self.eventsViewModel.getEvents {}
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     }

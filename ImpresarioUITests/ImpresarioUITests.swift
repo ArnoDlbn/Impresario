@@ -1,9 +1,3 @@
-//
-//  ImpresarioUITests.swift
-//  ImpresarioUITests
-//
-//  Created by Arnaud Dalbin on 11/04/2021.
-//
 
 import XCTest
 

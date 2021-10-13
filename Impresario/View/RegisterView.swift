@@ -12,14 +12,16 @@ struct RegisterView: View {
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 50)
             Picker("Select a profile", selection: $profile) {
                 ForEach(profiles, id: \.self) {
                     Text($0)
                 }
                 .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
             }
+            .pickerStyle(.segmented)
             .frame(width: 220)
+            Spacer()
+                .frame(height: 50)
             VStack(spacing: 10) {
                 TextField("Full name", text: $fullName)
                 TextField("Email", text: $email)
@@ -27,9 +29,9 @@ struct RegisterView: View {
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .font(.custom("Merriweather-Regular", size: 15, relativeTo: .body))
-            .frame(width: 220, height: 40, alignment: .center)
+            .frame(width: 220)
             Spacer()
-                .frame(height: 100)
+                .frame(height: 50)
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color(red: 255/255, green: 203/255, blue: 164/255))
                 .frame(width: 220, height: 40, alignment: .center)

@@ -86,8 +86,8 @@ class APIGraphQlClient: APIClientProtocol
         }
     }
     
-    func createEvent(title: String, description: String, startsAt: String, endsAt: String, label: String, street: String, zipCode: String, city: String, countryCode: String, virtualLabel: String, url: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-        self.apollo.perform(mutation: CreateEventMutation(input: EventInput(description: description, endsAt: endsAt, physicalAddress: PhysicalAddressInput(city: city, countryCode: countryCode, label: label, street: street, zipCode: zipCode), startsAt: startsAt, title: title, virtualAddress: VirtualAddressInput(label: virtualLabel, url: url)))) { result in
+    func createEvent(title: String, description: String, startsAt: String, endsAt: String, label: String, street: String, zipCode: String, city: String, countryCode: String, virtualLabel: String, url: String, validatesInterviewRequestAutomatically: Bool, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        self.apollo.perform(mutation: CreateEventMutation(input: EventInput(description: description, endsAt: endsAt, physicalAddress: PhysicalAddressInput(city: city, countryCode: countryCode, label: label, street: street, zipCode: zipCode), startsAt: startsAt, title: title, validatesInterviewRequestAutomatically: validatesInterviewRequestAutomatically, virtualAddress: VirtualAddressInput(label: virtualLabel, url: url)))) { result in
             switch result {
             case .success(let graphQLResult):
                 debugPrint(graphQLResult.data ?? "")
@@ -203,17 +203,25 @@ class APIGraphQlClient: APIClientProtocol
         }
     }
     
-    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
         self.apollo.perform(mutation: RequestInterviewMutation(input: InterviewRequestInput(eventId: eventId, startsAt: startsAt))) { result in
             switch result {
             case .success(let graphQLResult):
                 debugPrint(graphQLResult.data ?? "")
                 debugPrint(graphQLResult.errors ?? "")
+                if let errorStrings = graphQLResult.errors {
+                    errorHandler(errorStrings.map {
+                        $0.description
+                    }.joined(separator: ", "))
+                } else {
                 successHandler()
+                }
             case .failure(let error):
                 debugPrint(error)
-                errorHandler()
+                errorHandler(error.localizedDescription)
             }
         }
     }
 }
+
+

@@ -88,31 +88,20 @@ struct InterviewDetailView: View {
                     })
                 )
                 .alert(isPresented: $showingAlert) {
-                    Alert(
-                        title: Text("Cancel an interview"),
-                        message: Text("Are you sure you want to cancel this interview?"),
-                        primaryButton: .default(
-                            Text("OK"),
-                            action: {
-                                let interviewId: String = interviewViewModel.interview.id
-                                interviewViewModel.cancelInterview(
-                                    interviewId: interviewId,
-                                    successHandler: {
-                                        interviewsViewModel.interviews = interviewsViewModel.interviews.filter { $0.id != interviewId }
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    },
-                                    errorHandler: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                        userViewModel.logOut()
-                                    }
-                                )
+                    AlertViewer.showAlertWithActions(message: "Are you sure you want to cancel this interview?") {
+                        let interviewId: String = interviewViewModel.interview.id
+                        interviewViewModel.cancelInterview(
+                            interviewId: interviewId,
+                            successHandler: {
+                                interviewsViewModel.interviews = interviewsViewModel.interviews.filter { $0.id != interviewId }
+                                self.presentationMode.wrappedValue.dismiss()
+                            },
+                            errorHandler: {
+                                self.presentationMode.wrappedValue.dismiss()
+                                userViewModel.logOut()
                             }
-                        ),
-                        secondaryButton: .destructive(
-                            Text("Cancel"),
-                            action: {}
                         )
-                    )
+                    }
                 }
         }
         .navigationTitle(Text(interviewViewModel.interview.event.bandName ?? ""))
