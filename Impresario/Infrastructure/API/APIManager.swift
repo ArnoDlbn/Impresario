@@ -40,7 +40,7 @@ class APIManager
         client.login(email: email, password: password, successHandler: successHandler, errorHandler: errorHandler)
     }
     
-    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         client.requestInterview(eventId: eventId, startsAt: startsAt, successHandler: successHandler, errorHandler: errorHandler)
     }
 }

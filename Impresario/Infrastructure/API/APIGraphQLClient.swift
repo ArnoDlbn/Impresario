@@ -203,22 +203,16 @@ class APIGraphQlClient: APIClientProtocol
         }
     }
     
-    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         self.apollo.perform(mutation: RequestInterviewMutation(input: InterviewRequestInput(eventId: eventId, startsAt: startsAt))) { result in
             switch result {
             case .success(let graphQLResult):
                 debugPrint(graphQLResult.data ?? "")
                 debugPrint(graphQLResult.errors ?? "")
-                if let errorStrings = graphQLResult.errors {
-                    errorHandler(errorStrings.map {
-                        $0.description
-                    }.joined(separator: ", "))
-                } else {
                 successHandler()
-                }
             case .failure(let error):
                 debugPrint(error)
-                errorHandler(error.localizedDescription)
+                errorHandler()
             }
         }
     }

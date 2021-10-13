@@ -49,12 +49,7 @@ struct EventTimeSlotView: View {
                             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
                     }))
                     .alert(isPresented: $showingAlert) {
-                        if errorMessage != nil {
-                            return AlertViewer.showAlertWithNoActions(message: errorMessage!) {
-                                self.presentationMode.wrappedValue.dismiss()
-                            }
-                        } else {
-                            return AlertViewer.showAlertWithActions(message: "Are you sure you want to request this interview?") {
+                        AlertViewer.showAlertWithActions(message: "Are you sure you want to request this interview?") {
                                 InterviewViewModel.requestInterview(
                                     eventId: eventID,
                                     startsAt: timeSlotViewModel.timeSlot.startsAt,
@@ -62,15 +57,11 @@ struct EventTimeSlotView: View {
                                         self.eventsViewModel.getEvents {}
                                         self.presentationMode.wrappedValue.dismiss()
                                     },
-                                    errorHandler: { errorMessage in
-                                        showingAlert = false
-                                        self.errorMessage = errorMessage
-                                        showingAlert = true
-                                        //                                    userViewModel.logOut()
+                                    errorHandler: {
+                                        userViewModel.logOut()
                                     }
                                 )
                             }
-                        }
                     }
             } else {
                 RoundedRectangle(cornerRadius: 15)

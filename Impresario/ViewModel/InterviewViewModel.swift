@@ -9,7 +9,7 @@ class InterviewViewModel {
         self.interview = interview
     }
     
-    static func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    static func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         APIManager.shared.requestInterview(
             eventId: eventId,
             startsAt: startsAt,

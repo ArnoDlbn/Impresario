@@ -17,5 +17,5 @@ protocol APIClientProtocol
     
     func getUser(successHandler: @escaping (User) -> Void, errorHandler: @escaping () -> Void)
     
-    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void)
+    func requestInterview(eventId: String, startsAt: String, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
 }
