@@ -16,3 +16,8 @@ class MapViewer {
         }
     }
 }
+
+struct MyAnnotationItem: Identifiable {
+    var coordinate: CLLocationCoordinate2D
+    let id = UUID()
+}
