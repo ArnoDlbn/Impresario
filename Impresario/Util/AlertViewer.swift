@@ -5,7 +5,6 @@ import SwiftUI
 class AlertViewer {
     
     static func showAlertWithActions(message: String, completion: @escaping () -> Void) -> Alert {
-        
         let alert = Alert(title: Text("Important message"),
                           message: Text("\(message)"),
                           primaryButton: .default(
@@ -23,12 +22,15 @@ class AlertViewer {
     }
     
     static func showAlertWithNoActions(message: String, completion: @escaping () -> Void) -> Alert {
-        
         let alert = Alert(title: Text("Important message"),
                           message: Text("\(message)"),
-                          dismissButton: .default(Text("OK"),action: {completion()})
+                          dismissButton: .default(
+                            Text("OK"),
+                            action: {
+                                completion()
+                            }
+                          )
         )
-        
         return alert
     }
 }

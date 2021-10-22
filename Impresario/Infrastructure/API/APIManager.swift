@@ -20,8 +20,37 @@ class APIManager
         client.cancelInterview(interviewId: interviewId, successHandler: successHandler, errorHandler: errorHandler)
     }
     
-    func createEvent(title: String, description: String, startsAt: String, endsAt: String, label: String, street: String, zipCode: String, city: String, countryCode: String, virtualLabel: String, url: String, validatesInterviewRequestAutomatically: Bool, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-        client.createEvent(title: title, description: description, startsAt: startsAt, endsAt: endsAt, label: label, street: street, zipCode: zipCode, city: city, countryCode: countryCode, virtualLabel: virtualLabel, url: url, validatesInterviewRequestAutomatically: validatesInterviewRequestAutomatically, successHandler: successHandler, errorHandler: errorHandler)
+    func createEvent(
+        title: String,
+        description: String,
+        startsAt: String,
+        endsAt: String,
+        label: String,
+        street: String,
+        zipCode: String,
+        city: String,
+        countryCode: String,
+        virtualLabel: String,
+        url: String,
+        validatesInterviewRequestAutomatically: Bool,
+        successHandler: @escaping () -> Void,
+        errorHandler: @escaping () -> Void) {
+        client.createEvent(
+            title: title,
+            description: description,
+            startsAt: startsAt,
+            endsAt: endsAt,
+            label: label,
+            street: street,
+            zipCode: zipCode,
+            city: city,
+            countryCode: countryCode,
+            virtualLabel: virtualLabel,
+            url: url,
+            validatesInterviewRequestAutomatically: validatesInterviewRequestAutomatically,
+            successHandler: successHandler,
+            errorHandler: errorHandler
+        )
     }
     
     func getEvents(successHandler: @escaping([Event]) -> (), errorHandler: @escaping() -> ()) {

@@ -15,8 +15,7 @@ class APIGraphQlClient: APIClientProtocol
         return ApolloClient(networkTransport: transport, store: store)
     }()
     
-    func buildEventFromEventDetails(_ content: EventDetails) -> Event
-        {
+    func buildEventFromEventDetails(_ content: EventDetails) -> Event {
             let timeSlot: [TimeSlot] = content.timeSlots!.map { timeSlot in
                 let result = TimeSlot.init(startsAt: timeSlot!.startsAt, isAvailable: timeSlot!.isAvailable)
                 return result
@@ -37,8 +36,8 @@ class APIGraphQlClient: APIClientProtocol
             }
             
             return Event(
-                startEvent: content.startsAt,
-                endEvent: content.endsAt,
+                startsAt: content.startsAt,
+                endsAt: content.endsAt,
                 title: content.title,
                 description: content.description,
                 bandName: content.band.name,
@@ -46,7 +45,8 @@ class APIGraphQlClient: APIClientProtocol
                 timeSlot: timeSlot,
                 id: content.id,
                 physicalAddress: firstAddress,
-                virtualAddress: secondAddress)
+                virtualAddress: secondAddress
+            )
         }
     
     func buildInterviewFromInterview(_ content: InterviewsQuery.Data.Interview.Edge.Node) -> Interview {
@@ -86,19 +86,53 @@ class APIGraphQlClient: APIClientProtocol
         }
     }
     
-    func createEvent(title: String, description: String, startsAt: String, endsAt: String, label: String, street: String, zipCode: String, city: String, countryCode: String, virtualLabel: String, url: String, validatesInterviewRequestAutomatically: Bool, successHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-        self.apollo.perform(mutation: CreateEventMutation(input: EventInput(description: description, endsAt: endsAt, physicalAddress: PhysicalAddressInput(city: city, countryCode: countryCode, label: label, street: street, zipCode: zipCode), startsAt: startsAt, title: title, validatesInterviewRequestAutomatically: validatesInterviewRequestAutomatically, virtualAddress: VirtualAddressInput(label: virtualLabel, url: url)))) { result in
-            switch result {
-            case .success(let graphQLResult):
-                debugPrint(graphQLResult.data ?? "")
-                debugPrint(graphQLResult.errors ?? "")
-                successHandler()
-            case .failure(let error):
-                debugPrint(error)
-                errorHandler()
+    func createEvent(
+        title: String,
+        description: String,
+        startsAt: String,
+        endsAt: String,
+        label: String,
+        street: String,
+        zipCode: String,
+        city: String,
+        countryCode: String,
+        virtualLabel: String,
+        url: String,
+        validatesInterviewRequestAutomatically: Bool,
+        successHandler: @escaping () -> Void,
+        errorHandler: @escaping () -> Void) {
+            self.apollo.perform(
+                mutation: CreateEventMutation(
+                    input: EventInput(
+                        description: description,
+                        endsAt: endsAt,
+                        physicalAddress: PhysicalAddressInput(
+                            city: city,
+                            countryCode: countryCode,
+                            label: label,
+                            street: street,
+                            zipCode: zipCode),
+                        startsAt: startsAt,
+                        title: title,
+                        validatesInterviewRequestAutomatically: validatesInterviewRequestAutomatically,
+                        virtualAddress: VirtualAddressInput(
+                            label: virtualLabel,
+                            url: url
+                        )
+                    )
+                )
+            ) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    debugPrint(graphQLResult.data ?? "")
+                    debugPrint(graphQLResult.errors ?? "")
+                    successHandler()
+                case .failure(let error):
+                    debugPrint(error)
+                    errorHandler()
+                }
             }
         }
-    }
     
     func getEvents(successHandler: @escaping ([Event]) -> (), errorHandler: @escaping () -> ()) {
         self.apollo.fetch(query: EventsQuery(), cachePolicy: .fetchIgnoringCacheCompletely) { result in

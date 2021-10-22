@@ -49,4 +49,16 @@ class DateFormatter {
         let result = "\(day)/\(monthString)/\(year) at \(hour):\(minutesString)"
         return result
     }
+    
+    static func getMonth(date: String?) -> String? {
+        guard let date = date else { return nil }
+        let currentDate = Date()
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        let dateFormatted = dateFormatter.date(from: date)
+        let dateFormatter2 = Foundation.DateFormatter()
+        dateFormatter2.dateFormat = "MMM"
+        let result = dateFormatter2.string(from: dateFormatted ?? currentDate)
+        return result
+    }
 }

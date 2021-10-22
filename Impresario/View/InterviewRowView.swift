@@ -15,7 +15,7 @@ struct InterviewRowView: View {
                     .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
                     .overlay(Text(interviewViewModel.interview.day ?? ""))
-                Text(interviewViewModel.interview.hourAndMinutes ?? "")
+                Text(interviewViewModel.interview.month ?? "")
                 Spacer()
             }
             .frame(width: 60)

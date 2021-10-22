@@ -14,7 +14,6 @@ struct PhysicalAddress: Decodable {
          zipCode: String,
          city: String,
          countryCode: String? = nil) {
-        
         self.label = label
         self.street = street
         self.zipCode = zipCode

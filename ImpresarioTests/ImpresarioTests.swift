@@ -11,19 +11,7 @@ class ImpresarioTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
-//    func testCancelEvent() throws {
-//    }
-//
-//    func testCancelInterview() throws {
-//    }
-//
-//    func testCreateEvent() throws {
-//    }
-//
-//    func testLogin() throws {
-//    }
-    
+        
     func testGetEvents() throws {
         APIManager.shared.client = MockAPIGraphQLClient()
         
@@ -53,19 +41,17 @@ class ImpresarioTests: XCTestCase {
         XCTAssertEqual(userViewModel.user.email, "contact+louislepron@appsolument.com")
     }
     
-//    func testRequestInterview() throws {
-//    }
-    
     func testEventExtension() throws {
         
-        let event = Event(startEvent: "2021-12-21T09:00:00+00:00",
-                          endEvent: "2021-12-21T12:30:00+00:00",
+        let event = Event(startsAt: "2021-12-21T09:00:00+00:00",
+                          endsAt: "2021-12-21T12:30:00+00:00",
                           id: "07174c10-1af0-11ec-9988-0242ac170005")
         
         XCTAssertEqual(event.fullStartDate, "21/12/2021 at 9:00")
         XCTAssertEqual(event.fullEndDate, "21/12/2021 at 12:30")
         XCTAssertEqual(event.day, "21")
         XCTAssertEqual(event.hourAndMinutes, "9:00")
+        XCTAssertEqual(event.month, "Dec")
     }
     
     func testInterviewExtension() throws {
@@ -79,6 +65,7 @@ class ImpresarioTests: XCTestCase {
         XCTAssertEqual(interview.fullEndDate, "21/12/2021 at 12:15")
         XCTAssertEqual(interview.day, "21")
         XCTAssertEqual(interview.hourAndMinutes, "12:00")
+        XCTAssertEqual(interview.month, "Dec")
     }
     
     func testTimeSlotExtension() throws {

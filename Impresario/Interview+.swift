@@ -16,4 +16,8 @@ extension Interview {
     var fullEndDate : String? {
         DateFormatter.getFullDate(date: self.endsAt)
     }
+    
+    var month : String? {
+        DateFormatter.getMonth(date: self.startsAt)
+    }
 }

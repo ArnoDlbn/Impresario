@@ -3,8 +3,8 @@ import Foundation
 
 struct Event: Identifiable, Decodable {
     
-    let startEvent: String?
-    let endEvent: String?
+    let startsAt: String?
+    let endsAt: String?
     let title: String?
     let description: String?
     let bandName: String?
@@ -14,8 +14,8 @@ struct Event: Identifiable, Decodable {
     let physicalAddress: PhysicalAddress?
     let virtualAddress: VirtualAddress?
     
-    init(startEvent: String? = nil,
-         endEvent: String? = nil,
+    init(startsAt: String? = nil,
+         endsAt: String? = nil,
          title: String? = nil,
          description: String? = nil,
          bandName: String? = nil,
@@ -24,9 +24,8 @@ struct Event: Identifiable, Decodable {
          id: String,
          physicalAddress: PhysicalAddress? = nil,
          virtualAddress: VirtualAddress? = nil) {
-
-        self.startEvent = startEvent
-        self.endEvent = endEvent
+        self.startsAt = startsAt
+        self.endsAt = endsAt
         self.title = title
         self.description = description
         self.bandName = bandName

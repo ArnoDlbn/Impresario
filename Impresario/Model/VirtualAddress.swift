@@ -8,7 +8,6 @@ struct VirtualAddress: Decodable {
     
     init(label: String? = nil,
          url: String) {
-        
         self.label = label
         self.url = url
     }

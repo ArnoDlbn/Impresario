@@ -308,6 +308,27 @@
 			path = Apollo;
 			sourceTree = "<group>";
 		};
+		1C8AC82F2722F5E5004A1982 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1C0FBE56270C546500560D7A /* events.json */,
+				1C2E2151270DEB9700958B0F /* interviews.json */,
+				1C4E684B271478F10013485D /* timeSlot.json */,
+				1C2E2154270DEC2C00958B0F /* user.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1C8AC8302722FD21004A1982 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				1C08F77526D673F0005C3999 /* AlertViewer.swift */,
+				519D473426D2B70B0010DABC /* DateFormatter.swift */,
+				1CD038EE2700C80500CD9F3B /* MapViewer.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		511A181B26CBE4F700FF6767 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,18 +438,16 @@
 		51ECEDC826233A2800D4C67E /* Impresario */ = {
 			isa = PBXGroup;
 			children = (
-				1C08F77526D673F0005C3999 /* AlertViewer.swift */,
 				516EA591265443F7007E3508 /* API.graphql */,
 				1C5EA34B26FF808400D71931 /* API.swift */,
-				519D473426D2B70B0010DABC /* DateFormatter.swift */,
 				1C75E3C126CD4DE2006FE925 /* Extension */,
 				51ECEDD226233A2B00D4C67E /* Info.plist */,
 				1C75E3EA26CE866B006FE925 /* Infrastructure */,
-				1CD038EE2700C80500CD9F3B /* MapViewer.swift */,
 				51ECEDF726233A6500D4C67E /* Model */,
 				51ECEDCF26233A2B00D4C67E /* Preview Content */,
 				51995B0126BEC37200F3CF26 /* schema.json */,
 				51ECEE072623568700D4C67E /* Supporting files */,
+				1C8AC8302722FD21004A1982 /* Util */,
 				51ECEDF826233A6F00D4C67E /* View */,
 				511A181B26CBE4F700FF6767 /* ViewModel */,
 			);
@@ -446,13 +465,10 @@
 		51ECEDDA26233A2C00D4C67E /* ImpresarioTests */ = {
 			isa = PBXGroup;
 			children = (
-				1C0FBE56270C546500560D7A /* events.json */,
+				1C8AC82F2722F5E5004A1982 /* Data */,
 				51ECEDDB26233A2C00D4C67E /* ImpresarioTests.swift */,
 				51ECEDDD26233A2C00D4C67E /* Info.plist */,
-				1C2E2151270DEB9700958B0F /* interviews.json */,
 				1C0FBE58270C79C400560D7A /* MockAPIGraphQLClient.swift */,
-				1C4E684B271478F10013485D /* timeSlot.json */,
-				1C2E2154270DEC2C00958B0F /* user.json */,
 			);
 			path = ImpresarioTests;
 			sourceTree = "<group>";

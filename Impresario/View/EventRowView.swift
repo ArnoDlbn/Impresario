@@ -15,7 +15,7 @@ struct EventRowView: View {
                     .stroke(Color(red: 255/255, green: 203/255, blue: 164/255), lineWidth: 3)
                     .frame(width: 50, height: 50, alignment: .center)
                     .overlay(Text(eventViewModel.event.day ?? ""))
-                Text(eventViewModel.event.hourAndMinutes ?? "")
+                Text(eventViewModel.event.month ?? "")
                 Spacer()
             }
             .frame(width: 60)

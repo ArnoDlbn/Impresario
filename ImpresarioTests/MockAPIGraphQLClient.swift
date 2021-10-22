@@ -71,23 +71,4 @@ class MockAPIGraphQLClient: APIClientProtocol
     func getJson(name: String) -> URL? {
         return Bundle.main.url(forResource: name, withExtension: "json")
     }
-    
-//    func decodeJsonFromArray(dataType: AnyObject) -> [AnyObject]? {
-//        let jsonData = try Data(contentsOf: URL, options: .alwaysMapped)
-//        let jsonDecoder =  JSONDecoder()
-//        return try? jsonDecoder.decode(Array<self.dataType>.self, from: jsonData)
-//    }
-//    
-//    func decodeJson(name: String, dataType: AnyObject, successHandler: @escaping ([AnyObject]) -> (), errorHandler: @escaping () -> ()) {
-//        if let url = getJson(name: name) {
-//            do {
-//                debugPrint("YEAH")
-//                successHandler(decodeJsonFromArray(dataType: dataType)!)
-//            } catch {
-//                errorHandler()
-//            }
-//        } else {
-//            debugPrint("Invalid path")
-//        }
-//    }
 }

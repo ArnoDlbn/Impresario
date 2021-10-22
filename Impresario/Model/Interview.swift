@@ -12,7 +12,6 @@ struct Interview: Identifiable, Decodable {
          endsAt: String,
          event: Event,
          id: String) {
-        
         self.startsAt = startsAt
         self.endsAt = endsAt
         self.event = event
