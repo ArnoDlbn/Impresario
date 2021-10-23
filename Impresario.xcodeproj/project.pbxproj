@@ -22,10 +22,10 @@
 		1C2E215B2711D58A00958B0F /* VirtualAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E215A2711D58A00958B0F /* VirtualAddress.swift */; };
 		1C4E684C271478F10013485D /* timeSlot.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C4E684B271478F10013485D /* timeSlot.json */; };
 		1C4E684D271478F10013485D /* timeSlot.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C4E684B271478F10013485D /* timeSlot.json */; };
-		1C5EA34C26FF808400D71931 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5EA34B26FF808400D71931 /* API.swift */; };
 		1C75E3C926CD5642006FE925 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3C826CD5642006FE925 /* Event.swift */; };
 		1C75E3E126CE8247006FE925 /* PhysicalAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E026CE8247006FE925 /* PhysicalAddress.swift */; };
 		1C75E3E726CE8270006FE925 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C75E3E626CE8270006FE925 /* TimeSlot.swift */; };
+		1C8AC83427231121004A1982 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8AC83327231121004A1982 /* API.swift */; };
 		1CD038EF2700C80500CD9F3B /* MapViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD038EE2700C80500CD9F3B /* MapViewer.swift */; };
 		511A180C26C2DBC400FF6767 /* InterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */; };
 		511A180E26C2DBD600FF6767 /* InterviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */; };
@@ -147,10 +147,10 @@
 		1C2E2154270DEC2C00958B0F /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		1C2E215A2711D58A00958B0F /* VirtualAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualAddress.swift; sourceTree = "<group>"; };
 		1C4E684B271478F10013485D /* timeSlot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = timeSlot.json; sourceTree = "<group>"; };
-		1C5EA34B26FF808400D71931 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1C75E3C826CD5642006FE925 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1C75E3E026CE8247006FE925 /* PhysicalAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalAddress.swift; sourceTree = "<group>"; };
 		1C75E3E626CE8270006FE925 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		1C8AC83327231121004A1982 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1CD038EE2700C80500CD9F3B /* MapViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewer.swift; sourceTree = "<group>"; };
 		511A180B26C2DBC400FF6767 /* InterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewViewModel.swift; sourceTree = "<group>"; };
 		511A180D26C2DBD600FF6767 /* InterviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewsViewModel.swift; sourceTree = "<group>"; };
@@ -264,14 +264,17 @@
 		1C0FBE55270C471900560D7A /* API */ = {
 			isa = PBXGroup;
 			children = (
-				1C0FBE5A270C857A00560D7A /* APIGraphQLClient.swift */,
+				516EA591265443F7007E3508 /* API.graphql */,
+				1C8AC83327231121004A1982 /* API.swift */,
 				1C0FBE5C270C861A00560D7A /* APIClientProtocol.swift */,
+				1C0FBE5A270C857A00560D7A /* APIGraphQLClient.swift */,
 				1C0FBE5E270C870100560D7A /* APIManager.swift */,
+				51995B0126BEC37200F3CF26 /* schema.json */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
-		1C75E3C126CD4DE2006FE925 /* Extension */ = {
+		1C75E3C126CD4DE2006FE925 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				519D473226D2B6810010DABC /* Event+.swift */,
@@ -279,7 +282,7 @@
 				519D473826D2BEAE0010DABC /* TimeSlot+.swift */,
 				1C08F79326DE720C005C3999 /* View+.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1C75E3EA26CE866B006FE925 /* Infrastructure */ = {
@@ -319,17 +322,17 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		1C8AC8302722FD21004A1982 /* Util */ = {
+		1C8AC8302722FD21004A1982 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				1C08F77526D673F0005C3999 /* AlertViewer.swift */,
 				519D473426D2B70B0010DABC /* DateFormatter.swift */,
 				1CD038EE2700C80500CD9F3B /* MapViewer.swift */,
 			);
-			path = Util;
+			path = Utils;
 			sourceTree = "<group>";
 		};
-		511A181B26CBE4F700FF6767 /* ViewModel */ = {
+		511A181B26CBE4F700FF6767 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				518478C3269F469C00C9AE34 /* EventsViewModel.swift */,
@@ -339,7 +342,7 @@
 				512F3D4A26D3EA5600726EC7 /* TimeSlotViewModel.swift */,
 				511A181726CA8F7D00FF6767 /* UserViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		515F7B0726F0C4F100189806 /* KoHo */ = {
@@ -438,28 +441,16 @@
 		51ECEDC826233A2800D4C67E /* Impresario */ = {
 			isa = PBXGroup;
 			children = (
-				516EA591265443F7007E3508 /* API.graphql */,
-				1C5EA34B26FF808400D71931 /* API.swift */,
-				1C75E3C126CD4DE2006FE925 /* Extension */,
+				1C75E3C126CD4DE2006FE925 /* Extensions */,
 				51ECEDD226233A2B00D4C67E /* Info.plist */,
 				1C75E3EA26CE866B006FE925 /* Infrastructure */,
-				51ECEDF726233A6500D4C67E /* Model */,
-				51ECEDCF26233A2B00D4C67E /* Preview Content */,
-				51995B0126BEC37200F3CF26 /* schema.json */,
+				51ECEDF726233A6500D4C67E /* Models */,
 				51ECEE072623568700D4C67E /* Supporting files */,
-				1C8AC8302722FD21004A1982 /* Util */,
-				51ECEDF826233A6F00D4C67E /* View */,
-				511A181B26CBE4F700FF6767 /* ViewModel */,
+				1C8AC8302722FD21004A1982 /* Utils */,
+				51ECEDF826233A6F00D4C67E /* Views */,
+				511A181B26CBE4F700FF6767 /* ViewModels */,
 			);
 			path = Impresario;
-			sourceTree = "<group>";
-		};
-		51ECEDCF26233A2B00D4C67E /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				51ECEDD026233A2B00D4C67E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		51ECEDDA26233A2C00D4C67E /* ImpresarioTests */ = {
@@ -482,7 +473,7 @@
 			path = ImpresarioUITests;
 			sourceTree = "<group>";
 		};
-		51ECEDF726233A6500D4C67E /* Model */ = {
+		51ECEDF726233A6500D4C67E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1C75E3C826CD5642006FE925 /* Event.swift */,
@@ -492,10 +483,10 @@
 				511A181926CBE07900FF6767 /* User.swift */,
 				1C2E215A2711D58A00958B0F /* VirtualAddress.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		51ECEDF826233A6F00D4C67E /* View */ = {
+		51ECEDF826233A6F00D4C67E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				5194244A267DE852001EBCAD /* AddEventView.swift */,
@@ -514,7 +505,7 @@
 				51ECEE022623429D00D4C67E /* RegisterView.swift */,
 				51ECEE1026357E5500D4C67E /* StartView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		51ECEE072623568700D4C67E /* Supporting files */ = {
@@ -523,6 +514,7 @@
 				51ECEDCD26233A2B00D4C67E /* Assets.xcassets */,
 				516C139D26F0C36300C130ED /* Fonts */,
 				515F7B5526F22AD700189806 /* Launch Screen.storyboard */,
+				51ECEDD026233A2B00D4C67E /* Preview Assets.xcassets */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -727,7 +719,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/Infrastructure/API/*.graphql --localSchemaFile=\"Infrastructure/API/schema.json\" Infrastructure/API/API.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -750,6 +742,7 @@
 				1C0FBE5F270C870100560D7A /* APIManager.swift in Sources */,
 				518478C4269F469C00C9AE34 /* EventsViewModel.swift in Sources */,
 				519D473726D2BAA50010DABC /* Interview+.swift in Sources */,
+				1C8AC83427231121004A1982 /* API.swift in Sources */,
 				511A180E26C2DBD600FF6767 /* InterviewsViewModel.swift in Sources */,
 				516EA59D265C0902007E3508 /* TokenAddingInterceptor.swift in Sources */,
 				51DBE57E265D51FE0046A366 /* EventDetailView.swift in Sources */,
@@ -757,7 +750,6 @@
 				516EA572264EC32E007E3508 /* EventRowView.swift in Sources */,
 				51ECEE032623429D00D4C67E /* RegisterView.swift in Sources */,
 				511A181D26CBE59600FF6767 /* Interview.swift in Sources */,
-				1C5EA34C26FF808400D71931 /* API.swift in Sources */,
 				1C0FBE5D270C861A00560D7A /* APIClientProtocol.swift in Sources */,
 				519D473326D2B6810010DABC /* Event+.swift in Sources */,
 				51ECEE1126357E5500D4C67E /* StartView.swift in Sources */,
