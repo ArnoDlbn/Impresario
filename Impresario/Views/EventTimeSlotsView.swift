@@ -8,6 +8,7 @@ struct EventTimeSlotsView: View {
     let eventViewModel: EventViewModel
     
     var body: some View {
+        ScrollView {
         VStack {
             if userViewModel.user.isArtist {
                 Text("Requested interviews")
@@ -55,6 +56,7 @@ struct EventTimeSlotsView: View {
             .font(.custom("MerriweatherSans-ExtraBold", size: 15, relativeTo: .body))
             .padding(.top, 50)
         }
+    }
     }
     
     // create number of rows

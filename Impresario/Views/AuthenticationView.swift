@@ -45,18 +45,14 @@ struct AuthenticationView: View {
                         .disabled(email.isEmpty || password.isEmpty)
                 )
                 .alert(isPresented: $showAlertFailure, content: {
-                    AlertViewer.showAlertWithActions(message: "Authentication failed!") {
+                    AlertViewer.showAlertWithNoActions(message: "Authentication failed!") {}
+                })
+            Spacer()
+                .alert(isPresented: $showAlertNoBiometry, content: {
+                    AlertViewer.showAlertWithNoActions(message: "Your device is not configured for biometric authentication.") {
                         userViewModel.login(email: email, password: password)
                     }
                 })
-            //            Spacer()
-            //                .frame(height: 30)
-            //                .alert(isPresented: $showAlertNoBiometry, content: {
-            //                    AlertViewer.showAlertWithActions(message: "Your device is not configured for biometric authentication.") {
-            //                        userViewModel.login(username: username, password: password)
-            //                    }
-            //                })
-            Spacer()
         }.onChange(of: userViewModel.user.token) { newToken in
             if (newToken != nil) {
                 userViewModel.getUser()
@@ -84,7 +80,6 @@ struct AuthenticationView: View {
             }
         } else {
             showAlertNoBiometry.toggle()
-            userViewModel.login(email: email, password: password)
         }
     }
 }
